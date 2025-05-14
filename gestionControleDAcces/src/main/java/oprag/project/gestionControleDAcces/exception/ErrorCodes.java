@@ -1,0 +1,24 @@
+package oprag.project.gestionControleDAcces.exception;
+
+public enum ErrorCodes {
+
+    UTILISATEUR_NOT_FOUND(1000),
+    UTILISATEUR_NOT_VALID(1001),
+    UTILISATEUR_EN_COURS_D_UTILSATION(1002),
+    INSPECTION_EXIST(2000),
+    INSPECTION_NOT_VALID(2001),
+    INSPECTION_NOT_FOUND(2002),
+    INSPECTION_EN_COURS_D_EXECUTION(2003),
+    CERTFICAT_NOT_VALID(3000),
+    CERTIFICAT_NOT_FOUND(3001),
+    BADGE_NOT_FOUND(4000);
+
+    ErrorCodes(int code){
+        this.errorCode=code;
+    }
+    private int errorCode;
+
+    public int getErrorCode(){
+        return this.errorCode;
+    }
+}

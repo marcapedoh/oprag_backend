@@ -1,0 +1,38 @@
+package oprag.project.gestionControleDAcces.controller;
+
+import oprag.project.gestionControleDAcces.controller.API.CertificatControlAPI;
+import oprag.project.gestionControleDAcces.dto.CertificatControlDAO;
+import oprag.project.gestionControleDAcces.services.CertificatControlService;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+public class CertificatControlController implements CertificatControlAPI {
+
+    private CertificatControlService  certificatControlService;
+
+    public CertificatControlController(CertificatControlService certificatControlService) {
+        this.certificatControlService = certificatControlService;
+    }
+
+    @Override
+    public CertificatControlDAO save(CertificatControlDAO certificatControlDAO) {
+        return this.certificatControlService.save(certificatControlDAO);
+    }
+
+    @Override
+    public CertificatControlDAO findById(Integer id) {
+        return this.certificatControlService.findById(id);
+    }
+
+    @Override
+    public List<CertificatControlDAO> findAll() {
+        return this.certificatControlService.findAll();
+    }
+
+    @Override
+    public void delete(Integer id) {
+        this.certificatControlService.delete(id);
+    }
+}
