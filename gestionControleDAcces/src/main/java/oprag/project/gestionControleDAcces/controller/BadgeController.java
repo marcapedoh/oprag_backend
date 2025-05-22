@@ -10,12 +10,15 @@ import java.util.List;
 
 @RestController
 public class BadgeController implements BadgeAPI {
-
     private BadgeService badgeService;
 
     @Autowired
     public BadgeController(BadgeService badgeService) {
         this.badgeService = badgeService;
+    }
+    @Override
+    public BadgeDAO save(BadgeDAO badgeDAO) {
+        return this.badgeService.save(badgeDAO);
     }
 
     @Override

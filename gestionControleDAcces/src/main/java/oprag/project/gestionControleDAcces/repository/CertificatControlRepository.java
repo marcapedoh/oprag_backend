@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface CertificatControlRepository extends JpaRepository<CertificatControl,Integer> {
     List<CertificatControl> findCertificatControlByUtilisateurId(Integer id);
+    List<CertificatControl> findCertificatControlByChauffeurId(Integer id);
+    List<CertificatControl> findCertificatControlByVehiculeId(Integer id);
 }

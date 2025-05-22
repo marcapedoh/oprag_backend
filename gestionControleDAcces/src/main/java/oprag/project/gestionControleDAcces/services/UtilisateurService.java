@@ -10,6 +10,6 @@ public interface UtilisateurService {
     UtilisateurDAO findById(Integer id);
     UtilisateurDAO findByEmail(String email);
     List<UtilisateurDAO> findAll();
-
+    void changeState(Integer id);
     void delete(Integer id);
 }

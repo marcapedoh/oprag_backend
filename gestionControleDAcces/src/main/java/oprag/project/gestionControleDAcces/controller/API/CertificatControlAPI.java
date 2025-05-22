@@ -20,7 +20,6 @@ public interface CertificatControlAPI {
             @ApiResponse(responseCode = "404", description = "CertificatControl non créé")
     })
     @PostMapping(value = APP_ROOT+"/CertificatControls/create",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
-
     CertificatControlDAO save(@RequestBody CertificatControlDAO certificatControlDAO);
 
     @Operation(summary = "Rechercher un CertificatControl par Id", description = "Cette méthode permet de rechercher un CertificatControl par son Id.")
@@ -29,7 +28,6 @@ public interface CertificatControlAPI {
             @ApiResponse(responseCode = "404", description = "CertificatControl non trouvé")
     })
     @GetMapping(value = APP_ROOT + "/CertificatControls/findById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-
     CertificatControlDAO findById(@PathVariable("id") Integer id);
 
     @GetMapping(value = APP_ROOT + "/CertificatControls/all", produces = MediaType.APPLICATION_JSON_VALUE)

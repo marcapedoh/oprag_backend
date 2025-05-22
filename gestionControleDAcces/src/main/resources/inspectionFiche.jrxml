@@ -55,7 +55,7 @@
         <staticText>
             <reportElement x="99" y="72" width="100" height="20" uuid="b1197d1d-8fbd-480c-ab5e-4431ac1ed551"/>
             <textElement>
-                <font fontName="Arial Rounded MT Bold"/>
+                <font />
             </textElement>
             <text><![CDATA[N⁰ de rapport: ]]></text>
         </staticText>
@@ -76,7 +76,7 @@
         <staticText>
             <reportElement x="80" y="90" width="404" height="13" uuid="4cebf322-2ee6-460c-8daa-df33bd874376"/>
             <textElement textAlignment="Center">
-                <font fontName="Arial Rounded MT &#xD;&#xA;"/>
+                <font />
             </textElement>
             <text><![CDATA[Décret n 22 portant création et attribution de la DGMG -Arrêté N 00097/MTL]]></text>
         </staticText>
@@ -90,7 +90,7 @@
                 <pen lineWidth="1.0" lineStyle="Solid"/>
             </box>
             <textElement textAlignment="Center">
-                <font fontName="Arial Rounded MT Bold" size="12"/>
+                <font  size="12" />
             </textElement>
             <text><![CDATA[Societé/
 Entreprise]]></text>
@@ -105,7 +105,7 @@ Entreprise]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Center">
-                <font fontName="Arial Rounded MT Bold" size="12"/>
+                <font  size="12" />
             </textElement>
             <textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
         </textField>
@@ -118,7 +118,7 @@ Entreprise]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Center">
-                <font fontName="Arial Rounded MT Bold" size="12"/>
+                <font size="12" />
             </textElement>
             <text><![CDATA[Localisation]]></text>
         </staticText>
@@ -141,7 +141,7 @@ Entreprise]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Center">
-                <font fontName="Arial Rounded MT Bold"/>
+                <font />
             </textElement>
             <text><![CDATA[Désignation,
 identification de
@@ -166,7 +166,7 @@ l'équipement]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Center">
-                <font fontName="Arial Rounded MT Bold" size="12"/>
+                <font  size="12" />
             </textElement>
             <text><![CDATA[
 
@@ -182,7 +182,7 @@ présentés:]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Left">
-                <font fontName="Arial Rounded MT Bold"/>
+                <font />
             </textElement>
             <text><![CDATA[
 Notice d'instruction: ]]></text>
@@ -196,7 +196,7 @@ Notice d'instruction: ]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Left">
-                <font fontName="Arial Rounded MT Bold"/>
+                <font />
             </textElement>
             <text><![CDATA[Livret Maintenance:
 ]]></text>
@@ -210,7 +210,7 @@ Notice d'instruction: ]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement>
-                <font fontName="Arial Rounded MT Bold"/>
+                <font />
             </textElement>
             <text><![CDATA[Déclaration/Attestation de conformité: ]]></text>
         </staticText>
@@ -223,7 +223,7 @@ Notice d'instruction: ]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement>
-                <font fontName="Arial Rounded MT Bold"/>
+                <font />
             </textElement>
             <text><![CDATA[Rapport de contrôle précédent:]]></text>
         </staticText>
@@ -236,7 +236,7 @@ Notice d'instruction: ]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Left">
-                <font fontName="Arial Rounded MT Bold"/>
+                <font />
             </textElement>
             <text><![CDATA[Déclaration (écrite) du chef d'établissement, des travaux prévus d'être effectué par l'équipement de transport contrôlé (pour l'assistance d'examen d'adéquation) :]]></text>
         </staticText>
@@ -249,7 +249,7 @@ Notice d'instruction: ]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Center">
-                <font fontName="Arial Rounded MT Bold" size="12"/>
+                <font />
             </textElement>
             <text><![CDATA[Conditions
 d'intervention:]]></text>
@@ -284,7 +284,7 @@ Partiel: ]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Center">
-                <font fontName="Arial Rounded MT Bold" size="12"/>
+                <font />
             </textElement>
             <text><![CDATA[Charges
 d'éssai et fonctionnement:]]></text>
@@ -397,7 +397,7 @@ Conforme à la réglementation:]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Center">
-                <font fontName="Arial Rounded MT Bold" size="10"/>
+                <font  size="10" />
             </textElement>
             <text><![CDATA[N]]></text>
         </staticText>
@@ -410,7 +410,7 @@ Conforme à la réglementation:]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Center">
-                <font fontName="Arial Rounded MT Bold" size="10"/>
+                <font size="10"/>
             </textElement>
             <text><![CDATA[OBSERVATIONS ET RECOMMANDATIONS]]></text>
         </staticText>
@@ -443,7 +443,7 @@ Conforme à la réglementation:]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Center">
-                <font fontName="Arial Rounded MT Bold"/>
+                <font />
             </textElement>
             <text><![CDATA[N.B. AUCUN OPERATEUR OU CHAUFFEUR N'A PU ETRE CONTRÔLE FAUTE DE REFUS]]></text>
         </staticText>
@@ -488,7 +488,7 @@ Signature:]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Center">
-                <font fontName="Arial Rounded MT Bold" size="11"/>
+                <font  size="11" />
             </textElement>
             <text><![CDATA[Date]]></text>
         </staticText>
@@ -526,7 +526,7 @@ Signature:]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Center">
-                <font fontName="Arial Rounded MT Bold" size="10"/>
+                <font size="10" />
             </textElement>
             <text><![CDATA[Motif contrôle]]></text>
         </staticText>

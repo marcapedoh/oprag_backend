@@ -25,6 +25,7 @@ public class VehiculeDAO {
     private String numeroAssurance;
     private String numeroVisiteTechnique;
     private String vgpRemorque;
+    private boolean active;
     private boolean controleEquipementObligatoirel;
 
 
@@ -40,6 +41,7 @@ public class VehiculeDAO {
                 .id(vehicule.getId())
                 .numeroCarteGrise(vehicule.getNumeroCarteGrise())
                 .typeVehicules(vehicule.getTypeVehicules())
+                .active(vehicule.isActive())
                 .numeroAssurance(vehicule.getNumeroAssurance())
                 .numeroVisiteTechnique(vehicule.getNumeroVisiteTechnique())
                 .vgpRemorque(vehicule.getVgpRemorque())
@@ -56,6 +58,7 @@ public class VehiculeDAO {
         vehicule.setId(vehiculeDAO.getId());
         vehicule.setNumeroCarteGrise(vehiculeDAO.getNumeroCarteGrise());
         vehicule.setTypeVehicules(vehiculeDAO.getTypeVehicules());
+        vehicule.setActive(vehiculeDAO.isActive());
         vehicule.setNumeroAssurance(vehiculeDAO.getNumeroAssurance());
         vehicule.setNumeroVisiteTechnique(vehiculeDAO.getNumeroVisiteTechnique());
         vehicule.setVgpRemorque(vehiculeDAO.getVgpRemorque());

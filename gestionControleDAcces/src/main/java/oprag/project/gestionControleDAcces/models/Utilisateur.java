@@ -30,6 +30,8 @@ public class Utilisateur extends AbstractEntity implements UserDetails {
     private boolean premiereConnexion;
     @Column(name = "otpNumber",nullable = false)
     private Integer otpNumber;
+    @Column(name = "active")
+    private boolean active;
     @Column(name = "signature")
     private String signature;
     @Column(name = "userRole", nullable = false)

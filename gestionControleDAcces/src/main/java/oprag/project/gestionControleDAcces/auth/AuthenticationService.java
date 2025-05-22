@@ -4,17 +4,23 @@ package oprag.project.gestionControleDAcces.auth;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import oprag.project.gestionControleDAcces.config.JwtService;
+import oprag.project.gestionControleDAcces.dto.ChauffeurDAO;
 import oprag.project.gestionControleDAcces.exception.EntityNotFoundException;
 import oprag.project.gestionControleDAcces.exception.ErrorCodes;
+import oprag.project.gestionControleDAcces.exception.InvalidEntityException;
+import oprag.project.gestionControleDAcces.exception.InvalidOperationException;
 import oprag.project.gestionControleDAcces.models.UserRole;
 import oprag.project.gestionControleDAcces.models.Utilisateur;
+import oprag.project.gestionControleDAcces.repository.ChauffeurRepository;
 import oprag.project.gestionControleDAcces.repository.InspectionRepository;
 import oprag.project.gestionControleDAcces.repository.UtilisateurRepository;
 import oprag.project.gestionControleDAcces.services.EmailService;
+import oprag.project.gestionControleDAcces.validators.ChauffeurValidator;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Random;
 
 @Slf4j
@@ -23,48 +29,60 @@ import java.util.Random;
 public class AuthenticationService {
     private final JwtService jwtService;
     private final UtilisateurRepository utilisateurRepository;
+    private final ChauffeurRepository chauffeurRepository;
     private final InspectionRepository inspectionRepository;
     private final EmailService emailService;
    private final PasswordEncoder passwordEncoder;
 
     public AuthenticationResponse authenticate(AuthenticationRequest request){
-        int countOfConnectionPerUser=0;
-//        try {
-//            UserDetails user=utilisateurRepository.findUtilisateurByUserName(request.getUsername()).orElseThrow(()-> new EntityNotFoundException("aucun utilisateur trouvé avec ce nom d'utilisateur"));
-//            String jwtToken="";
-//            if(passwordEncoder.matches(request.getMotDePasse(),user.getPassword())){
-//                jwtToken=jwtService.generateToken(user);
-//            }
-//            UserDetails user1=utilisateurRepository.findUtilisateurByUserName(request.getUsername()).orElseThrow(()-> new EntityNotFoundException("Aucun utilisateur trouvé dans la bd"));
-//            if(!StringUtils.hasLength(user1.getPassword())){
-//                log.warn("le username de cet utilisateur est null");
-//            }
-//            countOfConnectionPerUser+=1;
-//            return AuthenticationResponse.builder()
-//                    .token(jwtToken)
-//                    .build();
-//        }catch (EntityNotFoundException e1){
-//            try {
-//                countOfConnectionPerUser+=1;
-//                return authenticatePrestataire(request);
-//            }catch (EntityNotFoundException e2){
-//                countOfConnectionPerUser+=1;
-//                return  authenticateAssure(request);
-//            }
-//
-//        }
-        return  null;
+        String jwtToken;
+        UserDetails utilisateur= this.utilisateurRepository.findUtilisateurByUserName(request.getUsername()).orElseThrow(()-> new EntityNotFoundException("Aucun chauffeur trouvé pour cet userName"));
+        if(passwordEncoder.matches(request.getMotDePasse(),utilisateur.getPassword())){
+            jwtToken=jwtService.generateToken(utilisateur);
+            return AuthenticationResponse.builder()
+                    .token(jwtToken)
+                    .build();
+        }
+        return null;
     }
 
+    public ChauffeurDAO registerChauffeur(ChauffeurDAO chauffeurDAO){
+        if(chauffeurRepository.findByNom(chauffeurDAO.getNom()).isPresent()){
+            throw new InvalidOperationException("ce chauffeur existe déjà dans la base de donnée", ErrorCodes.CHAUFFEUR_ALREADY_EXIST);
+        }
+        List<String> errors= ChauffeurValidator.validate(chauffeurDAO);
+        if(!errors.isEmpty()){
+            throw new InvalidEntityException("le chauffeur que vous passez n'est pas valide",ErrorCodes.CHAUFFEUR_NOT_VALID,errors);
+        }
+        chauffeurDAO.setActive(true);
+        chauffeurDAO.setMotDePasse(passwordEncoder.encode(chauffeurDAO.getMotDePasse()));
+        return ChauffeurDAO.fromEntity(
+                chauffeurRepository.save(
+                        ChauffeurDAO.toEntity(chauffeurDAO)
+                )
+        );
+    }
+    public AuthenticationResponse authenticateChauffeur(String userName, String motDePasse) {
+        String jwtToken;
+        UserDetails chauffeur= this.chauffeurRepository.findChauffeurByUserName(userName).orElseThrow(()-> new EntityNotFoundException("Aucun chauffeur trouvé pour cet userName"));
+        if(passwordEncoder.matches(motDePasse,chauffeur.getPassword())){
+            jwtToken=jwtService.generateToken(chauffeur);
+            return AuthenticationResponse.builder()
+                    .token(jwtToken)
+                    .build();
+        }
+        return null;
 
+    }
     public AuthenticationResponse register(RegisterRequest request){
         var utilisateur= utilisateurRepository.findUtilisateurByUserName(request.getUserName());
         var inspection= inspectionRepository.findById(request.getIdInspection());
-        if(!utilisateur.isPresent() && inspection.isPresent()){
+        if(utilisateur.isEmpty() && inspection.isPresent()){
             var user= Utilisateur.builder()
                     .nom(request.getNom())
                     .prenom(request.getPrenom())
                     .userName(request.getUserName())
+                    .active(true)
                     .premiereConnexion(true)
                     .role(UserRole.valueOf(request.getRole()))
                     .email(request.getEmail())

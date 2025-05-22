@@ -20,10 +20,15 @@ import java.util.List;
 public class ChauffeurDAO {
     private Integer id;
     private String numeroPermis;
+    private String nom;
+    private String prenom;
     private String numeroCertificatMedicalValide;
     private String numeroVisiteTechnique;
     private String attestionCapPoidsLourd;
     private String attestationDeConduiteDefensive;
+    private String userName;
+    private boolean active;
+    private String motDePasse;
 
     @JsonIgnore
     private List<CertificatControlDAO> certificatControl;
@@ -33,11 +38,16 @@ public class ChauffeurDAO {
 
         return ChauffeurDAO.builder()
                 .id(chauffeur.getId())
+                .nom(chauffeur.getNom())
+                .prenom(chauffeur.getPrenom())
                 .numeroPermis(chauffeur.getNumeroPermis())
                 .numeroCertificatMedicalValide(chauffeur.getNumeroCertificatMedicalValide())
                 .numeroVisiteTechnique(chauffeur.getNumeroVisiteTechnique())
                 .attestationDeConduiteDefensive(chauffeur.getAttestationDeConduiteDefensive())
                 .attestionCapPoidsLourd(chauffeur.getAttestionCapPoidsLourd())
+                .userName(chauffeur.getUsername())
+                .active(chauffeur.isActive())
+                .motDePasse(chauffeur.getMotDePasse())
                 .build();
     }
 
@@ -46,10 +56,15 @@ public class ChauffeurDAO {
 
         Chauffeur chauffeur = new Chauffeur();
         chauffeur.setId(chauffeurDAO.getId());
+        chauffeur.setNom(chauffeurDAO.getNom());
+        chauffeur.setPrenom(chauffeurDAO.getPrenom());
         chauffeur.setNumeroPermis(chauffeurDAO.getNumeroPermis());
         chauffeur.setNumeroVisiteTechnique(chauffeurDAO.getNumeroVisiteTechnique());
         chauffeur.setNumeroCertificatMedicalValide(chauffeurDAO.getNumeroCertificatMedicalValide());
         chauffeur.setAttestionCapPoidsLourd(chauffeurDAO.getAttestationDeConduiteDefensive());
+        chauffeur.setUserName(chauffeurDAO.getUserName());
+        chauffeur.setActive(chauffeurDAO.isActive());
+        chauffeur.setMotDePasse(chauffeurDAO.getMotDePasse());
         chauffeur.setAttestationDeConduiteDefensive(chauffeurDAO.getAttestationDeConduiteDefensive());
         return chauffeur;
     }

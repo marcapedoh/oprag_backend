@@ -32,23 +32,23 @@ public class CertificatControlServiceImpl implements CertificatControlService {
         if(!errors.isEmpty()){
             throw new InvalidEntityException("le certificat que vous passez n'est pas valide",ErrorCodes.CERTFICAT_NOT_VALID,errors);
         }
-        var certificatControl=CertificatControlDAO.fromEntity(
-                certificatControlRepository.save(
-                        CertificatControlDAO.toEntity(certificatControlDAO)
-                )
-        );
-        BadgeDAO badgeDAO=BadgeDAO.builder()
-                .numero("numero-"+ UUID.randomUUID().toString())
-                .validite(certificatControlDAO.getValidite().toString())
-                .numeroParc("parc-numero"+ UUID.randomUUID().toString())
-                .codeQrString("QRCODEString-Path")
-                .active(true)
-                .certificatControl(certificatControl)
-                .inspecteur(certificatControl.getUtilisateur())
-                .build();
-        var badgeObj=badgeRepository.save(BadgeDAO.toEntity(badgeDAO));
-        certificatControl.setBadge(BadgeDAO.fromEntity(badgeObj));
-        certificatControl.setDeleted(false);
+//        var certificatControl=CertificatControlDAO.fromEntity(
+//                certificatControlRepository.save(
+//                        CertificatControlDAO.toEntity(certificatControlDAO)
+//                )
+//        );
+//        BadgeDAO badgeDAO=BadgeDAO.builder()
+//                .numero("numero-"+ UUID.randomUUID().toString())
+//                .validite(certificatControlDAO.getValidite().toString())
+//                .numeroParc("parc-numero"+ UUID.randomUUID().toString())
+//                .codeQrString("QRCODEString-Path")
+//                .active(true)
+//                .certificatControl(certificatControl)
+//                .inspecteur(certificatControl.getUtilisateur())
+//                .build();
+//        var badgeObj=badgeRepository.save(BadgeDAO.toEntity(badgeDAO));
+//        certificatControl.setBadge(BadgeDAO.fromEntity(badgeObj));
+//        certificatControl.setDeleted(false);
         return CertificatControlDAO.fromEntity(
                 certificatControlRepository.save(
                         CertificatControlDAO.toEntity(certificatControlDAO)

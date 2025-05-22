@@ -6,9 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import oprag.project.gestionControleDAcces.dto.BadgeDAO;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,6 +14,13 @@ import static oprag.project.gestionControleDAcces.constant.Utils.APP_ROOT;
 
 @Tag(name = "Badges", description = "API de gestion des Badges")
 public interface BadgeAPI {
+    @Operation(summary = "Creer un Badge", description = "Cette méthode permet de creer un Badge.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Badge créé"),
+            @ApiResponse(responseCode = "404", description = "Badge non créé")
+    })
+    @PostMapping(value = APP_ROOT+"/Badges/create",consumes = MediaType.APPLICATION_JSON_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
+    BadgeDAO save(@RequestBody BadgeDAO badgeDAO);
     @Operation(summary = "Rechercher un Badge par numero", description = "Cette méthode permet de rechercher un Badge par son numero.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Badge trouvé"),

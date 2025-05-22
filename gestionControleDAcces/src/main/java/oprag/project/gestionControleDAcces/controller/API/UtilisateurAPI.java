@@ -41,4 +41,8 @@ public interface UtilisateurAPI {
     @Operation(summary = "Supprimer un utilisateur", description = "Cette méthode permet de supprimer un utilisateur par ID.")
     @DeleteMapping(value = APP_ROOT + "/Utilisateurs/delete/{id}")
     void delete(@PathVariable("id") Integer id);
+
+    @Operation(summary = "Desactivé un utilisateur", description = "Cette méthode permet de desactiver un utilisateur par ID.")
+    @DeleteMapping(value = APP_ROOT + "/Utilisateurs/changeState/{id}")
+    void changeState(@PathVariable("id") Integer id);
 }

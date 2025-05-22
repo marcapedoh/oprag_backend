@@ -22,8 +22,8 @@ public class Badge extends AbstractEntity {
     private String codeQrString;
     //Recuperer le logo de l'inspection dans l'objet inspection et le mettre sur le badge
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "badgeId")
+    @OneToOne
+    @JoinColumn(name = "certificatControlId")
     private CertificatControl certificatControl;
 
     @ManyToOne

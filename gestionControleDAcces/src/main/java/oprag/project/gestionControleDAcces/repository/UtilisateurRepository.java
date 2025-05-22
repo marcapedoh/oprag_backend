@@ -12,5 +12,5 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur,Integer
     Optional<Utilisateur> findUtilisateurByEmail(String email);
     List<Utilisateur> findUtilisateurByInspectionId(Integer id);
 
-    Optional<Utilisateur> findUtilisateurByRole(UserRole role);
+    Optional<Utilisateur> findUtilisateurByInspectionNomAndRole(String inspectionNom,UserRole role);
 }

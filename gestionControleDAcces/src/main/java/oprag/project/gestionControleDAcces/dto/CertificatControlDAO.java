@@ -1,6 +1,7 @@
 package oprag.project.gestionControleDAcces.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,6 +41,7 @@ public class CertificatControlDAO {
     private boolean paye;
     private boolean deleted;
     private Double montant;
+    @JsonIgnore
     private BadgeDAO badge;
 
     private UtilisateurDAO utilisateur;
@@ -79,7 +81,7 @@ public class CertificatControlDAO {
                 .normeFabrication(certificatControl.getNormeFabrication())
                 .paye(certificatControl.isPaye())
                 .montant(certificatControl.getMontant())
-                .badge(BadgeDAO.fromEntity(certificatControl.getBadge()))
+                //.badge(BadgeDAO.fromEntity(certificatControl.getBadge()))
                 .utilisateur(UtilisateurDAO.fromEntity(certificatControl.getUtilisateur()))
                 .chauffeur(ChauffeurDAO.fromEntity(certificatControl.getChauffeur()))
                 .vehicule(VehiculeDAO.fromEntity(certificatControl.getVehicule()))
@@ -118,7 +120,7 @@ public class CertificatControlDAO {
         certificatControlEntity.setNormeFabrication(certificatControl.getNormeFabrication());
         certificatControlEntity.setPaye(certificatControl.isPaye());
         certificatControlEntity.setMontant(certificatControl.getMontant());
-        certificatControlEntity.setBadge(BadgeDAO.toEntity(certificatControl.getBadge()));
+       //certificatControlEntity.setBadge(BadgeDAO.toEntity(certificatControl.getBadge()));
         certificatControlEntity.setUtilisateur(UtilisateurDAO.toEntity(certificatControl.getUtilisateur()));
         certificatControlEntity.setChauffeur(ChauffeurDAO.toEntity(certificatControl.getChauffeur()));
         certificatControlEntity.setVehicule(VehiculeDAO.toEntity(certificatControl.getVehicule()));

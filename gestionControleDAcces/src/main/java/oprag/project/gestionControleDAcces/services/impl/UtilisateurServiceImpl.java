@@ -51,4 +51,16 @@ public class UtilisateurServiceImpl implements UtilisateurService {
             throw new InvalidOperationException("vous ne pouvez pas supprimé un utilisateur qui est déjà liés à des opérations dans la base de données",ErrorCodes.UTILISATEUR_EN_COURS_D_UTILSATION);
         }
     }
+
+    @Override
+    public void changeState(Integer id) {
+        assert id != null;
+        if(this.certificatControlRepository.findCertificatControlByUtilisateurId(id).isEmpty() && this.utilisateurRepository.findById(id).isPresent()){
+            var utilisateur=this.utilisateurRepository.findById(id).get();
+            utilisateur.setActive(false);
+            this.utilisateurRepository.save(utilisateur);
+        }else{
+            throw new InvalidOperationException("Utilisateur est opération sur les objets de la base de donnée on peut donc pas le désactivé",ErrorCodes.UTILISATEUR_EN_COURS_D_UTILSATION);
+        }
+    }
 }

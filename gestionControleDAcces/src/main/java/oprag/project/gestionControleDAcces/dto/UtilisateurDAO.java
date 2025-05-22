@@ -26,8 +26,9 @@ public class UtilisateurDAO {
     private boolean premiereConnexion;
     private Integer otpNumber;
     private String signature;
-
-    private String role;
+    private boolean active;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     private InspectionDAO inspection;
 
@@ -44,10 +45,11 @@ public class UtilisateurDAO {
                 .userName(utilisateur.getUsername())
                 .premiereConnexion(utilisateur.isPremiereConnexion())
                 .otpNumber(utilisateur.getOtpNumber())
+                .active(utilisateur.isActive())
                 .email(utilisateur.getEmail())
                 .motDePasse(utilisateur.getMotDePasse())
                 .signature(utilisateur.getSignature())
-                .role(String.valueOf(utilisateur.getRole()))
+                .role(utilisateur.getRole())
                 .inspection(InspectionDAO.fromEntity(utilisateur.getInspection()))
                 .build();
     }
@@ -59,12 +61,13 @@ public class UtilisateurDAO {
         utilisateur.setId(utilisateurDAO.getId());
         utilisateur.setNom(utilisateurDAO.getNom());
         utilisateur.setPrenom(utilisateurDAO.getPrenom());
+        utilisateur.setActive(utilisateurDAO.isActive());
         utilisateur.setPremiereConnexion(utilisateurDAO.isPremiereConnexion());
         utilisateur.setOtpNumber(utilisateurDAO.getOtpNumber());
         utilisateur.setUserName(utilisateurDAO.getUserName());
         utilisateur.setEmail(utilisateurDAO.getEmail());
         utilisateur.setSignature(utilisateurDAO.getSignature());
-        utilisateur.setRole(UserRole.valueOf(utilisateurDAO.getRole()));
+        utilisateur.setRole(utilisateurDAO.getRole());
         utilisateur.setInspection(InspectionDAO.toEntity(utilisateurDAO.getInspection()));
         return utilisateur;
     }
