@@ -3,11 +3,13 @@ package oprag.project.gestionControleDAcces.controller;
 import oprag.project.gestionControleDAcces.controller.API.CertificatControlAPI;
 import oprag.project.gestionControleDAcces.dto.CertificatControlDAO;
 import oprag.project.gestionControleDAcces.services.CertificatControlService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class CertificatControlController implements CertificatControlAPI {
 
     private CertificatControlService  certificatControlService;

@@ -36,7 +36,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request){
         String jwtToken;
-        UserDetails utilisateur= this.utilisateurRepository.findUtilisateurByUserName(request.getUsername()).orElseThrow(()-> new EntityNotFoundException("Aucun chauffeur trouvé pour cet userName"));
+        UserDetails utilisateur= this.utilisateurRepository.findUtilisateurByUserName(request.getUsername()).orElseThrow(()-> new EntityNotFoundException("Aucun Utilisateur trouvé pour cet userName"));
         if(passwordEncoder.matches(request.getMotDePasse(),utilisateur.getPassword())){
             jwtToken=jwtService.generateToken(utilisateur);
             return AuthenticationResponse.builder()
