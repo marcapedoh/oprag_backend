@@ -3,11 +3,13 @@ package oprag.project.gestionControleDAcces.controller;
 import oprag.project.gestionControleDAcces.controller.API.VehiculeAPI;
 import oprag.project.gestionControleDAcces.dto.VehiculeDAO;
 import oprag.project.gestionControleDAcces.services.VehiculeService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class VehiculeController implements VehiculeAPI {
     private VehiculeService vehiculeService;
 

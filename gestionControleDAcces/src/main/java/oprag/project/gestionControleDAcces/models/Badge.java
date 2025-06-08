@@ -18,9 +18,6 @@ public class Badge extends AbstractEntity {
     private String numeroParc;
     @Column(name = "active",nullable = false)
     private boolean active;
-    @Column(name = "codeQrString",nullable = false)
-    private String codeQrString;
-    //Recuperer le logo de l'inspection dans l'objet inspection et le mettre sur le badge
 
     @OneToOne
     @JoinColumn(name = "certificatControlId")

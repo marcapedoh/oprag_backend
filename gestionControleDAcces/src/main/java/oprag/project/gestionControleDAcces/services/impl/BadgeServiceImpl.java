@@ -1,9 +1,6 @@
 package oprag.project.gestionControleDAcces.services.impl;
 
-import oprag.project.gestionControleDAcces.dto.BadgeDAO;
-import oprag.project.gestionControleDAcces.dto.CertificatControlDAO;
-import oprag.project.gestionControleDAcces.dto.InspectionDAO;
-import oprag.project.gestionControleDAcces.dto.UtilisateurDAO;
+import oprag.project.gestionControleDAcces.dto.*;
 import oprag.project.gestionControleDAcces.exception.EntityNotFoundException;
 import oprag.project.gestionControleDAcces.exception.ErrorCodes;
 import oprag.project.gestionControleDAcces.exception.InvalidEntityException;
@@ -16,12 +13,18 @@ import oprag.project.gestionControleDAcces.services.QRCodeUtil;
 import oprag.project.gestionControleDAcces.validators.BadgeValidator;
 import oprag.project.gestionControleDAcces.validators.InspectionValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -42,8 +45,6 @@ public class BadgeServiceImpl implements BadgeService {
     }
 
 
-
-
     @Override
     public BadgeDAO save(BadgeDAO badgeDAO) {
         Random random = new Random();
@@ -57,23 +58,6 @@ public class BadgeServiceImpl implements BadgeService {
                 +"-"+LocalDate.now()+"-"+randomInt);
         if(badgeRepository.findBadgeByNumero(badgeDAO.getNumero()).isPresent()){
             throw new InvalidOperationException("ce badge existe déjà dans la base de donnée", ErrorCodes.BADGE_ALREADY_EXIST);
-        }
-        String qrContent = "DateCreation:" + LocalDate.now() + ";Numero:" + badgeDAO.getNumero();
-
-        try {
-            BufferedImage qrImage = QRCodeUtil.generateQRCodeImage(qrContent, 80, 80);
-
-
-            String downloadPath = getDownloadFolderPath();
-            String fileName = "badge_" + badgeDAO.getNumero() + ".png";
-            File outputFile = new File(downloadPath, fileName);
-
-            ImageIO.write(qrImage, "png", outputFile);
-
-            badgeDAO.setCodeQrString(outputFile.getAbsolutePath());
-
-        } catch (Exception e) {
-            throw new RuntimeException("Erreur lors de la génération du QR Code", e);
         }
 
         List<String> errors= BadgeValidator.validate(badgeDAO);
@@ -94,10 +78,30 @@ public class BadgeServiceImpl implements BadgeService {
         return badge;
     }
 
-    private String getDownloadFolderPath() {
-        String userHome = System.getProperty("user.home");
-        return userHome + File.separator + "Downloads";
+
+    public ResponseEntity<byte[]> getQrCode(String numero) {
+        var badge = badgeRepository.findBadgeByNumero(numero)
+                .orElseThrow(() -> new EntityNotFoundException("Badge non trouvé avec ce numéro"));
+
+        try {
+            String qrContent = "DateCreation:" + badge.getDateCreation() + ";Numero:" + badge.getNumero()+";Validite:"+badge.getValidite();
+            BufferedImage qrImage = QRCodeUtil.generateQRCodeImage(qrContent, 80, 80);
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(qrImage, "png", baos);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_PNG);
+            headers.setContentDispositionFormData("attachment", "badge_qr_" + badge.getNumero() + ".png");
+            headers.setContentLength(baos.size());
+
+            return ResponseEntity.ok().headers(headers).body(baos.toByteArray());
+
+        } catch (Exception e) {
+            throw new RuntimeException("Erreur lors de la génération du QR Code", e);
+        }
     }
+
 
     @Override
     public BadgeDAO findByNumero(String numero) {
@@ -112,6 +116,43 @@ public class BadgeServiceImpl implements BadgeService {
                 .map(BadgeDAO::fromEntity)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Object> countAllPerDay() {
+        return badgeRepository.findAll().stream()
+                .collect(Collectors.groupingBy(
+                        badge -> badge.getDateCreation().atZone(ZoneId.systemDefault()) .toLocalDate(),
+                        Collectors.counting()
+                ))
+                .entrySet().stream()
+                .map(entry -> new BadgeStatsDTO(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList())
+                .stream()
+                .map(dto -> (Object) dto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Object> countAllPerIntervalDays(LocalDate startDate, LocalDate endDate) {
+        return badgeRepository.findAll().stream()
+                // Filtrer les badges entre startDate et endDate inclusivement
+                .filter(badge -> {
+                    LocalDate badgeDate = badge.getDateCreation().atZone(ZoneId.systemDefault()).toLocalDate();
+                    return (badgeDate.isEqual(startDate) || badgeDate.isAfter(startDate)) &&
+                            (badgeDate.isEqual(endDate) || badgeDate.isBefore(endDate));
+                })
+                // Regrouper par date locale
+                .collect(Collectors.groupingBy(
+                        badge -> badge.getDateCreation().atZone(ZoneId.systemDefault()).toLocalDate(),
+                        Collectors.counting()
+                ))
+                // Transformer en liste de BadgeStatsDTO
+                .entrySet().stream()
+                .map(entry -> new BadgeStatsDTO(entry.getKey(), entry.getValue()))
+                .map(dto -> (Object) dto)
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public void delete(Integer id) {

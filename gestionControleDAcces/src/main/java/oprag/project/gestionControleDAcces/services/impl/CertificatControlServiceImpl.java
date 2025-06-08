@@ -11,6 +11,8 @@ import oprag.project.gestionControleDAcces.services.CertificatControlService;
 import oprag.project.gestionControleDAcces.validators.CertificatControlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -49,6 +51,7 @@ public class CertificatControlServiceImpl implements CertificatControlService {
 //        var badgeObj=badgeRepository.save(BadgeDAO.toEntity(badgeDAO));
 //        certificatControl.setBadge(BadgeDAO.fromEntity(badgeObj));
 //        certificatControl.setDeleted(false);
+        certificatControlDAO.setCreationDate(Instant.now());
         return CertificatControlDAO.fromEntity(
                 certificatControlRepository.save(
                         CertificatControlDAO.toEntity(certificatControlDAO)

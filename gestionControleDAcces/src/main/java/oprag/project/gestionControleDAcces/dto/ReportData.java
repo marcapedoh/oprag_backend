@@ -17,4 +17,5 @@ public class ReportData {
     private LocalDate dateCertificat;
     private UtilisateurDAO utilisateur;
     private InspectionDAO inspection;
+    private String essaisConcatenes;
 }

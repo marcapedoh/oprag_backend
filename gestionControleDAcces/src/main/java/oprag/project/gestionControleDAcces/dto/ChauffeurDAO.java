@@ -23,7 +23,6 @@ public class ChauffeurDAO {
     private String nom;
     private String prenom;
     private String numeroCertificatMedicalValide;
-    private String numeroVisiteTechnique;
     private String attestionCapPoidsLourd;
     private String attestationDeConduiteDefensive;
     private String userName;
@@ -42,7 +41,7 @@ public class ChauffeurDAO {
                 .prenom(chauffeur.getPrenom())
                 .numeroPermis(chauffeur.getNumeroPermis())
                 .numeroCertificatMedicalValide(chauffeur.getNumeroCertificatMedicalValide())
-                .numeroVisiteTechnique(chauffeur.getNumeroVisiteTechnique())
+
                 .attestationDeConduiteDefensive(chauffeur.getAttestationDeConduiteDefensive())
                 .attestionCapPoidsLourd(chauffeur.getAttestionCapPoidsLourd())
                 .userName(chauffeur.getUsername())
@@ -59,7 +58,6 @@ public class ChauffeurDAO {
         chauffeur.setNom(chauffeurDAO.getNom());
         chauffeur.setPrenom(chauffeurDAO.getPrenom());
         chauffeur.setNumeroPermis(chauffeurDAO.getNumeroPermis());
-        chauffeur.setNumeroVisiteTechnique(chauffeurDAO.getNumeroVisiteTechnique());
         chauffeur.setNumeroCertificatMedicalValide(chauffeurDAO.getNumeroCertificatMedicalValide());
         chauffeur.setAttestionCapPoidsLourd(chauffeurDAO.getAttestationDeConduiteDefensive());
         chauffeur.setUserName(chauffeurDAO.getUserName());

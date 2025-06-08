@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import oprag.project.gestionControleDAcces.models.*;
 
+import java.time.Instant;
 import java.util.List;
 
 @Data
@@ -20,6 +21,7 @@ public class CertificatControlDAO {
     private String site;
     private String societe;
     private String numeroRapport;
+    private Instant creationDate;
     private String localisationCertificationFait;
     private String description;
     private boolean noticeInstruction;
@@ -61,6 +63,7 @@ public class CertificatControlDAO {
                 .societe(certificatControl.getSociete())
                 .numeroRapport(certificatControl.getNumeroRapport())
                 .deleted(certificatControl.isDeleted())
+                .creationDate(Instant.now())
                 .validite(certificatControl.getValidite())
                 .description(certificatControl.getDescription())
                 .localisationCertificationFait(certificatControl.getLocalisationCertificationFait())
@@ -77,7 +80,7 @@ public class CertificatControlDAO {
                 .motifControle(certificatControl.getMotifControle())
                 .observationRecommendation(certificatControl.getObservationRecommendation())
                 .validite(certificatControl.getValidite())
-                .signatureDGM(certificatControl.getSignatureDGM())
+                .signatureDGM(certificatControl.getSignatureDGM().isEmpty()?certificatControl.getSignatureDGM():"null")
                 .normeFabrication(certificatControl.getNormeFabrication())
                 .paye(certificatControl.isPaye())
                 .montant(certificatControl.getMontant())
@@ -98,6 +101,7 @@ public class CertificatControlDAO {
         certificatControlEntity.setId(certificatControl.getId());
         certificatControlEntity.setSite(certificatControl.getSite());
         certificatControlEntity.setSociete(certificatControl.getSociete());
+        certificatControlEntity.setCreationDate(certificatControl.getCreationDate());
         certificatControlEntity.setNumeroRapport(certificatControl.getNumeroRapport());
         certificatControlEntity.setValidite(certificatControl.getValidite());
         certificatControlEntity.setDescription(certificatControl.getDescription());

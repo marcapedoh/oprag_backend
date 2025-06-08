@@ -20,7 +20,6 @@ public class BadgeDAO {
     private String validite;
     private String numeroParc;
     private boolean active;
-    private String codeQrString;
     private CertificatControlDAO certificatControl;
     private UtilisateurDAO inspecteur;
 
@@ -34,7 +33,6 @@ public class BadgeDAO {
                 .validite(badge.getValidite())
                 .numeroParc(badge.getNumeroParc())
                 .active(badge.isActive())
-                .codeQrString(badge.getCodeQrString())
                 .certificatControl(CertificatControlDAO.fromEntity(badge.getCertificatControl()))
                 .inspecteur(UtilisateurDAO.fromEntity(badge.getInspecteur()))
                 .build();
@@ -51,7 +49,6 @@ public class BadgeDAO {
         badge.setValidite(badgeDAO.getValidite());
         badge.setNumeroParc(badgeDAO.getNumeroParc());
         badge.setActive(badgeDAO.isActive());
-        badge.setCodeQrString(badgeDAO.getCodeQrString());
         badge.setCertificatControl(CertificatControlDAO.toEntity(badgeDAO.getCertificatControl()));
         badge.setInspecteur(UtilisateurDAO.toEntity(badgeDAO.getInspecteur()));
         return badge;

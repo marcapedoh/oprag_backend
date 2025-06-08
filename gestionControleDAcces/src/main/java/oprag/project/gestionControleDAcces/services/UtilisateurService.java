@@ -10,6 +10,7 @@ public interface UtilisateurService {
     UtilisateurDAO findById(Integer id);
     UtilisateurDAO findByEmail(String email);
     List<UtilisateurDAO> findAll();
+    List<UtilisateurDAO> findAllByInspectionNom(String nomInspection);
     void changeState(Integer id);
     void delete(Integer id);
 }

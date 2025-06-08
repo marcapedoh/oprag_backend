@@ -36,11 +36,17 @@ public class AuthenticationService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request){
         String jwtToken;
+        var user=this.utilisateurRepository.findUtilisateurByUserName(request.getUsername()).orElseThrow(()-> new EntityNotFoundException("Aucun Utilisateur trouvé pour cet userName"));
         UserDetails utilisateur= this.utilisateurRepository.findUtilisateurByUserName(request.getUsername()).orElseThrow(()-> new EntityNotFoundException("Aucun Utilisateur trouvé pour cet userName"));
         if(passwordEncoder.matches(request.getMotDePasse(),utilisateur.getPassword())){
             jwtToken=jwtService.generateToken(utilisateur);
             return AuthenticationResponse.builder()
                     .token(jwtToken)
+                    .userId(user.getId())
+                    .active(user.isActive())
+                    .role(user.getRole())
+                    .otpNumber(user.getOtpNumber())
+                    .inspectionName(user.getInspection().getNom())
                     .build();
         }
         return null;
@@ -55,7 +61,8 @@ public class AuthenticationService {
             throw new InvalidEntityException("le chauffeur que vous passez n'est pas valide",ErrorCodes.CHAUFFEUR_NOT_VALID,errors);
         }
         chauffeurDAO.setActive(true);
-        chauffeurDAO.setMotDePasse(passwordEncoder.encode(chauffeurDAO.getMotDePasse()));
+
+        chauffeurDAO.setMotDePasse(passwordEncoder.encode(chauffeurDAO.getNom()+chauffeurDAO.getPrenom()));
         return ChauffeurDAO.fromEntity(
                 chauffeurRepository.save(
                         ChauffeurDAO.toEntity(chauffeurDAO)

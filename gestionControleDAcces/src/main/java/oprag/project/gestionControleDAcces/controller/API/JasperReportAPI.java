@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -21,5 +22,5 @@ public interface JasperReportAPI {
             @ApiResponse(responseCode = "404", description = "Report non créé")
     })
     @PostMapping(value = APP_ROOT+"/Reports/exportReport/{reportFormat}/{certificatControlId}",produces = MediaType.APPLICATION_JSON_VALUE)
-    String exportReport(@PathVariable("reportFormat") String reportFormat,@PathVariable("certificatControlId")  Integer certificatControlId) throws FileNotFoundException, JRException;
+    ResponseEntity<byte[]> exportReport(@PathVariable("reportFormat") String reportFormat, @PathVariable("certificatControlId")  Integer certificatControlId) throws FileNotFoundException, JRException;
 }

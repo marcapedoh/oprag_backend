@@ -6,8 +6,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import oprag.project.gestionControleDAcces.dto.BadgeDAO;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static oprag.project.gestionControleDAcces.constant.Utils.APP_ROOT;
@@ -28,6 +30,16 @@ public interface BadgeAPI {
     })
     @GetMapping(value = APP_ROOT + "/Badges/findById/{numero}", produces = MediaType.APPLICATION_JSON_VALUE)
     BadgeDAO findByNumero(@PathVariable("numero") String numero);
+
+    @GetMapping(value = APP_ROOT + "/Badges/getQrCode/{numero}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<byte[]> getQrCode(@PathVariable("numero") String numero);
+
+
+    @GetMapping(value = APP_ROOT + "/Badges/countAllPerDay", produces = MediaType.APPLICATION_JSON_VALUE)
+    List<Object> countAllPerDay();
+
+    @GetMapping(value = APP_ROOT + "/Badges/countAllPerIntervalDays/{startDate}/{endDate}", produces = MediaType.APPLICATION_JSON_VALUE)
+    List<Object> countAllPerIntervalDays(@PathVariable("startDate") LocalDate startDate,@PathVariable("endDate") LocalDate endDate);
 
     @GetMapping(value = APP_ROOT + "/Badges/all", produces = MediaType.APPLICATION_JSON_VALUE)
     List<BadgeDAO> findAll();

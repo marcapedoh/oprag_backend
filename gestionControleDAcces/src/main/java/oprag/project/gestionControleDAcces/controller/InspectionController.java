@@ -3,11 +3,13 @@ package oprag.project.gestionControleDAcces.controller;
 import oprag.project.gestionControleDAcces.controller.API.InspectionAPI;
 import oprag.project.gestionControleDAcces.dto.InspectionDAO;
 import oprag.project.gestionControleDAcces.services.InspectionService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class InspectionController implements InspectionAPI {
     private InspectionService inspectionService;
     public InspectionController(InspectionService inspectionService) {

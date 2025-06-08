@@ -3,6 +3,7 @@ package oprag.project.gestionControleDAcces.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.Instant;
 import java.util.List;
 
 
@@ -19,6 +20,8 @@ public class CertificatControl extends AbstractEntity{
     private String societe;
     @Column(name = "numeroRapport",nullable = false)
     private String numeroRapport;
+    @Column(name = "creationDate",nullable = false)
+    private Instant creationDate;
     @Column(name = "localisationCertificationFait",nullable = false)
     private String localisationCertificationFait;
     @Column(name = "description",nullable = false)
