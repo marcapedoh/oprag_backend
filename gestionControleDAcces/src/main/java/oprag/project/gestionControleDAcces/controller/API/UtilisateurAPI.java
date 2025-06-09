@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.time.Instant;
 import java.util.List;
 
 import static oprag.project.gestionControleDAcces.constant.Utils.APP_ROOT;
@@ -44,6 +45,8 @@ public interface UtilisateurAPI {
     @GetMapping(value = APP_ROOT + "/Utilisateurs/findAllByInspectionNom/{nomInspection}", produces = MediaType.APPLICATION_JSON_VALUE)
     List<UtilisateurDAO> findAllByInspectionNom(@PathVariable("nomInspection") String nomInspection);
 
+    @GetMapping(value = APP_ROOT + "/Utilisateurs/lastOperationDate/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    Instant lastOperationDate(@PathVariable("id") Integer id);
 
     @Operation(summary = "Supprimer un utilisateur", description = "Cette méthode permet de supprimer un utilisateur par ID.")
     @DeleteMapping(value = APP_ROOT + "/Utilisateurs/delete/{id}")

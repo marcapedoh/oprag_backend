@@ -153,6 +153,14 @@ public class BadgeServiceImpl implements BadgeService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<BadgeDAO> findAllPerInspecteurId(Integer id) {
+        assert id!=null;
+        return this.badgeRepository.findBadgeByInspecteurId(id).stream()
+                .map(BadgeDAO::fromEntity)
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public void delete(Integer id) {

@@ -34,6 +34,11 @@ public class CertificatControlController implements CertificatControlAPI {
     }
 
     @Override
+    public List<CertificatControlDAO> findCertificatControlByUtilisateurId(Integer id) {
+        return this.certificatControlService.findCertificatControlByUtilisateurId(id);
+    }
+
+    @Override
     public void delete(Integer id) {
         this.certificatControlService.delete(id);
     }

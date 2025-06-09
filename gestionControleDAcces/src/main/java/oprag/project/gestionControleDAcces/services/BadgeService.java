@@ -13,5 +13,6 @@ public interface BadgeService {
     ResponseEntity<byte[]> getQrCode(String numero);
     List<Object> countAllPerDay();
     List<Object> countAllPerIntervalDays(LocalDate startDate, LocalDate endDate);
+    List<BadgeDAO> findAllPerInspecteurId(Integer id);
     void delete(Integer id);
 }

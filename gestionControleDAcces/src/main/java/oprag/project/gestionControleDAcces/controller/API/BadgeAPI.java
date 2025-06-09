@@ -44,6 +44,9 @@ public interface BadgeAPI {
     @GetMapping(value = APP_ROOT + "/Badges/all", produces = MediaType.APPLICATION_JSON_VALUE)
     List<BadgeDAO> findAll();
 
+    @GetMapping(value = APP_ROOT + "/Badges/findAllPerInspecteurId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    List<BadgeDAO> findAllPerInspecteurId(@PathVariable("id") Integer id);
+
     @Operation(summary = "Supprimer un Badge", description = "Cette méthode permet de supprimer un Badge par ID.")
     @DeleteMapping(value = APP_ROOT + "/Badges/delete/{id}")
 

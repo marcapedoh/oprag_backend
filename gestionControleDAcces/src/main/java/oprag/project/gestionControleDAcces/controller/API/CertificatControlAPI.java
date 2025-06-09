@@ -33,6 +33,9 @@ public interface CertificatControlAPI {
     @GetMapping(value = APP_ROOT + "/CertificatControls/all", produces = MediaType.APPLICATION_JSON_VALUE)
     List<CertificatControlDAO> findAll();
 
+    @GetMapping(value = APP_ROOT + "/CertificatControls/findCertificatControlByUtilisateurId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    List<CertificatControlDAO> findCertificatControlByUtilisateurId(@PathVariable("id") Integer id);
+
     @Operation(summary = "Supprimer un CertificatControl", description = "Cette méthode permet de supprimer un CertificatControl par ID.")
     @DeleteMapping(value = APP_ROOT + "/CertificatControls/delete/{id}")
     void delete(@PathVariable("id") Integer id);

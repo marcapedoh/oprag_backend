@@ -6,6 +6,7 @@ import oprag.project.gestionControleDAcces.services.UtilisateurService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Instant;
 import java.util.List;
 
 @RestController
@@ -30,6 +31,11 @@ public class UtilisateurController implements UtilisateurAPI {
     @Override
     public List<UtilisateurDAO> findAll() {
         return this.utilisateurService.findAll();
+    }
+
+    @Override
+    public Instant lastOperationDate(Integer id) {
+        return this.utilisateurService.lastOperationDate(id);
     }
 
     @Override

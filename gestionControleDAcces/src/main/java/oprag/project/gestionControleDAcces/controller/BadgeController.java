@@ -36,6 +36,11 @@ public class BadgeController implements BadgeAPI {
     }
 
     @Override
+    public List<BadgeDAO> findAllPerInspecteurId(Integer id) {
+        return this.badgeService.findAllPerInspecteurId(id);
+    }
+
+    @Override
     public List<Object> countAllPerIntervalDays(LocalDate startDate, LocalDate endDate) {
         return this.badgeService.countAllPerIntervalDays(startDate, endDate);
     }

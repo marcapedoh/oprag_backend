@@ -75,6 +75,14 @@ public class CertificatControlServiceImpl implements CertificatControlService {
     }
 
     @Override
+    public List<CertificatControlDAO> findCertificatControlByUtilisateurId(Integer id) {
+        assert id!=null;
+        return this.certificatControlRepository.findCertificatControlByUtilisateurId(id).stream()
+                .map(CertificatControlDAO::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void delete(Integer id) {
         assert id!=null;
         if(this.certificatControlRepository.existsById(id)){
