@@ -9,9 +9,13 @@ import oprag.project.gestionControleDAcces.repository.InspectionRepository;
 import oprag.project.gestionControleDAcces.repository.UtilisateurRepository;
 import oprag.project.gestionControleDAcces.services.InspectionService;
 import oprag.project.gestionControleDAcces.validators.InspectionValidator;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 
@@ -31,6 +35,11 @@ public class InspectionServiceImpl implements InspectionService {
         if(!inspectionRepository.findInspectionByNom(inspectionDAO.getNom()).isEmpty()){
             throw new InvalidOperationException("cette inspection existe déjà dans la base de donnée", ErrorCodes.INSPECTION_EXIST);
         }
+        Random random = new Random();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        String dateCondensee = LocalDate.now().format(formatter);
+
+        inspectionDAO.setCodeInspection(inspectionDAO.getCode().substring(0,3).toUpperCase()+"-"+inspectionDAO.getType().toString().substring(0,3)+"-"+ dateCondensee+"-"+random.nextInt(99));
         List<String> errors= InspectionValidator.validate(inspectionDAO);
         if(!errors.isEmpty()){
             throw new InvalidEntityException("l'inspection que vous passez n'est pas valide",ErrorCodes.INSPECTION_NOT_VALID,errors);

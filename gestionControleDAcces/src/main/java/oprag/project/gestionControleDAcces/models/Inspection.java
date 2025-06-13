@@ -1,8 +1,6 @@
 package oprag.project.gestionControleDAcces.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -16,6 +14,14 @@ import java.util.List;
 public class Inspection extends AbstractEntity {
     @Column(name = "nom", nullable = false,unique = true)
     private String nom;
+    @Column(name = "code", nullable = false, unique = true)
+    private String code;
+    @Column(name = "codeInspection", nullable = false, unique = true)
+    private String codeInspection;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "typeControl",nullable = false)
+    private TypeControl type;
+
     @Column(name = "logo",nullable = false)
     private String logo;
 
