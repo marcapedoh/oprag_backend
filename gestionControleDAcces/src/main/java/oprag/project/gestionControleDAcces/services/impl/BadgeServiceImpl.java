@@ -67,7 +67,7 @@ public class BadgeServiceImpl implements BadgeService {
 
         badgeDAO.setInspecteur(UtilisateurDAO.fromEntity(inspecteur));
         badgeDAO.setCertificatControl(CertificatControlDAO.fromEntity(certificatControl));
-
+        badgeDAO.setActive(true);
         var badge = BadgeDAO.fromEntity(
                 badgeRepository.save(
                         BadgeDAO.toEntity(badgeDAO)));
