@@ -16,7 +16,7 @@ public class SwaggerConfiguration {
        return new OpenAPI()
                .servers(List.of(
                        new Server()
-                               .url("https://badge.routeafrique.com")
+                               .url("https://badge.routeafrique.com:1020")
                                .description("Server Production"),
                        new Server()
                                .url("https://staging.routeafrique.com")
