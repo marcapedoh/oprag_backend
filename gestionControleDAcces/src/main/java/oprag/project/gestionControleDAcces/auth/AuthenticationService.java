@@ -45,6 +45,7 @@ public class AuthenticationService {
                     .userId(user.getId())
                     .active(user.isActive())
                     .role(user.getRole())
+                    .inspectionId(user.getInspection().getId())
                     .otpNumber(user.getOtpNumber())
                     .inspectionName(user.getInspection().getNom())
                     .build();

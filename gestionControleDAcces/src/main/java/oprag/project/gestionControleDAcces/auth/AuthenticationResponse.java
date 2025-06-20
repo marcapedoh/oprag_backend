@@ -17,5 +17,6 @@ public class AuthenticationResponse {
     private boolean active;
     private UserRole role;
     private Integer otpNumber;
+    private Integer inspectionId;
     private String inspectionName;
 }
