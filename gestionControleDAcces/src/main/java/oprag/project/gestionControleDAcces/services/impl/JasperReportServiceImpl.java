@@ -21,6 +21,7 @@ import org.springframework.util.ResourceUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -67,8 +68,11 @@ public class JasperReportServiceImpl implements JasperReportService {
                 .inspection(directeurDGMG.getInspection())
                 .certificatControl(certificatControl)
                 .build();
-        File file= ResourceUtils.getFile("classpath:inspectionFiche.jrxml");
-        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+//        File file= ResourceUtils.getFile("classpath:inspectionFiche.jrxml");
+//        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
+        InputStream jrxmlStream = getClass().getResourceAsStream("/inspectionFiche.jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlStream);
+
         JRBeanCollectionDataSource dataSource= new JRBeanCollectionDataSource(Collections.singleton(reportData));
         Map<String,Object> parameters= new HashMap<>();
         parameters.put("CreatedBy","MarcAPEDOHKossiKekeli");
