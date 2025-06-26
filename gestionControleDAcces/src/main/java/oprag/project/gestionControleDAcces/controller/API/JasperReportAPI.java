@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -23,4 +24,7 @@ public interface JasperReportAPI {
     })
     @PostMapping(value = APP_ROOT+"/Reports/exportReport/{reportFormat}/{certificatControlId}",produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<byte[]> exportReport(@PathVariable("reportFormat") String reportFormat, @PathVariable("certificatControlId")  Integer certificatControlId) throws FileNotFoundException, JRException;
+    @GetMapping(value = APP_ROOT+"/Reports/exportReportForQrCode/{reportFormat}/{certificatControlId}",produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<byte[]> exportReportForQrCode(@PathVariable("reportFormat") String reportFormat, @PathVariable("certificatControlId")  Integer certificatControlId) throws FileNotFoundException, JRException;
+
 }

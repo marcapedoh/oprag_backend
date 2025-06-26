@@ -24,4 +24,9 @@ public class JasperReportController implements JasperReportAPI {
     public ResponseEntity<byte[]> exportReport(String reportFormat, Integer certificatControlId) throws FileNotFoundException, JRException {
         return this.jasperReportService.exportReport(reportFormat, certificatControlId);
     }
+
+    @Override
+    public ResponseEntity<byte[]> exportReportForQrCode(String reportFormat, Integer certificatControlId) throws FileNotFoundException, JRException {
+        return this.jasperReportService.exportReport(reportFormat, certificatControlId);
+    }
 }

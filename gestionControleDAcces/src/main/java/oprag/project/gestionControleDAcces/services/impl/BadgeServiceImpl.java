@@ -84,9 +84,9 @@ public class BadgeServiceImpl implements BadgeService {
                 .orElseThrow(() -> new EntityNotFoundException("Badge non trouvé avec ce numéro"));
 
         try {
-            String qrContent = "DateCreation:" + badge.getDateCreation() + ";Numero:" + badge.getNumero()+";Validite:"+badge.getValidite();
-            BufferedImage qrImage = QRCodeUtil.generateQRCodeImage(qrContent, 80, 80);
-
+            //String qrContent = "DateCreation:" + badge.getDateCreation() + ";Numero:" + badge.getNumero()+";Validite:"+badge.getValidite();
+            String qrContent= "https://badge.routeafrique.com:1020/OPRAG/v0/endpoint/Reports/exportReportForQrCode/pdf/"+badge.getCertificatControl().getId();
+            BufferedImage qrImage = QRCodeUtil.generateQRCodeImage(qrContent, 150, 150);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(qrImage, "png", baos);
 

@@ -44,6 +44,8 @@ public class AuthenticationService {
                     .token(jwtToken)
                     .userId(user.getId())
                     .active(user.isActive())
+                    .nom(user.getNom())
+                    .prenom(user.getPrenom())
                     .role(user.getRole())
                     .inspectionId(user.getInspection().getId())
                     .otpNumber(user.getOtpNumber())

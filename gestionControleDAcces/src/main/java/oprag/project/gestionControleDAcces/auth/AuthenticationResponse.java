@@ -13,6 +13,8 @@ import oprag.project.gestionControleDAcces.models.UserRole;
 @NoArgsConstructor
 public class AuthenticationResponse {
     private String token;
+    private String nom;
+    private String prenom;
     private int userId;
     private boolean active;
     private UserRole role;
