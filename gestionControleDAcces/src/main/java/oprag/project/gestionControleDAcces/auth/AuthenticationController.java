@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import oprag.project.gestionControleDAcces.dto.UtilisateurDAO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,6 +36,11 @@ public class AuthenticationController {
     })
     public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request){
         return ResponseEntity.ok(authenticationService.register(request));
+    }
+
+    @PostMapping(value="/update")
+    public ResponseEntity<UtilisateurDAO> update(@RequestBody UtilisateurDAO utilisateurDAO){
+        return ResponseEntity.ok(authenticationService.update(utilisateurDAO));
     }
 
 

@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import oprag.project.gestionControleDAcces.config.JwtService;
 import oprag.project.gestionControleDAcces.dto.ChauffeurDAO;
+import oprag.project.gestionControleDAcces.dto.UtilisateurDAO;
 import oprag.project.gestionControleDAcces.exception.EntityNotFoundException;
 import oprag.project.gestionControleDAcces.exception.ErrorCodes;
 import oprag.project.gestionControleDAcces.exception.InvalidEntityException;
@@ -119,6 +120,12 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token("erreur survenue lors de la persistance")
                 .build();
+    }
+
+    public UtilisateurDAO update(UtilisateurDAO utilisateurDAO){
+        return UtilisateurDAO.fromEntity(
+                this.utilisateurRepository.save(UtilisateurDAO.toEntity(utilisateurDAO))
+        );
     }
 
 
