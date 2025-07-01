@@ -97,7 +97,7 @@ public class AuthenticationService {
                     .premiereConnexion(true)
                     .role(UserRole.valueOf(request.getRole()))
                     .email(request.getEmail())
-                    .inspection(inspection.get())
+                    .inspection(inspection.orElse(null))
                     .motDePasse(passwordEncoder.encode(request.getMotDePasse()))
                     .build();
             if(!String.valueOf(user.getRole()).equals("INSPECTEUR")){

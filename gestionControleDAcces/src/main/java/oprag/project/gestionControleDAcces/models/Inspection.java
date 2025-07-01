@@ -18,6 +18,10 @@ public class Inspection extends AbstractEntity {
     private String code;
     @Column(name = "codeInspection", nullable = false, unique = true)
     private String codeInspection;
+
+    @Column(name = "status", nullable = false)
+    private boolean status;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "typeControl",nullable = false)
     private TypeControl type;

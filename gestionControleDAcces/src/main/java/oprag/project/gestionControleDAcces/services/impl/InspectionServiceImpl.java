@@ -38,7 +38,7 @@ public class InspectionServiceImpl implements InspectionService {
         Random random = new Random();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         String dateCondensee = LocalDate.now().format(formatter);
-
+        inspectionDAO.setStatus(true);
         inspectionDAO.setCodeInspection(inspectionDAO.getCode().substring(0,3).toUpperCase()+"-"+inspectionDAO.getType().toString().substring(0,3)+"-"+ dateCondensee+"-"+random.nextInt(99));
         List<String> errors= InspectionValidator.validate(inspectionDAO);
         if(!errors.isEmpty()){

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import oprag.project.gestionControleDAcces.models.Inspection;
 import oprag.project.gestionControleDAcces.models.TypeControl;
 
+import java.time.Instant;
 import java.util.List;
 
 @Data
@@ -19,7 +20,9 @@ public class InspectionDAO {
     private String code;
     private String nom;
     private String codeInspection;
+    private boolean status;
     private TypeControl type;
+    private Instant createdDate;
     private String logo;
     @JsonIgnore
     private List<UtilisateurDAO> inspecteurs;
@@ -32,9 +35,11 @@ public class InspectionDAO {
         return InspectionDAO.builder()
                 //.id(inspection.getId())
                 .nom(inspection.getNom())
+                .status(inspection.isStatus())
                 .codeInspection(inspection.getCodeInspection())
                 .type(inspection.getType())
                 .code(inspection.getCode())
+                .createdDate(inspection.getDateCreation())
                 .logo(inspection.getLogo())
                 .build();
     }
@@ -49,6 +54,7 @@ public class InspectionDAO {
         inspection.setNom(inspectionDAO.getNom());
         inspection.setCodeInspection(inspectionDAO.getCodeInspection());
         inspection.setType(inspectionDAO.getType());
+        inspection.setStatus(inspectionDAO.isStatus());
         inspection.setCode(inspectionDAO.getCode());
         inspection.setLogo(inspectionDAO.getLogo());
         return inspection;
