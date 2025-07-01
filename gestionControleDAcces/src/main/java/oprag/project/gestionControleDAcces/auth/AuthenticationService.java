@@ -87,8 +87,8 @@ public class AuthenticationService {
     }
     public AuthenticationResponse register(RegisterRequest request){
         var utilisateur= utilisateurRepository.findUtilisateurByUserName(request.getUserName());
-        var inspection= inspectionRepository.findById(request.getIdInspection());
-        if(utilisateur.isEmpty() && inspection.isPresent()){
+        var inspection= inspectionRepository.findById(request.getIdInspection()).orElse(null);
+        if(utilisateur.isEmpty() ){
             var user= Utilisateur.builder()
                     .nom(request.getNom())
                     .prenom(request.getPrenom())
@@ -97,7 +97,7 @@ public class AuthenticationService {
                     .premiereConnexion(true)
                     .role(UserRole.valueOf(request.getRole()))
                     .email(request.getEmail())
-                    .inspection(inspection.orElse(null))
+                    .inspection(inspection)
                     .motDePasse(passwordEncoder.encode(request.getMotDePasse()))
                     .build();
             if(!String.valueOf(user.getRole()).equals("INSPECTEUR")){
@@ -112,10 +112,6 @@ public class AuthenticationService {
             return AuthenticationResponse.builder()
                     .token(jwtToken)
                     .build();
-        }else{
-            if(!inspection.isPresent()){
-                throw new EntityNotFoundException("l'inspection que vous cherchez afin de creer l'utilisateur n'est pas trouvé ou n'existe pas encore");
-            }
         }
         return AuthenticationResponse.builder()
                 .token("erreur survenue lors de la persistance")
