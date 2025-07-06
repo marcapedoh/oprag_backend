@@ -48,9 +48,9 @@ public class AuthenticationService {
                     .nom(user.getNom())
                     .prenom(user.getPrenom())
                     .role(user.getRole())
-                    .inspectionId(user.getInspection().getId()!=null?user.getInspection().getId():null)
+                    .inspectionId(user.getInspection()!=null?user.getInspection().getId():null)
                     .otpNumber(user.getOtpNumber())
-                    .inspectionName(user.getInspection().getNom())
+                    .inspectionName(user.getInspection()!=null?user.getInspection().getNom():null)
                     .build();
         }
         return null;
