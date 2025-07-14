@@ -488,7 +488,7 @@ Signature:]]></text>
                 <reportElement x="26" y="569" width="144" height="16" uuid="342ad5e9-1de2-4aa2-9282-e167ad6da07f"/>
                 <textFieldExpression><![CDATA[$F{utilisateur.nom} + " " + $F{utilisateur.prenom}]]></textFieldExpression>
             </textField>
-            <image>
+            <image scaleImage="RetainShape">
                 <reportElement x="70" y="530" width="300" height="60" uuid="3623c285-f7d6-4a8b-9881-4f821c88bd93"/>
                 <imageExpression><![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{utilisateur.signature}.substring($F{utilisateur.signature}.indexOf(",")+1))))]]></imageExpression>
             </image>
