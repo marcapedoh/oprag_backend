@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import static oprag.project.gestionControleDAcces.constant.Utils.APP_ROOT;
 
@@ -23,8 +24,8 @@ public interface JasperReportAPI {
             @ApiResponse(responseCode = "404", description = "Report non créé")
     })
     @PostMapping(value = APP_ROOT+"/Reports/exportReport/{reportFormat}/{certificatControlId}",produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<byte[]> exportReport(@PathVariable("reportFormat") String reportFormat, @PathVariable("certificatControlId")  Integer certificatControlId) throws FileNotFoundException, JRException;
+    ResponseEntity<byte[]> exportReport(@PathVariable("reportFormat") String reportFormat, @PathVariable("certificatControlId")  Integer certificatControlId) throws IOException, JRException;
     @GetMapping(value = APP_ROOT+"/Reports/exportReportForQrCode/{reportFormat}/{certificatControlId}",produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<byte[]> exportReportForQrCode(@PathVariable("reportFormat") String reportFormat, @PathVariable("certificatControlId")  Integer certificatControlId) throws FileNotFoundException, JRException;
+    ResponseEntity<byte[]> exportReportForQrCode(@PathVariable("reportFormat") String reportFormat, @PathVariable("certificatControlId")  Integer certificatControlId) throws IOException, JRException;
 
 }

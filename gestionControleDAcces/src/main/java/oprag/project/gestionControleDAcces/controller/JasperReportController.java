@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -21,12 +22,12 @@ public class JasperReportController implements JasperReportAPI {
     }
 
     @Override
-    public ResponseEntity<byte[]> exportReport(String reportFormat, Integer certificatControlId) throws FileNotFoundException, JRException {
+    public ResponseEntity<byte[]> exportReport(String reportFormat, Integer certificatControlId) throws IOException, JRException {
         return this.jasperReportService.exportReport(reportFormat, certificatControlId);
     }
 
     @Override
-    public ResponseEntity<byte[]> exportReportForQrCode(String reportFormat, Integer certificatControlId) throws FileNotFoundException, JRException {
+    public ResponseEntity<byte[]> exportReportForQrCode(String reportFormat, Integer certificatControlId) throws IOException, JRException {
         return this.jasperReportService.exportReport(reportFormat, certificatControlId);
     }
 }

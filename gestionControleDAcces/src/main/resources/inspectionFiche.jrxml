@@ -489,8 +489,8 @@ Signature:]]></text>
                 <textFieldExpression><![CDATA[$F{utilisateur.nom} + " " + $F{utilisateur.prenom}]]></textFieldExpression>
             </textField>
             <image>
-                <reportElement x="70" y="588" width="99" height="20" uuid="3623c285-f7d6-4a8b-9881-4f821c88bd93"/>
-                <imageExpression><![CDATA[$F{utilisateur.signature}]]></imageExpression>
+                <reportElement x="70" y="530" width="300" height="60" uuid="3623c285-f7d6-4a8b-9881-4f821c88bd93"/>
+                <imageExpression><![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{utilisateur.signature}.substring($F{utilisateur.signature}.indexOf(",")+1))))]]></imageExpression>
             </image>
             <textField>
                 <reportElement x="270" y="550" width="88" height="20" uuid="03441944-91c2-4f8d-ac7e-5c2f5100b28d"/>
@@ -500,9 +500,9 @@ Signature:]]></text>
                 <reportElement x="195" y="567" width="134" height="20" uuid="32b64887-2747-4494-876e-be5bf9537279"/>
                 <textFieldExpression><![CDATA[$F{certificatControl.utilisateur.role}]]></textFieldExpression>
             </textField>
-            <image>
-                <reportElement x="230" y="588" width="99" height="20" uuid="563c5875-d81d-4618-a627-484ef0d72457"/>
-                <imageExpression><![CDATA[$F{certificatControl.utilisateur.signature}]]></imageExpression>
+            <image scaleImage="RetainShape">
+                <reportElement x="230" y="530" width="300" height="60" uuid="563c5875-d81d-4618-a627-484ef0d72457"/>
+                <imageExpression><![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{certificatControl.utilisateur.signature}.substring($F{certificatControl.utilisateur.signature}.indexOf(",")+1))))]]></imageExpression>
             </image>
             <textField>
                 <reportElement x="403" y="569" width="90" height="20" uuid="dc36979c-a2c7-4b2a-99be-5ce2cc7ea7d5"/>

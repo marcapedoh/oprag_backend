@@ -1,5 +1,6 @@
 package oprag.project.gestionControleDAcces.services.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import oprag.project.gestionControleDAcces.dto.CertificatControlDAO;
@@ -18,21 +19,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class JasperReportServiceImpl implements JasperReportService {
 
     private CertificatControlRepository certificationControlRepository;
@@ -52,7 +50,7 @@ public class JasperReportServiceImpl implements JasperReportService {
     }
 
     @Override
-    public ResponseEntity<byte[]> exportReport(String reportFormat, Integer certificatControlId) throws FileNotFoundException, JRException {
+    public ResponseEntity<byte[]> exportReport(String reportFormat, Integer certificatControlId) throws IOException, JRException {
         String userHome = System.getProperty("user.home");
         Path downloadsPath = Paths.get(userHome, "Downloads");
         String outputPath="";
@@ -61,6 +59,8 @@ public class JasperReportServiceImpl implements JasperReportService {
         ZoneId zoneId = ZoneId.systemDefault(); // ou ZoneId.of("Europe/Paris") selon le besoin
         LocalDate localDate = this.certificationControlRepository.findById(certificatControlId).get().getDateCreation().atZone(zoneId).toLocalDate();
         String essaisConcatenes=getEssaisConcatenes(certificatControl.getEssaiFonctionnementList());
+
+
         ReportData reportData=ReportData.builder()
                 .utilisateur(directeurDGMG)
                 .dateCertificat(localDate)
