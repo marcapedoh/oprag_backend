@@ -48,6 +48,7 @@ public class AuthenticationService {
                     .nom(user.getNom())
                     .prenom(user.getPrenom())
                     .role(user.getRole())
+                    .signaturePresence(user.getSignature() != null)
                     .inspectionId(user.getInspection()!=null?user.getInspection().getId():null)
                     .otpNumber(user.getOtpNumber())
                     .inspectionName(user.getInspection()!=null?user.getInspection().getNom():null)
