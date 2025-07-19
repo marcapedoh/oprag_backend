@@ -18,7 +18,7 @@ public class RegisterRequest {
     private String prenom;
     private String userName;
     private String email;
-    private Integer idInspection;
+    private String idInspection;
     private String motDePasse;
     private String role;
 }

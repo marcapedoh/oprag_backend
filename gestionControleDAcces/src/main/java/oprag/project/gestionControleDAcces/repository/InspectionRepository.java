@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface InspectionRepository extends JpaRepository<Inspection,Integer> {
     Optional<Inspection> findInspectionByNom(String nom);
 
+    Optional<Inspection> findByCode(String code);
 }

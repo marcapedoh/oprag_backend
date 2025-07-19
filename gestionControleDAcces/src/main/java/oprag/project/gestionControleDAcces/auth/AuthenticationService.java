@@ -88,7 +88,7 @@ public class AuthenticationService {
     }
     public AuthenticationResponse register(RegisterRequest request){
         var utilisateur= utilisateurRepository.findUtilisateurByUserName(request.getUserName());
-        var inspection= inspectionRepository.findById(request.getIdInspection()).orElse(null);
+        var inspection= inspectionRepository.findByCode((request.getIdInspection())).orElse(null);
         if(utilisateur.isEmpty() ){
             var user= Utilisateur.builder()
                     .nom(request.getNom())
