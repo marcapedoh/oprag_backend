@@ -39,8 +39,8 @@ public class UtilisateurController implements UtilisateurAPI {
     }
 
     @Override
-    public List<UtilisateurDAO> findAllByInspectionNom(String nomInspection) {
-        return this.utilisateurService.findAllByInspectionNom(nomInspection);
+    public List<UtilisateurDAO> findAllByInspectionNom() {
+        return this.utilisateurService.findAllByInspectionNom();
     }
 
     @Override

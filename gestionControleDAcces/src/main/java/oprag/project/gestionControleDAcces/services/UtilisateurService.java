@@ -11,7 +11,7 @@ public interface UtilisateurService {
     UtilisateurDAO findById(Integer id);
     UtilisateurDAO findByEmail(String email);
     List<UtilisateurDAO> findAll();
-    List<UtilisateurDAO> findAllByInspectionNom(String nomInspection);
+    List<UtilisateurDAO> findAllByInspectionNom();
     void changeState(Integer id);
     Instant lastOperationDate(Integer id);
     void delete(Integer id);

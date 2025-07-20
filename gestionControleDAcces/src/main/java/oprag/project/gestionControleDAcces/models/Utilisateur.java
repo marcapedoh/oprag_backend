@@ -32,7 +32,7 @@ public class Utilisateur extends AbstractEntity implements UserDetails {
     private Integer otpNumber;
     @Column(name = "active")
     private boolean active;
-    @Column(name = "signature")
+    @Column(name = "signature",length = 2500000)
     private String signature;
     @Column(name = "userRole", nullable = false)
     @Enumerated(EnumType.STRING)

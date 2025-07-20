@@ -1,5 +1,6 @@
 package oprag.project.gestionControleDAcces.services.impl;
 
+import oprag.project.gestionControleDAcces.dto.InspectionDAO;
 import oprag.project.gestionControleDAcces.dto.UtilisateurDAO;
 import oprag.project.gestionControleDAcces.exception.EntityNotFoundException;
 import oprag.project.gestionControleDAcces.exception.ErrorCodes;
@@ -9,11 +10,13 @@ import oprag.project.gestionControleDAcces.models.CertificatControl;
 import oprag.project.gestionControleDAcces.models.Utilisateur;
 import oprag.project.gestionControleDAcces.repository.BadgeRepository;
 import oprag.project.gestionControleDAcces.repository.CertificatControlRepository;
+import oprag.project.gestionControleDAcces.repository.InspectionRepository;
 import oprag.project.gestionControleDAcces.repository.UtilisateurRepository;
 import oprag.project.gestionControleDAcces.services.UtilisateurService;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,11 +25,13 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private final UtilisateurRepository utilisateurRepository;
     private final CertificatControlRepository certificatControlRepository;
     private final BadgeRepository badgeRepository;
+    private final InspectionRepository inspectionRepository;
 
-    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository,CertificatControlRepository certificatControlRepository,BadgeRepository badgeRepository) {
+    public UtilisateurServiceImpl(UtilisateurRepository utilisateurRepository, CertificatControlRepository certificatControlRepository, BadgeRepository badgeRepository, InspectionRepository inspectionRepository) {
         this.utilisateurRepository = utilisateurRepository;
         this.certificatControlRepository = certificatControlRepository;
         this.badgeRepository = badgeRepository;
+        this.inspectionRepository = inspectionRepository;
     }
 
     @Override
@@ -49,10 +54,23 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
-    public List<UtilisateurDAO> findAllByInspectionNom(String nomInspection) {
-        return this.utilisateurRepository.findUtilisateurByInspectionNom(nomInspection).stream()
-                .map(UtilisateurDAO::fromEntity)
+    public List<UtilisateurDAO> findAllByInspectionNom() {
+        List<UtilisateurDAO> allUsers = new ArrayList<>();
+
+        List<InspectionDAO> inspectionDAOs = this.inspectionRepository.findAll().stream()
+                .map(InspectionDAO::fromEntity)
                 .collect(Collectors.toList());
+
+        for (InspectionDAO inspectionDAO : inspectionDAOs) {
+            List<UtilisateurDAO> users = this.utilisateurRepository.findUtilisateurByInspectionNom(inspectionDAO.getNom())
+                    .stream()
+                    .map(UtilisateurDAO::fromEntity)
+                    .collect(Collectors.toList());
+
+            allUsers.addAll(users);
+        }
+
+        return allUsers;
     }
 
     @Override
