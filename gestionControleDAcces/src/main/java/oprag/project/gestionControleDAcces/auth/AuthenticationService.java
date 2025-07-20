@@ -120,6 +120,7 @@ public class AuthenticationService {
     }
 
     public UtilisateurDAO update(UtilisateurDAO utilisateurDAO){
+
         return UtilisateurDAO.fromEntity(
                 this.utilisateurRepository.save(UtilisateurDAO.toEntity(utilisateurDAO))
         );

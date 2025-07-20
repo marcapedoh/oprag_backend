@@ -17,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class InspectionDAO {
+    private Integer id;
     private String code;
     private String nom;
     private String codeInspection;
@@ -33,7 +34,7 @@ public class InspectionDAO {
         }
 
         return InspectionDAO.builder()
-                //.id(inspection.getId())
+                .id(inspection.getId())
                 .nom(inspection.getNom())
                 .status(inspection.isStatus())
                 .codeInspection(inspection.getCodeInspection())
@@ -50,7 +51,7 @@ public class InspectionDAO {
         }
 
         Inspection inspection = new Inspection();
-       // inspection.setId(inspectionDAO.getId());
+        inspection.setId(inspectionDAO.getId());
         inspection.setNom(inspectionDAO.getNom());
         inspection.setCodeInspection(inspectionDAO.getCodeInspection());
         inspection.setType(inspectionDAO.getType());
