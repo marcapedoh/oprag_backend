@@ -65,6 +65,7 @@ public class UtilisateurDAO {
         utilisateur.setPremiereConnexion(utilisateurDAO.isPremiereConnexion());
         utilisateur.setOtpNumber(utilisateurDAO.getOtpNumber());
         utilisateur.setUserName(utilisateurDAO.getUserName());
+        utilisateur.setMotDePasse(utilisateurDAO.getMotDePasse());
         utilisateur.setEmail(utilisateurDAO.getEmail());
         utilisateur.setSignature(utilisateurDAO.getSignature());
         utilisateur.setRole(utilisateurDAO.getRole());
