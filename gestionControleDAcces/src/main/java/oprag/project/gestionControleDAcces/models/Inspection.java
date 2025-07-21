@@ -26,7 +26,7 @@ public class Inspection extends AbstractEntity {
     @Column(name = "typeControl",nullable = false)
     private TypeControl type;
 
-    @Column(name = "logo",nullable = false,length = 2500000)
+    @Column(name = "logo",length = 2500000)
     private String logo;
 
     @OneToMany(mappedBy = "inspection")
