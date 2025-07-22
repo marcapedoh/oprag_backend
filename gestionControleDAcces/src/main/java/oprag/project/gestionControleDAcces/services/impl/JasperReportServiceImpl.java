@@ -55,7 +55,7 @@ public class JasperReportServiceImpl implements JasperReportService {
         Path downloadsPath = Paths.get(userHome, "Downloads");
         String outputPath="";
         var certificatControl= this.certificationControlRepository.findById(certificatControlId).map(CertificatControlDAO::fromEntity).orElseThrow(()-> new EntityNotFoundException("aucun certificatControl pour ce id fourni"));
-        var directeurDGMG=this.utilisateurRepository.findUtilisateurByInspectionNomAndRole(certificatControl.getUtilisateur().getInspection().getNom(),UserRole.DGMG).map(UtilisateurDAO::fromEntity).orElseThrow(()-> new EntityNotFoundException("Le directeur DGMG n'est pas trouvé"));
+        var directeurDGMG=this.utilisateurRepository.findUtilisateurByInspectionNomAndRole(certificatControl.getUtilisateur().getInspection().getNom(),UserRole.INSPECTEUR_PRINCIPAL).map(UtilisateurDAO::fromEntity).orElseThrow(()-> new EntityNotFoundException("Le directeur DGMG n'est pas trouvé"));
         ZoneId zoneId = ZoneId.systemDefault(); // ou ZoneId.of("Europe/Paris") selon le besoin
         LocalDate localDate = this.certificationControlRepository.findById(certificatControlId).get().getDateCreation().atZone(zoneId).toLocalDate();
         String essaisConcatenes=getEssaisConcatenes(certificatControl.getEssaiFonctionnementList());
