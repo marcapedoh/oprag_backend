@@ -33,7 +33,7 @@ public class InspectionServiceImpl implements InspectionService {
 
     @Override
     public InspectionDAO save(InspectionDAO inspectionDAO) {
-        if(!inspectionRepository.findInspectionByNom(inspectionDAO.getNom()).isEmpty()){
+        if(!inspectionRepository.findInspectionByNom(inspectionDAO.getNom()).isEmpty() && inspectionDAO.getId()==null){
             throw new InvalidOperationException("cette inspection existe déjà dans la base de donnée", ErrorCodes.INSPECTION_EXIST);
         }
         Random random = new Random();
