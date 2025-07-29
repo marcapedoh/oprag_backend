@@ -27,6 +27,11 @@ public class InspectionController implements InspectionAPI {
     }
 
     @Override
+    public List<Double> pieChartStatsData() {
+        return this.inspectionService.pieChartStatsData();
+    }
+
+    @Override
     public InspectionDAO findById(Integer id) {
         return this.inspectionService.findById(id);
     }

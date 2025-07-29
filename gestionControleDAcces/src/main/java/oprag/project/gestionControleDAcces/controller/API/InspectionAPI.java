@@ -29,6 +29,8 @@ public interface InspectionAPI {
     @GetMapping(value = APP_ROOT + "/Inspections/all", produces = MediaType.APPLICATION_JSON_VALUE)
     List<InspectionDAO> findAll();
 
+    @GetMapping(value = APP_ROOT + "/Inspections/pieChartStatsData", produces = MediaType.APPLICATION_JSON_VALUE)
+    List<Double> pieChartStatsData();
     @Operation(summary = "Rechercher une inspection par Id", description = "Cette méthode permet de rechercher une inspection par son Id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Inspection trouvé"),
