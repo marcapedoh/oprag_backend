@@ -67,8 +67,20 @@ public class InspectionServiceImpl implements InspectionService {
     }
 
     @Override
-    public List<Long> pieChartStatsData() {
-        return Arrays.asList(this.inspectionRepository.countByStatusTrue(),this.inspectionRepository.countByStatusFalse());
+    public List<Double> pieChartStatsData() {
+        long total = inspectionRepository.count();
+
+        if (total == 0) {
+            return Arrays.asList(0.0, 0.0);
+        }
+
+        long activeCount = inspectionRepository.countByStatusTrue();
+        long inactiveCount = inspectionRepository.countByStatusFalse();
+
+        double activePercentage = (activeCount * 100.0) / total;
+        double inactivePercentage = (inactiveCount * 100.0) / total;
+
+        return Arrays.asList(activePercentage, inactivePercentage);
     }
 
     @Override
