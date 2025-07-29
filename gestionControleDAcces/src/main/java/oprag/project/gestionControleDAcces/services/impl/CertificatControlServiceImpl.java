@@ -13,8 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -72,6 +71,43 @@ public class CertificatControlServiceImpl implements CertificatControlService {
         return this.certificatControlRepository.findAll().stream()
                 .map(CertificatControlDAO::fromEntity)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public long numberOfCertificatControls() {
+        return this.findAll().size();
+    }
+
+    @Override
+    public List<Map<String, Object>> getCertificatControlsStatsByInspection() {
+        List<Object[]> rows = certificatControlRepository.countCertificatControlByInspectionAndMonth();
+
+        // Map temporaire : { Inspection -> [12 mois] }
+        Map<String, List<Long>> inspectionData = new LinkedHashMap<>();
+
+        for (Object[] row : rows) {
+            String inspectionName = (String) row[0];
+            Integer mois = ((Number) row[1]).intValue();
+            Long total = ((Number) row[2]).longValue();
+
+            inspectionData.putIfAbsent(inspectionName, initEmptyList()); // Liste de 12 zéros
+            inspectionData.get(inspectionName).set(mois - 1, total); // Index basé sur mois (1 → 12)
+        }
+
+        // Transformer en List<Map<String,Object>>
+        List<Map<String, Object>> result = new ArrayList<>();
+        for (Map.Entry<String, List<Long>> entry : inspectionData.entrySet()) {
+            Map<String, Object> item = new HashMap<>();
+            item.put("name", entry.getKey());
+            item.put("data", entry.getValue());
+            result.add(item);
+        }
+
+        return result;
+    }
+
+    private List<Long> initEmptyList() {
+        return new ArrayList<>(Collections.nCopies(12, 0L));
     }
 
     @Override

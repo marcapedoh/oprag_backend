@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -63,6 +64,11 @@ public class InspectionServiceImpl implements InspectionService {
         return this.inspectionRepository.findById(id)
                 .map(InspectionDAO::fromEntity)
                 .orElseThrow(()-> new EntityNotFoundException("Aucune inspection trouvé pour cet id",ErrorCodes.INSPECTION_NOT_FOUND));
+    }
+
+    @Override
+    public List<Long> pieChartStatsData() {
+        return Arrays.asList(this.inspectionRepository.countByStatusTrue(),this.inspectionRepository.countByStatusFalse());
     }
 
     @Override

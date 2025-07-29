@@ -11,4 +11,7 @@ public interface InspectionRepository extends JpaRepository<Inspection,Integer> 
     Optional<Inspection> findInspectionByNom(String nom);
 
     Optional<Inspection> findByCode(String code);
+
+    long countByStatusTrue();
+    long countByStatusFalse();
 }

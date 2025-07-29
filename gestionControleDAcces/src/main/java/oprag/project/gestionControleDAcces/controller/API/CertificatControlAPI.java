@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 import static oprag.project.gestionControleDAcces.constant.Utils.APP_ROOT;
 
@@ -29,6 +30,12 @@ public interface CertificatControlAPI {
     })
     @GetMapping(value = APP_ROOT + "/CertificatControls/findById/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     CertificatControlDAO findById(@PathVariable("id") Integer id);
+
+    @GetMapping(value = APP_ROOT + "/CertificatControls/numberOfCertificatControls", produces = MediaType.APPLICATION_JSON_VALUE)
+    long numberOfCertificatControls();
+
+    @GetMapping(value = APP_ROOT + "/CertificatControls/getCertificatControlsStatsByInspection", produces = MediaType.APPLICATION_JSON_VALUE)
+    List<Map<String,Object>> getCertificatControlsStatsByInspection();
 
     @GetMapping(value = APP_ROOT + "/CertificatControls/all", produces = MediaType.APPLICATION_JSON_VALUE)
     List<CertificatControlDAO> findAll();

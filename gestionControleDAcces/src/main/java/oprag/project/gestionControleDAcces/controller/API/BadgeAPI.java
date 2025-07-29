@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import static oprag.project.gestionControleDAcces.constant.Utils.APP_ROOT;
 
@@ -33,6 +34,12 @@ public interface BadgeAPI {
 
     @GetMapping(value = APP_ROOT + "/Badges/getQrCode/{numero}", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<byte[]> getQrCode(@PathVariable("numero") String numero);
+
+    @GetMapping(value = APP_ROOT + "/Badges/numberOfBadges", produces = MediaType.APPLICATION_JSON_VALUE)
+    long numberOfBadges();
+
+    @GetMapping(value = APP_ROOT + "/Badges/numberOfBadgePerInspection", produces = MediaType.APPLICATION_JSON_VALUE)
+    Map<String, Object> numberOfBadgePerInspection();
 
 
     @GetMapping(value = APP_ROOT + "/Badges/countAllPerDay", produces = MediaType.APPLICATION_JSON_VALUE)

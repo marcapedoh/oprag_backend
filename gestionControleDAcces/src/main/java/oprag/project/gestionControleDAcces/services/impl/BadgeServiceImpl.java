@@ -25,8 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -130,6 +129,30 @@ public class BadgeServiceImpl implements BadgeService {
                 .stream()
                 .map(dto -> (Object) dto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public long numberOfBadges() {
+        return this.findAll().size();
+    }
+
+    @Override
+    public Map<String, Object> numberOfBadgePerInspection() {
+        List<Object[]> results = certificateControlRepository.countCertificatControlByInspection();
+
+        List<String> xaxis = new ArrayList<>();
+        List<Long> yaxis = new ArrayList<>();
+
+        for (Object[] row : results) {
+            xaxis.add((String) row[0]);    // Nom inspection
+            yaxis.add((Long) row[1]);      // Nombre de cartes
+        }
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("xaxis", xaxis);
+        result.put("yaxis", yaxis);
+
+        return result;
     }
 
     @Override

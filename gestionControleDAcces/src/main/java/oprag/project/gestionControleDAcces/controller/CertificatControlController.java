@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -26,6 +27,16 @@ public class CertificatControlController implements CertificatControlAPI {
     @Override
     public CertificatControlDAO findById(Integer id) {
         return this.certificatControlService.findById(id);
+    }
+
+    @Override
+    public long numberOfCertificatControls() {
+        return this.certificatControlService.numberOfCertificatControls();
+    }
+
+    @Override
+    public List<Map<String, Object>> getCertificatControlsStatsByInspection() {
+        return this.certificatControlService.getCertificatControlsStatsByInspection();
     }
 
     @Override

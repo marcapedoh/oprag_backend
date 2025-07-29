@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -33,6 +34,16 @@ public class BadgeController implements BadgeAPI {
     @Override
     public ResponseEntity<byte[]> getQrCode(String numero) {
         return this.badgeService.getQrCode(numero);
+    }
+
+    @Override
+    public long numberOfBadges() {
+        return this.badgeService.numberOfBadges();
+    }
+
+    @Override
+    public Map<String, Object> numberOfBadgePerInspection() {
+        return this.badgeService.numberOfBadgePerInspection();
     }
 
     @Override
