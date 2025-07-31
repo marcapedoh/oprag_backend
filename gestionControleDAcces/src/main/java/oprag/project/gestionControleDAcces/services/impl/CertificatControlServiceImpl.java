@@ -79,6 +79,11 @@ public class CertificatControlServiceImpl implements CertificatControlService {
     }
 
     @Override
+    public Double certificatControlsAmount() {
+        return this.certificatControlRepository.getTotalMontant();
+    }
+
+    @Override
     public List<Map<String, Object>> getCertificatControlsStatsByInspection() {
         List<Object[]> rows = certificatControlRepository.countCertificatControlByInspectionAndMonth();
 

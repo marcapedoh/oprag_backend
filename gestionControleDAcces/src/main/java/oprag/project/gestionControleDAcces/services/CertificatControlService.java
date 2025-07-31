@@ -10,6 +10,7 @@ public interface CertificatControlService {
     CertificatControlDAO findById(Integer id);
     List<CertificatControlDAO> findAll();
     long numberOfCertificatControls();
+    Double certificatControlsAmount();
     List<Map<String,Object>> getCertificatControlsStatsByInspection();
     List<CertificatControlDAO> findCertificatControlByUtilisateurId(Integer id);
     void delete(Integer id);

@@ -26,4 +26,8 @@ public interface CertificatControlRepository extends JpaRepository<CertificatCon
 
     Optional<CertificatControl> findTopByUtilisateurIdOrderByCreationDateDesc(Integer utilisateurId);
 
+    @Query("SELECT COALESCE(SUM(c.montant), 0) FROM CertificatControl c")
+    Double getTotalMontant();
+
+
 }

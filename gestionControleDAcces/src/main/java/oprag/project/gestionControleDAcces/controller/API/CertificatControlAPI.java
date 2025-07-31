@@ -34,6 +34,9 @@ public interface CertificatControlAPI {
     @GetMapping(value = APP_ROOT + "/CertificatControls/numberOfCertificatControls", produces = MediaType.APPLICATION_JSON_VALUE)
     long numberOfCertificatControls();
 
+    @GetMapping(value = APP_ROOT + "/CertificatControls/certificatControlsAmount", produces = MediaType.APPLICATION_JSON_VALUE)
+    Double certificatControlsAmount();
+
     @GetMapping(value = APP_ROOT + "/CertificatControls/getCertificatControlsStatsByInspection", produces = MediaType.APPLICATION_JSON_VALUE)
     List<Map<String,Object>> getCertificatControlsStatsByInspection();
 

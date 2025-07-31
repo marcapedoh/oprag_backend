@@ -35,6 +35,11 @@ public class CertificatControlController implements CertificatControlAPI {
     }
 
     @Override
+    public Double certificatControlsAmount() {
+        return this.certificatControlService.certificatControlsAmount();
+    }
+
+    @Override
     public List<Map<String, Object>> getCertificatControlsStatsByInspection() {
         return this.certificatControlService.getCertificatControlsStatsByInspection();
     }
