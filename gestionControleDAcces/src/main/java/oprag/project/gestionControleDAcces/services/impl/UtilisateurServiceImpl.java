@@ -88,10 +88,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         assert id != null;
         if(this.certificatControlRepository.findCertificatControlByUtilisateurId(id).isEmpty() && this.utilisateurRepository.findById(id).isPresent()){
             var utilisateur=this.utilisateurRepository.findById(id).get();
-            utilisateur.setActive(false);
+            utilisateur.setActive(!utilisateur.isActive());
             this.utilisateurRepository.save(utilisateur);
         }else{
-            throw new InvalidOperationException("Utilisateur est opération sur les objets de la base de donnée on peut donc pas le désactivé",ErrorCodes.UTILISATEUR_EN_COURS_D_UTILSATION);
+            throw new InvalidOperationException("Utilisateur a fait des opérations sur les objets de la base de donnée on peut donc pas le désactivé",ErrorCodes.UTILISATEUR_EN_COURS_D_UTILSATION);
         }
     }
 
