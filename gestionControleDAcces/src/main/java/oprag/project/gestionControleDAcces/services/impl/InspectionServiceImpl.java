@@ -5,6 +5,7 @@ import oprag.project.gestionControleDAcces.exception.EntityNotFoundException;
 import oprag.project.gestionControleDAcces.exception.ErrorCodes;
 import oprag.project.gestionControleDAcces.exception.InvalidEntityException;
 import oprag.project.gestionControleDAcces.exception.InvalidOperationException;
+import oprag.project.gestionControleDAcces.repository.BadgeRepository;
 import oprag.project.gestionControleDAcces.repository.InspectionRepository;
 import oprag.project.gestionControleDAcces.repository.UtilisateurRepository;
 import oprag.project.gestionControleDAcces.services.InspectionService;
@@ -25,10 +26,12 @@ public class InspectionServiceImpl implements InspectionService {
 
     private final InspectionRepository inspectionRepository;
     private final UtilisateurRepository utilisateurRepository;
+    private final BadgeRepository badgeRepository;
 
-    public InspectionServiceImpl(InspectionRepository inspectionRepository, UtilisateurRepository utilisateurRepository) {
+    public InspectionServiceImpl(InspectionRepository inspectionRepository, UtilisateurRepository utilisateurRepository, BadgeRepository badgeRepository) {
         this.inspectionRepository = inspectionRepository;
         this.utilisateurRepository = utilisateurRepository;
+        this.badgeRepository = badgeRepository;
     }
 
     @Override
@@ -36,11 +39,12 @@ public class InspectionServiceImpl implements InspectionService {
         if(!inspectionRepository.findInspectionByNom(inspectionDAO.getNom()).isEmpty() && inspectionDAO.getId()==null){
             throw new InvalidOperationException("cette inspection existe déjà dans la base de donnée", ErrorCodes.INSPECTION_EXIST);
         }
-        Random random = new Random();
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         String dateCondensee = LocalDate.now().format(formatter);
+
         inspectionDAO.setStatus(inspectionDAO.getId() == null || !inspectionDAO.isStatus());
-        inspectionDAO.setCodeInspection(inspectionDAO.getCode().substring(0,3).toUpperCase()+"-"+inspectionDAO.getType().toString().substring(0,3)+"-"+ dateCondensee+"-"+random.nextInt(99));
+        inspectionDAO.setCodeInspection(inspectionDAO.getCode().toUpperCase()+"-"+inspectionDAO.getType().toString().substring(0,3));
         List<String> errors= InspectionValidator.validate(inspectionDAO);
         if(!errors.isEmpty()){
             throw new InvalidEntityException("l'inspection que vous passez n'est pas valide",ErrorCodes.INSPECTION_NOT_VALID,errors);

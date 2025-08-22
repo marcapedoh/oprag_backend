@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -50,11 +51,15 @@ public class BadgeServiceImpl implements BadgeService {
         int randomInt = random.nextInt(9999);
         var inspecteur=this.utilisateurRepository.findById(badgeDAO.getInspecteur().getId()).orElseThrow(()-> new EntityNotFoundException("L'inspecteur n'est pas trouvé dans la base de donnée"));
         var certificatControl=this.certificateControlRepository.findById(badgeDAO.getCertificatControl().getId()).orElseThrow(()-> new EntityNotFoundException("Aucun certficatControl pour ce id"));
+        LocalDate date = LocalDate.now();
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+        String dateSansSeparateur = date.format(formatter);
         badgeDAO.setNumero(
-                inspecteur.getInspection().getNom().substring(0,4)
+                inspecteur.getInspection().getCode()
                 +"-"+certificatControl.getVehicule().getTypeVehicules().get(0).toString().substring(0,4)
-                +"-"+LocalDate.now()+"-"+randomInt);
+                +"-"+dateSansSeparateur+"-"+randomInt);
         if(badgeRepository.findBadgeByNumero(badgeDAO.getNumero()).isPresent()){
             throw new InvalidOperationException("ce badge existe déjà dans la base de donnée", ErrorCodes.BADGE_ALREADY_EXIST);
         }

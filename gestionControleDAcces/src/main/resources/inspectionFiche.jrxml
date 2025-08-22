@@ -178,7 +178,7 @@ présentés:]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Left">
-                <font />
+                <font fontName="Arial Rounded MT Bold"/>
             </textElement>
             <text><![CDATA[
 Notice d'instruction: ]]></text>
@@ -192,9 +192,10 @@ Notice d'instruction: ]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Left">
-                <font />
+                <font fontName="Arial Rounded MT Bold"/>
             </textElement>
-            <text><![CDATA[Livret Maintenance:
+            <text><![CDATA[
+Livret Maintenance:
 ]]></text>
         </staticText>
         <staticText>
@@ -378,11 +379,11 @@ Clignotant AR:                                               Conforme à la rég
             <textFieldExpression><![CDATA[$F{certificatControl.declarationConformite} ? "OUI" : "NON"]]></textFieldExpression>
         </textField>
         <textField>
-            <reportElement x="237" y="132" width="63" height="14" uuid="56d406ae-6c4b-40c1-bbd0-7c141e1ef97b"/>
+            <reportElement x="237" y="134" width="57" height="13"  uuid="56d406ae-6c4b-40c1-bbd0-7c141e1ef97b"/>
             <textFieldExpression><![CDATA[$F{certificatControl.noticeInstruction} ? "OUI" : "NON"]]></textFieldExpression>
         </textField>
         <textField>
-            <reportElement x="390" y="140" width="54" height="20" uuid="ea4c9a55-6b28-44b4-a06d-7d97fe34e99f"/>
+            <reportElement  x="490" y="134" width="50" height="15" uuid="ea4c9a55-6b28-44b4-a06d-7d97fe34e99f"/>
             <textFieldExpression><![CDATA[$F{certificatControl.livretMaintenance} ? "OUI" : "NON"]]></textFieldExpression>
         </textField>
         <staticText>
