@@ -178,7 +178,7 @@ présentés:]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Left">
-                <font fontName="Arial Rounded MT Bold"/>
+                <font />
             </textElement>
             <text><![CDATA[
 Notice d'instruction: ]]></text>
@@ -192,7 +192,7 @@ Notice d'instruction: ]]></text>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Left">
-                <font fontName="Arial Rounded MT Bold"/>
+                <font />
             </textElement>
             <text><![CDATA[
 Livret Maintenance:
