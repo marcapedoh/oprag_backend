@@ -2,11 +2,13 @@ package oprag.project.gestionControleDAcces.services.impl;
 
 import oprag.project.gestionControleDAcces.dto.BadgeDAO;
 import oprag.project.gestionControleDAcces.dto.CertificatControlDAO;
+import oprag.project.gestionControleDAcces.dto.InspectionMontantDAO;
 import oprag.project.gestionControleDAcces.exception.EntityNotFoundException;
 import oprag.project.gestionControleDAcces.exception.ErrorCodes;
 import oprag.project.gestionControleDAcces.exception.InvalidEntityException;
 import oprag.project.gestionControleDAcces.repository.BadgeRepository;
 import oprag.project.gestionControleDAcces.repository.CertificatControlRepository;
+import oprag.project.gestionControleDAcces.repository.InspectionMontantRepository;
 import oprag.project.gestionControleDAcces.services.CertificatControlService;
 import oprag.project.gestionControleDAcces.validators.CertificatControlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,12 @@ import java.util.stream.Collectors;
 public class CertificatControlServiceImpl implements CertificatControlService {
     private final CertificatControlRepository  certificatControlRepository;
     private final BadgeRepository badgeRepository;
+    private final InspectionMontantRepository inspectionMontantRepository;
     @Autowired
-    public CertificatControlServiceImpl(CertificatControlRepository certificatControlRepository,BadgeRepository badgeRepository) {
+    public CertificatControlServiceImpl(CertificatControlRepository certificatControlRepository,BadgeRepository badgeRepository, InspectionMontantRepository inspectionMontantRepository) {
         this.certificatControlRepository = certificatControlRepository;
         this.badgeRepository = badgeRepository;
+        this.inspectionMontantRepository = inspectionMontantRepository;
     }
 
     @Override
@@ -51,6 +55,8 @@ public class CertificatControlServiceImpl implements CertificatControlService {
 //        certificatControl.setBadge(BadgeDAO.fromEntity(badgeObj));
 //        certificatControl.setDeleted(false);
         certificatControlDAO.setCreationDate(Instant.now());
+        var inspectionMontant= InspectionMontantDAO.fromEntity(inspectionMontantRepository.findAll().stream().findFirst().get());
+        certificatControlDAO.setMontant(inspectionMontant.getMontant());
         return CertificatControlDAO.fromEntity(
                 certificatControlRepository.save(
                         CertificatControlDAO.toEntity(certificatControlDAO)

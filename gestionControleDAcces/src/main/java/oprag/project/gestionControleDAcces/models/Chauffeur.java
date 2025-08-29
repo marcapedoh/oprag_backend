@@ -25,11 +25,11 @@ public class Chauffeur extends AbstractEntity implements UserDetails {
     private String nom;
     @Column(name = "prenom",nullable = false)
     private String prenom;
-    @Column(name = "numeroCertificatMedicalValide",nullable = false)
+    @Column(name = "numeroCertificatMedicalValide")
     private String numeroCertificatMedicalValide;
-    @Column(name = "attestionCapPoidsLourd",nullable = false)
+    @Column(name = "attestionCapPoidsLourd")
     private String attestionCapPoidsLourd;
-    @Column(name = "attestationDeConduiteDefensive",nullable = false)
+    @Column(name = "attestationDeConduiteDefensive")
     private String attestationDeConduiteDefensive;
     @Column(name = "userName")
     private String userName;

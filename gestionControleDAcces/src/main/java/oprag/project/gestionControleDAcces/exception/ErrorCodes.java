@@ -20,7 +20,8 @@ public enum ErrorCodes {
     VEHICULE_NOT_VALID(6001),
     VEHICULE_NOT_FOUND(6002),
     BADGE_ALREADY_EXIST(7000),
-    BADGE_NOT_VALID(7001),;
+    BADGE_NOT_VALID(7001),
+    INSPECTION_MONTANT_NOT_VALID(8000);
 
     ErrorCodes(int code){
         this.errorCode=code;

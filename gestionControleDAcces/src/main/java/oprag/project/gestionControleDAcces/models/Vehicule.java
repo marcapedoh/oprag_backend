@@ -18,11 +18,11 @@ public class Vehicule extends AbstractEntity {
     @Column(name = "typesVehicule",nullable = false)
     @Enumerated(EnumType.STRING)
     private List<TypeVehicule> typeVehicules;
-    @Column(name = "numeroAssurance",nullable = false)
+    @Column(name = "numeroAssurance")
     private String numeroAssurance;
     @Column(name = "numeroVisiteTechnique",nullable = false)
     private String numeroVisiteTechnique;
-    @Column(name = "vgpRemorque",nullable = false)
+    @Column(name = "vgpRemorque")
     private String vgpRemorque;
     @Column(name = "active")
     private boolean active;

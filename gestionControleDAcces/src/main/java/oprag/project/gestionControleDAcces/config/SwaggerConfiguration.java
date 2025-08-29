@@ -19,6 +19,9 @@ public class SwaggerConfiguration {
                                .url("https://badge.routeafrique.com:1020")
                                .description("Server Production"),
                        new Server()
+                               .url("https://dev.routeafrique.com:2020")
+                               .description("Server Development"),
+                       new Server()
                                .url("https://staging.routeafrique.com")
                                .description("Server Staging"),
                        new Server()
