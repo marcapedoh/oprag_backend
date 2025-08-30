@@ -20,5 +20,9 @@ public enum Validite {
     DIX_SEPT_MOIS,
     DIX_HUIT_MOIS,
     DIX_NEUF_MOIS,
-    VINGT_MOIS
+    VINGT_MOIS,
+    VINGT_UN_MOIS,
+    VINGT_DEUX_MOIS,
+    VINGT_TROIS_MOIS,
+    VINGT_QUATRE_MOIS,
 }

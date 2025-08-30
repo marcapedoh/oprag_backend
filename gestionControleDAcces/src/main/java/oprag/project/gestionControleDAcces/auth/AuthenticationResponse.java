@@ -21,5 +21,6 @@ public class AuthenticationResponse {
     private Integer otpNumber;
     private boolean signaturePresence;
     private Integer inspectionId;
+    private String inspectionCode;
     private String inspectionName;
 }
