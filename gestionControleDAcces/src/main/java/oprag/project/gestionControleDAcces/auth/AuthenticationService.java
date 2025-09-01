@@ -51,7 +51,7 @@ public class AuthenticationService {
                     .signaturePresence(user.getSignature() != null)
                     .inspectionId(user.getInspection()!=null?user.getInspection().getId():null)
                     .otpNumber(user.getOtpNumber())
-                    .inspectionCode(user.getInspection().getCode())
+                    .inspectionCode(user.getInspection()!=null?user.getInspection().getCode():null)
                     .inspectionName(user.getInspection()!=null?user.getInspection().getNom():null)
                     .build();
         }
