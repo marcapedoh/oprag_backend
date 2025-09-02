@@ -76,10 +76,26 @@
             </textElement>
             <text><![CDATA[Décret n 22 portant création et attribution de la DGMG -Arrêté N 00097/MTL]]></text>
         </staticText>
+        <image>
+            <reportElement x="20" y="5" width="79" height="69" uuid="e7d3684b-a952-4187-ae16-9e9dca32271e"/>
+            <imageExpression><![CDATA["classpath:images/Logo_CIMFEP.png"]]></imageExpression>
+        </image>
+        <image>
+            <reportElement x="428" y="9" width="92" height="60" uuid="c4b51a78-082d-4b11-867c-de86a821ea18"/>
+            <imageExpression><![CDATA["classpath:images/logo-oprag-trans.png"]]></imageExpression>
+        </image>
     </band>
 </title>
 <detail>
-    <band height="651" splitType="Stretch">
+    <band height="677" splitType="Stretch">
+        <image>
+            <reportElement x="444" y="630" width="66" height="40" uuid="9d0fd8fb-e1d6-44f8-a862-8dca2c11a1dc"/>
+            <imageExpression><![CDATA["classpath:images/logo_hp.jpg"]]></imageExpression>
+        </image>
+        <image>
+            <reportElement x="30" y="638" width="98" height="32" uuid="280ebefe-a0e7-43f7-92eb-b65dcbbe5139"/>
+            <imageExpression><![CDATA["classpath:images/logo_BAJINN.png"]]></imageExpression>
+        </image>
         <staticText>
             <reportElement x="0" y="0" width="128" height="43" uuid="93149fe6-5eeb-46d9-8636-1a6088e3f7a3"/>
             <box padding="4">
@@ -545,6 +561,13 @@ Signature:]]></text>
             <reportElement x="473" y="356" width="67" height="18" uuid="c87e9a18-daaf-4649-9dbc-a2c7b9198ab3"/>
             <textFieldExpression><![CDATA[$F{certificatControl.conformeReglement} ? "OUI" : "NON"]]></textFieldExpression>
         </textField>
+        <staticText>
+            <reportElement x="160" y="650" width="259" height="23" uuid="1b00ec8b-2f02-4b57-a1d3-ce899190c74e"/>
+            <textElement>
+                <font size="14"/>
+            </textElement>
+            <text><![CDATA[LES PARTENAIRES TECHNIQUES]]></text>
+        </staticText>
     </band>
 </detail>
 <summary>
