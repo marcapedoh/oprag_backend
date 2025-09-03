@@ -559,36 +559,36 @@ Signature]]></text>
             <reportElement x="364" y="568" width="134" height="20" uuid="8c00bd9b-9ffa-4b47-8e1e-f088c05062db"/>
             <textFieldExpression><![CDATA[$F{certificatControl.utilisateur.inspection}.getCode().equals("BJNC")?$F{certificatControl.utilisateur.nom}+" "+$F{certificatControl.utilisateur.prenom}:""]]></textFieldExpression>
         </textField>
-        <image>
-            <reportElement x="410" y="600" width="120" height="50" uuid="a4358f15-56e7-4258-8c90-f8c7fb03de16"/>
-            <imageExpression><![CDATA[$F{certificatControl.utilisateur.inspection}.getCode().equals("CFHP")
-        ? javax.imageio.ImageIO.read(
-            new java.io.ByteArrayInputStream(
-                java.util.Base64.getDecoder().decode(
-                    $F{certificatControl.utilisateur.signature}.substring(
-                        $F{certificatControl.utilisateur.signature}.indexOf(",") + 1
-                    )
-                )
-            )
-          )
-        : null
-]]></imageExpression>
-        </image>
-        <image>
-            <reportElement x="410" y="600" width="120" height="50" uuid="a4358f15-56e7-4258-8c90-f8c7fb03de16"/>
-            <imageExpression><![CDATA[$F{certificatControl.utilisateur.inspection}.getCode().equals("BJNC")
-        ? javax.imageio.ImageIO.read(
-            new java.io.ByteArrayInputStream(
-                java.util.Base64.getDecoder().decode(
-                    $F{certificatControl.utilisateur.signature}.substring(
-                        $F{certificatControl.utilisateur.signature}.indexOf(",") + 1
-                    )
-                )
-            )
-          )
-        : null
-]]></imageExpression>
-        </image>
+<!--        <image>-->
+<!--            <reportElement x="410" y="600" width="120" height="50" uuid="a4358f15-56e7-4258-8c90-f8c7fb03de16"/>-->
+<!--            <imageExpression><![CDATA[$F{certificatControl.utilisateur.inspection}.getCode().equals("CFHP")-->
+<!--        ? javax.imageio.ImageIO.read(-->
+<!--            new java.io.ByteArrayInputStream(-->
+<!--                java.util.Base64.getDecoder().decode(-->
+<!--                    $F{certificatControl.utilisateur.signature}.substring(-->
+<!--                        $F{certificatControl.utilisateur.signature}.indexOf(",") + 1-->
+<!--                    )-->
+<!--                )-->
+<!--            )-->
+<!--          )-->
+<!--        : null-->
+<!--]]></imageExpression>-->
+<!--        </image>-->
+<!--        <image>-->
+<!--            <reportElement x="410" y="600" width="120" height="50" uuid="a4358f15-56e7-4258-8c90-f8c7fb03de16"/>-->
+<!--            <imageExpression><![CDATA[$F{certificatControl.utilisateur.inspection}.getCode().equals("BJNC")-->
+<!--        ? javax.imageio.ImageIO.read(-->
+<!--            new java.io.ByteArrayInputStream(-->
+<!--                java.util.Base64.getDecoder().decode(-->
+<!--                    $F{certificatControl.utilisateur.signature}.substring(-->
+<!--                        $F{certificatControl.utilisateur.signature}.indexOf(",") + 1-->
+<!--                    )-->
+<!--                )-->
+<!--            )-->
+<!--          )-->
+<!--        : null-->
+<!--]]></imageExpression>-->
+<!--        </image>-->
     </band>
 </detail>
 <summary>
