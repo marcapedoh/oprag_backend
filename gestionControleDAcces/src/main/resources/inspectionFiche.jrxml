@@ -561,7 +561,7 @@ Signature]]></text>
         </textField>
         <image>
             <reportElement x="410" y="600" width="120" height="50" uuid="a4358f15-56e7-4258-8c90-f8c7fb03de16"/>
-            <imageExpression><![CDATA[$F{certificatControl.utilisateur.inspection}.getCode().equals("BJNC")
+            <imageExpression><![CDATA[$F{certificatControl.utilisateur.inspection}.getCode().equals("CFHP")
         ? javax.imageio.ImageIO.read(
             new java.io.ByteArrayInputStream(
                 java.util.Base64.getDecoder().decode(
@@ -576,7 +576,7 @@ Signature]]></text>
         </image>
         <image>
             <reportElement x="410" y="600" width="120" height="50" uuid="a4358f15-56e7-4258-8c90-f8c7fb03de16"/>
-            <imageExpression><![CDATA[$F{certificatControl.utilisateur.inspection}.getCode().equals("CFHP")
+            <imageExpression><![CDATA[$F{certificatControl.utilisateur.inspection}.getCode().equals("BJNC")
         ? javax.imageio.ImageIO.read(
             new java.io.ByteArrayInputStream(
                 java.util.Base64.getDecoder().decode(
