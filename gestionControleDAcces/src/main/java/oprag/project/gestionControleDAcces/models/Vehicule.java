@@ -13,20 +13,20 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode(callSuper = true)
 public class Vehicule extends AbstractEntity {
-    @Column(name = "numeroCarteGrise",nullable = false,unique = true)
+    @Column(name = "numeroCarteGrise")
     private String numeroCarteGrise;
-    @Column(name = "typesVehicule",nullable = false)
+    @Column(name = "typesVehicule")
     @Enumerated(EnumType.STRING)
     private List<TypeVehicule> typeVehicules;
     @Column(name = "numeroAssurance")
     private String numeroAssurance;
-    @Column(name = "numeroVisiteTechnique",nullable = false)
+    @Column(name = "numeroVisiteTechnique")
     private String numeroVisiteTechnique;
     @Column(name = "vgpRemorque")
     private String vgpRemorque;
     @Column(name = "active")
     private boolean active;
-    @Column(name = "controleEquipementObligatoirel",nullable = false)
+    @Column(name = "controleEquipementObligatoirel")
     private boolean controleEquipementObligatoirel;
 
     @OneToMany(mappedBy = "vehicule")

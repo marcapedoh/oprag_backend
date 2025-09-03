@@ -69,13 +69,7 @@
             </textElement>
             <text><![CDATA[RAPPORT DE CONTRÔLE]]></text>
         </staticText>
-        <staticText>
-            <reportElement x="97" y="92" width="344" height="13" uuid="4cebf322-2ee6-460c-8daa-df33bd874376"/>
-            <textElement textAlignment="Center">
-                <font />
-            </textElement>
-            <text><![CDATA[Décret n 22 portant création et attribution de la DGMG -Arrêté N 00097/MTL]]></text>
-        </staticText>
+
         <image>
             <reportElement x="20" y="5" width="79" height="69" uuid="e7d3684b-a952-4187-ae16-9e9dca32271e"/>
             <imageExpression><![CDATA["classpath:images/Logo_CIMFEP.png"]]></imageExpression>
@@ -84,16 +78,29 @@
             <reportElement x="428" y="9" width="92" height="60" uuid="c4b51a78-082d-4b11-867c-de86a821ea18"/>
             <imageExpression><![CDATA["classpath:images/logo-oprag-trans.png"]]></imageExpression>
         </image>
+        <staticText>
+            <reportElement x="358" y="87" width="51" height="20" uuid="aeffddce-6096-4b58-8ab3-0d907dc1ee58"/>
+            <textElement>
+                <font />
+            </textElement>
+            <text><![CDATA[Date:]]></text>
+        </staticText>
+        <textField>
+            <reportElement x="409" y="87" width="90" height="20" uuid="dc36979c-a2c7-4b2a-99be-5ce2cc7ea7d5"/>
+            <textElement textAlignment="Center"/>
+            <textFieldExpression><![CDATA[$F{dateCertificat}]]></textFieldExpression>
+        </textField>
+
     </band>
 </title>
 <detail>
-    <band height="677" splitType="Stretch">
+    <band height="678" splitType="Stretch">
         <image>
-            <reportElement x="444" y="630" width="66" height="40" uuid="9d0fd8fb-e1d6-44f8-a862-8dca2c11a1dc"/>
+            <reportElement x="444" y="638" width="66" height="40" uuid="9d0fd8fb-e1d6-44f8-a862-8dca2c11a1dc"/>
             <imageExpression><![CDATA["classpath:images/logo_hp.jpg"]]></imageExpression>
         </image>
         <image>
-            <reportElement x="30" y="638" width="98" height="32" uuid="280ebefe-a0e7-43f7-92eb-b65dcbbe5139"/>
+            <reportElement x="30" y="645" width="98" height="32" uuid="280ebefe-a0e7-43f7-92eb-b65dcbbe5139"/>
             <imageExpression><![CDATA["classpath:images/logo_BAJINN.png"]]></imageExpression>
         </image>
         <staticText>
@@ -472,7 +479,7 @@ Clignotant AR:                                               Conforme à la rég
             <textElement>
                 <font size="9"/>
             </textElement>
-            <text><![CDATA[Nom du représentant de la DGMG:
+            <text><![CDATA[Nom du représentant de la société
 
 
 Signature:]]></text>
@@ -488,7 +495,7 @@ Signature:]]></text>
             <textElement>
                 <font size="9"/>
             </textElement>
-            <text><![CDATA[Nom du contrôleur
+            <text><![CDATA[Nom du responsable du CIMFEP
 :
 
 Signature:]]></text>
@@ -501,36 +508,33 @@ Signature:]]></text>
                 <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
-            <textElement textAlignment="Center">
-                <font  size="11"/>
+            <textElement textAlignment="Left">
+                <font fontName="Arial" size="8" isBold="false"/>
             </textElement>
-            <text><![CDATA[Date]]></text>
+            <text><![CDATA[Nom du représentant CFHP Services/BAJINN:
+
+
+
+Signature]]></text>
         </staticText>
         <textField>
             <reportElement x="26" y="599" width="144" height="16" uuid="342ad5e9-1de2-4aa2-9282-e167ad6da07f"/>
-            <textFieldExpression><![CDATA[$F{utilisateur.nom} + " " + $F{utilisateur.prenom}]]></textFieldExpression>
+            <textFieldExpression><![CDATA[""]]></textFieldExpression>
         </textField>
-        <image>
-            <reportElement x="70" y="618" width="99" height="20" uuid="3623c285-f7d6-4a8b-9881-4f821c88bd93"/>
-            <imageExpression><![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{utilisateur.signature}.substring($F{utilisateur.signature}.indexOf(",")+1))))]]></imageExpression>
-        </image>
-        <textField>
-            <reportElement x="270" y="580" width="88" height="20" uuid="03441944-91c2-4f8d-ac7e-5c2f5100b28d"/>
-            <textFieldExpression><![CDATA[$F{certificatControl.utilisateur.nom}+" "+$F{certificatControl.utilisateur.prenom}]]></textFieldExpression>
-        </textField>
+<!--        <image>-->
+<!--            <reportElement x="70" y="618" width="99" height="20" uuid="3623c285-f7d6-4a8b-9881-4f821c88bd93"/>-->
+<!--            <imageExpression><![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{utilisateur.signature}.substring($F{utilisateur.signature}.indexOf(",")+1))))]]></imageExpression>-->
+<!--        </image>-->
+
         <textField>
             <reportElement x="195" y="597" width="134" height="20" uuid="32b64887-2747-4494-876e-be5bf9537279"/>
-            <textFieldExpression><![CDATA[$F{certificatControl.utilisateur.role}]]></textFieldExpression>
+            <textFieldExpression><![CDATA[""]]></textFieldExpression>
         </textField>
-        <image>
-            <reportElement x="230" y="618" width="99" height="20" uuid="563c5875-d81d-4618-a627-484ef0d72457"/>
-            <imageExpression><![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{certificatControl.utilisateur.signature}.substring($F{certificatControl.utilisateur.signature}.indexOf(",")+1))))]]></imageExpression>
-        </image>
-        <textField>
-            <reportElement x="403" y="599" width="90" height="20" uuid="dc36979c-a2c7-4b2a-99be-5ce2cc7ea7d5"/>
-            <textElement textAlignment="Center"/>
-            <textFieldExpression><![CDATA[$F{dateCertificat}]]></textFieldExpression>
-        </textField>
+<!--        <image>-->
+<!--            <reportElement x="230" y="618" width="99" height="20" uuid="563c5875-d81d-4618-a627-484ef0d72457"/>-->
+<!--            <imageExpression><![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{certificatControl.utilisateur.signature}.substring($F{certificatControl.utilisateur.signature}.indexOf(",")+1))))]]></imageExpression>-->
+<!--        </image>-->
+
         <staticText>
             <reportElement x="0" y="388" width="128" height="39" uuid="8256bc62-9586-4219-8f0d-02ed147e34f1"/>
             <box padding="4">
@@ -568,6 +572,20 @@ Signature:]]></text>
             </textElement>
             <text><![CDATA[LES PARTENAIRES TECHNIQUES]]></text>
         </staticText>
+        <textField>
+            <reportElement x="362" y="597" width="134" height="20" uuid="8c00bd9b-9ffa-4b47-8e1e-f088c05062db"/>
+            <textFieldExpression><![CDATA[$F{certificatControl.utilisateur.nom}+" "+$F{certificatControl.utilisateur.prenom}
+]]></textFieldExpression>
+        </textField>
+        <image>
+            <reportElement x="410" y="600" width="120" height="50" uuid="a4358f15-56e7-4258-8c90-f8c7fb03de16"/>
+            <imageExpression><![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{certificatControl.utilisateur.signature}.substring($F{certificatControl.utilisateur.signature}.indexOf(",")+1))))
+]]></imageExpression>
+        </image>
+<!--        <image>-->
+<!--            <reportElement x="220" y="600" width="120" height="50" uuid="f5525f16-1222-4bc0-8e1c-bdc51eb9f115"/>-->
+<!--            <imageExpression><![CDATA[javax.imageio.ImageIO.read(new java.io.ByteArrayInputStream(java.util.Base64.getDecoder().decode($F{certificatControl.utilisateur.signature}.substring($F{certificatControl.utilisateur.signature}.indexOf(",")+1))))]]></imageExpression>-->
+<!--        </image>-->
     </band>
 </detail>
 <summary>
