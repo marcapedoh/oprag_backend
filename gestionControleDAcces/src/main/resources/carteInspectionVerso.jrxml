@@ -16,7 +16,7 @@
                 <imageExpression><![CDATA["classpath:images/logo_BAJINN.png"]]></imageExpression>
             </image>
             <staticText>
-                <reportElement x="71" y="35" width="92" height="13" uuid="4b8b19a0-2d6c-4e28-afd5-c9551dc7e756">
+                <reportElement x="75" y="37" width="92" height="13" uuid="4b8b19a0-2d6c-4e28-afd5-c9551dc7e756">
                     <property name="com.jaspersoft.studio.unit.y" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -27,7 +27,7 @@
                 <text><![CDATA[CARTE EDITEE PAR]]></text>
             </staticText>
             <staticText>
-                <reportElement x="38" y="52" width="170" height="13" uuid="4abecadc-a6bc-415e-9c32-d3e55b2e9b73">
+                <reportElement x="30" y="52" width="192" height="13" uuid="4abecadc-a6bc-415e-9c32-d3e55b2e9b73">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.y" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -38,7 +38,7 @@
                 <text><![CDATA[© GDT - Gabon Digital Transports]]></text>
             </staticText>
             <staticText>
-                <reportElement x="38" y="65" width="170" height="13" uuid="4bfbc686-282b-4117-8701-74b69f3ab692">
+                <reportElement x="41" y="65" width="170" height="13" uuid="4bfbc686-282b-4117-8701-74b69f3ab692">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.y" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -49,7 +49,7 @@
                 <text><![CDATA[GRPE PROLAB AFRIK]]></text>
             </staticText>
             <staticText>
-                <reportElement x="11" y="80" width="220" height="25" uuid="d33e4826-3b23-47ea-b2d3-b8a6438dff1c">
+                <reportElement x="11" y="80" width="220" height="34" uuid="d33e4826-3b23-47ea-b2d3-b8a6438dff1c">
                     <property name="com.jaspersoft.studio.unit.y" value="px"/>
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
@@ -59,19 +59,30 @@
                 <text><![CDATA[Usage exclusif aux zones portuaires autorisées. Ne pas plier. Ne pas exposer à une source magnétique.]]></text>
             </staticText>
             <image>
-                <reportElement x="93" y="120" width="49" height="17" uuid="c2a9aa17-b5b6-4479-ad22-add918d4e9e8"/>
+                <reportElement x="93" y="129" width="49" height="17" uuid="c2a9aa17-b5b6-4479-ad22-add918d4e9e8"/>
                 <imageExpression><![CDATA["classpath:images/prolabAfrik.png"]]></imageExpression>
             </image>
             <staticText>
-                <reportElement x="71" y="105" width="92" height="13" uuid="cdad9015-2c72-4fc5-b4b6-d86d5e566d90">
+                <reportElement x="71" y="114" width="92" height="13" uuid="cdad9015-2c72-4fc5-b4b6-d86d5e566d90">
                     <property name="com.jaspersoft.studio.unit.y" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
                 <textElement textAlignment="Center">
-                    <font fontName="Monserrat" size="9"/>
+                    <font fontName="Monserrat" size="7"/>
                 </textElement>
                 <text><![CDATA[https://prolabafrik.com]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="60" y="15" width="40" height="16" forecolor="#213E78" uuid="ba3c48ab-4a8c-401b-ba03-7f085c2cd50b">
+                    <property name="com.jaspersoft.studio.unit.y" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.x" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
+                </reportElement>
+                <textElement textAlignment="Left">
+                    <font fontName="Monserrat" size="12" isBold="true"/>
+                </textElement>
+                <text><![CDATA[CFHP]]></text>
             </staticText>
         </band>
     </detail>
