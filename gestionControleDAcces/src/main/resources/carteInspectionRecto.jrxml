@@ -73,7 +73,7 @@
             <reportElement x="192" y="103" width="50" height="50" uuid="8dc10b77-f243-4be2-af3d-0ecf4b18fe9d">
                 <property name="com.jaspersoft.studio.unit.x" value="px"/>
             </reportElement>
-            <imageExpression><![CDATA[$F{qrCodeString}
+            <imageExpression><![CDATA[$F{qrCodeString} != null && !$F{qrCodeString}.isEmpty()
         ? javax.imageio.ImageIO.read(
             new java.io.ByteArrayInputStream(
                 java.util.Base64.getDecoder().decode(
