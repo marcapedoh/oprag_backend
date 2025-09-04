@@ -122,7 +122,6 @@ public class JasperReportServiceImpl implements JasperReportService {
         JasperPrint printRecto = JasperFillManager.fillReport(reportRecto, new HashMap<>(), dataSource);
         JasperPrint printVerso = JasperFillManager.fillReport(reportVerso, new HashMap<>(), emptyDataSource);
 
-        // Combiner les JasperPrint en un seul PDF
         List<JasperPrint> prints = Arrays.asList(printRecto, printVerso);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         JRPdfExporter exporter = new JRPdfExporter();

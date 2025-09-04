@@ -10,6 +10,7 @@
 <field name="nomSociete" class="java.lang.String"></field>
 <field name="codeInspecteur" class="java.lang.String"></field>
 <field name="partenaireTechnique" class="java.lang.String"></field>
+    <field name="qrCodeString" class="java.lang.String"></field>
 
 <background>
     <band splitType="Stretch"/>
@@ -72,7 +73,17 @@
             <reportElement x="192" y="103" width="50" height="50" uuid="8dc10b77-f243-4be2-af3d-0ecf4b18fe9d">
                 <property name="com.jaspersoft.studio.unit.x" value="px"/>
             </reportElement>
-            <imageExpression><![CDATA["classpath:images/qrCodeImage.png"]]></imageExpression>
+            <imageExpression><![CDATA[$F{qrCodeString}
+        ? javax.imageio.ImageIO.read(
+            new java.io.ByteArrayInputStream(
+                java.util.Base64.getDecoder().decode(
+                   $F{qrCodeString}.substring(
+                        $F{qrCodeString}.indexOf(",") + 1
+                    )
+                )
+            )
+          )
+        : null]]></imageExpression>
         </image>
         <staticText>
             <reportElement x="10" y="126" width="130" height="11" forecolor="#FFFFFF" uuid="01eb6381-9e7c-47ea-b78b-f7289f8495b1">

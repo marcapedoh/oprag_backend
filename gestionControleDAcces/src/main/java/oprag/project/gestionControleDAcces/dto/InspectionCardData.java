@@ -16,4 +16,5 @@ public class InspectionCardData {
     private String nomSociete;
     private String codeInspecteur;
     private String partenaireTechnique;
+    private String qrCodeString;
 }
