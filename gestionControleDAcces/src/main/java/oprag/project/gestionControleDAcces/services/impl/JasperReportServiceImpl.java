@@ -3,7 +3,11 @@ package oprag.project.gestionControleDAcces.services.impl;
 import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.export.JRPdfExporter;
+import net.sf.jasperreports.export.SimpleExporterInput;
+import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import oprag.project.gestionControleDAcces.dto.CertificatControlDAO;
+import oprag.project.gestionControleDAcces.dto.InspectionCardData;
 import oprag.project.gestionControleDAcces.dto.ReportData;
 import oprag.project.gestionControleDAcces.dto.UtilisateurDAO;
 import oprag.project.gestionControleDAcces.exception.EntityNotFoundException;
@@ -17,10 +21,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -98,4 +99,45 @@ public class JasperReportServiceImpl implements JasperReportService {
 //        }
         throw new IllegalArgumentException("Format non supporté : " + reportFormat);
     }
+
+
+    @Override
+    public ResponseEntity<byte[]> exportReport(InspectionCardData inspectionCardData) throws JRException, IOException {
+        // Préparer les données
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(
+                Collections.singleton(inspectionCardData)
+        );
+
+        // Compiler les deux rapports
+        JasperReport reportRecto = JasperCompileManager.compileReport(
+                getClass().getResourceAsStream("/carteInspectionRecto.jrxml")
+        );
+        JasperReport reportVerso = JasperCompileManager.compileReport(
+                getClass().getResourceAsStream("/carteInspectionVerso.jrxml")
+        );
+
+        JRDataSource emptyDataSource = new JREmptyDataSource();
+
+        // Remplir les rapports
+        JasperPrint printRecto = JasperFillManager.fillReport(reportRecto, new HashMap<>(), dataSource);
+        JasperPrint printVerso = JasperFillManager.fillReport(reportVerso, new HashMap<>(), emptyDataSource);
+
+        // Combiner les JasperPrint en un seul PDF
+        List<JasperPrint> prints = Arrays.asList(printRecto, printVerso);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        JRPdfExporter exporter = new JRPdfExporter();
+        exporter.setExporterInput(SimpleExporterInput.getInstance(prints));
+        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(baos));
+        exporter.exportReport();
+
+        // Préparer la réponse HTTP
+        byte[] bytes = baos.toByteArray();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "CarteInspection.pdf");
+        headers.setContentLength(bytes.length);
+
+        return ResponseEntity.ok().headers(headers).body(bytes);
+    }
+
 }

@@ -3,6 +3,7 @@ package oprag.project.gestionControleDAcces.controller;
 
 import net.sf.jasperreports.engine.JRException;
 import oprag.project.gestionControleDAcces.controller.API.JasperReportAPI;
+import oprag.project.gestionControleDAcces.dto.InspectionCardData;
 import oprag.project.gestionControleDAcces.services.JasperReportService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,6 +25,11 @@ public class JasperReportController implements JasperReportAPI {
     @Override
     public ResponseEntity<byte[]> exportReport(String reportFormat, Integer certificatControlId) throws IOException, JRException {
         return this.jasperReportService.exportReport(reportFormat, certificatControlId);
+    }
+
+    @Override
+    public ResponseEntity<byte[]> exportReport( InspectionCardData inspectionCardData) throws IOException, JRException {
+        return this.jasperReportService.exportReport( inspectionCardData);
     }
 
     @Override

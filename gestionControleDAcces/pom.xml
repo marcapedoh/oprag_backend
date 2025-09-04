@@ -88,6 +88,14 @@
 			<version>0.11.5</version>
 		</dependency>
 		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>montserrat-fonts</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/libs/montserrat-jar.jar</systemPath>
+		</dependency>
+
+		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt-impl</artifactId>
 			<version>0.11.5</version>
@@ -124,6 +132,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+
 				<configuration>
 					<annotationProcessorPaths>
 						<path>
@@ -145,6 +154,29 @@
 					</excludes>
 				</configuration>
 			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.codehaus.mojo</groupId>-->
+<!--				<artifactId>exec-maven-plugin</artifactId>-->
+<!--				<version>3.1.0</version>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>compile-reports</id>-->
+<!--						<phase>generate-resources</phase>-->
+<!--						<goals>-->
+<!--							<goal>java</goal>-->
+<!--						</goals>-->
+<!--						<configuration>-->
+<!--							<mainClass>net.sf.jasperreports.engine.JasperCompileManager</mainClass>-->
+<!--							<arguments>-->
+<!--								<argument>src/main/resources/carteInspectionRecto.jrxml</argument>-->
+<!--								<argument>src/main/resources/carteInspectionVerso.jrxml</argument>-->
+<!--								<argument>src/main/resources/cardbook.jrxml</argument>-->
+<!--							</arguments>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
+
 		</plugins>
 	</build>
 
