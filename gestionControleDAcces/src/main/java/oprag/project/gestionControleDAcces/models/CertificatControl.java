@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -21,7 +22,7 @@ public class CertificatControl extends AbstractEntity{
     @Column(name = "numeroRapport",nullable = false)
     private String numeroRapport;
     @Column(name = "creationDate",nullable = false)
-    private Instant creationDate;
+    private LocalDate creationDate;
     @Column(name = "localisationCertificationFait",nullable = false)
     private String localisationCertificationFait;
     @Column(name = "description",nullable = false)

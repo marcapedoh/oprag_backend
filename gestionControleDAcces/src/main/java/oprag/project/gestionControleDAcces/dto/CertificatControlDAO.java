@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import oprag.project.gestionControleDAcces.models.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -21,7 +22,7 @@ public class CertificatControlDAO {
     private String site;
     private String societe;
     private String numeroRapport;
-    private Instant creationDate;
+    private LocalDate creationDate;
     private String localisationCertificationFait;
     private String description;
     private boolean noticeInstruction;
@@ -64,7 +65,7 @@ public class CertificatControlDAO {
                 .societe(certificatControl.getSociete())
                 .numeroRapport(certificatControl.getNumeroRapport())
                 .deleted(certificatControl.isDeleted())
-                .creationDate(Instant.now())
+                .creationDate(certificatControl.getCreationDate())
                 .validite(certificatControl.getValidite())
                 .description(certificatControl.getDescription())
                 .localisationCertificationFait(certificatControl.getLocalisationCertificationFait())

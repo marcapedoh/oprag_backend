@@ -99,7 +99,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     public Instant lastOperationDate(Integer id) {
         var certificationControl=this.certificatControlRepository.findTopByUtilisateurIdOrderByCreationDateDesc(id);
         var badge=this.badgeRepository.findTopByInspecteurIdOrderByDateCreationDesc(id);
-        Instant dateCertificat = certificationControl.map(CertificatControl::getCreationDate).orElse(null);
+        Instant dateCertificat = certificationControl.map(CertificatControl::getDateCreation).orElse(null);
         Instant dateBadge = badge.map(Badge::getDateCreation).orElse(null);
 
         if (dateCertificat == null && dateBadge == null) {
