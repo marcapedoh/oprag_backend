@@ -2919,7 +2919,7 @@
             </textField>
             <image>
                 <reportElement x="470" y="770" width="75" height="32" uuid="c3f7ab28-a20d-4dd2-b825-83a48cf4c671"/>
-                <imageExpression><![CDATA["C:/Users/adral/Downloads/logobajin.png"]]></imageExpression>
+                <imageExpression><![CDATA["classpath:images/logo_BAJINN.png"]]></imageExpression>
             </image>
             <staticText>
                 <reportElement x="50" y="770" width="60" height="20" forecolor="#213E78" uuid="63b3ed51-abc3-478c-b7bb-d77b53dce0f2">
