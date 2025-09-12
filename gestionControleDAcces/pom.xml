@@ -87,19 +87,36 @@
 			<artifactId>jjwt-api</artifactId>
 			<version>0.11.5</version>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>net.sf.jasperreports</groupId>-->
-<!--			<artifactId>montserrat-fonts</artifactId>-->
-<!--			<version>1.0</version>-->
-<!--			<scope>system</scope>-->
-<!--			<systemPath>${project.basedir}/libs/montserrat-jar.jar</systemPath>-->
-<!--		</dependency>-->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>montserrat-fonts</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/libs/montserrat-jar.jar</systemPath>
+		</dependency>
 
 		<dependency>
-			<groupId>oprag.project.gestionControleDAcces</groupId>
-			<artifactId>montserrat-font</artifactId>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>arialunicode-fonts</artifactId>
 			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/libs/arial-jar-unicode.jar</systemPath>
 		</dependency>
+
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>dejavusans-fonts</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/libs/dejavu-sans-jar.jar</systemPath>
+		</dependency>
+
+
+<!--		<dependency>-->
+<!--			<groupId>oprag.project.gestionControleDAcces</groupId>-->
+<!--			<artifactId>montserrat-font</artifactId>-->
+<!--			<version>1.0</version>-->
+<!--		</dependency>-->
 
 
 		<dependency>

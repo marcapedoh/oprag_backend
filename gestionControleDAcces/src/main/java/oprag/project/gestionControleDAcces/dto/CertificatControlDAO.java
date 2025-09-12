@@ -37,6 +37,7 @@ public class CertificatControlDAO {
     private boolean conformeReglement;
     private String motifControle;
     private String observationRecommendation;
+    private String recommendation;
     private Validite validite;
     private String signatureDGM;
     private String normeFabrication;

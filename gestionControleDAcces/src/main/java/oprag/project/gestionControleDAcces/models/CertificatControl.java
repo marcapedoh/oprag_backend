@@ -50,6 +50,8 @@ public class CertificatControl extends AbstractEntity{
     private String motifControle;
     @Column(name = "observationRecommendation",nullable = false,length = 2500000)
     private String observationRecommendation;
+    @Column(name = "recommendation",length = 2500000)
+    private String recommendation;
     @Column(name = "validite",nullable = false)
     @Enumerated(EnumType.STRING)
     private Validite validite;
