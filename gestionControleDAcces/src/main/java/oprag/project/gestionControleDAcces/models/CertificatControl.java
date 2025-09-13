@@ -45,6 +45,8 @@ public class CertificatControl extends AbstractEntity{
     private boolean moyenAccessConducteur;
     @Column(name = "essaiFonctionnementList",nullable = false)
     private List<EssaiFonctionnement> essaiFonctionnementList;
+    @Column(name = "essaiNonFonctionnementList")
+    private List<EssaiFonctionnement> essaiNonFonctionnementList;
     @Column(name = "conformeReglement",nullable = false)
     private boolean conformeReglement;
     @Column(name = "motifControle",nullable = false,length = 2500000)

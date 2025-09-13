@@ -35,6 +35,8 @@ public class CertificatControlDAO {
     private boolean moyenAccessConducteur;
     @Enumerated(EnumType.STRING)
     private List<EssaiFonctionnement> essaiFonctionnementList;
+    @Enumerated(EnumType.STRING)
+    private List<EssaiFonctionnement> essaiNonFonctionnementList;
     private boolean conformeReglement;
     private String motifControle;
     private String observationRecommendation;
@@ -78,6 +80,7 @@ public class CertificatControlDAO {
                 .moyenAccessPartiel(certificatControl.isMoyenAccessPartiel())
                 .moyenAccessConducteur(certificatControl.isMoyenAccessConducteur())
                 .essaiFonctionnementList(certificatControl.getEssaiFonctionnementList())
+                .essaiNonFonctionnementList(certificatControl.getEssaiNonFonctionnementList())
                 .conformeReglement(certificatControl.isConformeReglement())
                 .motifControle(certificatControl.getMotifControle())
                 .observationRecommendation(certificatControl.getObservationRecommendation())
@@ -118,6 +121,7 @@ public class CertificatControlDAO {
         certificatControlEntity.setMoyenAccessPartiel(certificatControl.isMoyenAccessPartiel());
         certificatControlEntity.setMoyenAccessConducteur(certificatControl.isMoyenAccessConducteur());
         certificatControlEntity.setEssaiFonctionnementList(certificatControl.getEssaiFonctionnementList());
+        certificatControlEntity.setEssaiNonFonctionnementList(certificatControl.getEssaiNonFonctionnementList());
         certificatControlEntity.setConformeReglement(certificatControl.isConformeReglement());
         certificatControlEntity.setMotifControle(certificatControl.getMotifControle());
         certificatControlEntity.setObservationRecommendation(certificatControl.getObservationRecommendation());

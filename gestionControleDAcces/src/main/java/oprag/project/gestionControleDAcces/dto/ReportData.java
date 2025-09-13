@@ -18,4 +18,6 @@ public class ReportData {
     private UtilisateurDAO utilisateur;
     private InspectionDAO inspection;
     private String essaisConcatenes;
+    private String essaisNonConcatenes;
+    private String essaisAll;
 }

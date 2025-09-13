@@ -50,6 +50,13 @@ public class JasperReportServiceImpl implements JasperReportService {
                         .collect(Collectors.joining(", "));
     }
 
+    public  String getEssaisNonConcatenes(List<EssaiFonctionnement> essaiNonFonctionnementList) {
+        return essaiNonFonctionnementList==null?"":
+                essaiNonFonctionnementList.stream()
+                        .map(Object::toString)
+                        .collect(Collectors.joining(", "));
+    }
+
     @Override
     public ResponseEntity<byte[]> exportReport(String reportFormat, Integer certificatControlId) throws IOException, JRException {
         String userHome = System.getProperty("user.home");
@@ -60,12 +67,15 @@ public class JasperReportServiceImpl implements JasperReportService {
         ZoneId zoneId = ZoneId.systemDefault(); // ou ZoneId.of("Europe/Paris") selon le besoin
         LocalDate localDate = this.certificationControlRepository.findById(certificatControlId).get().getDateCreation().atZone(zoneId).toLocalDate();
         String essaisConcatenes=getEssaisConcatenes(certificatControl.getEssaiFonctionnementList());
-
-
+        String essaisNonConcatenes=getEssaisNonConcatenes(certificatControl.getEssaiNonFonctionnementList());
+        String essaisAll = essaisConcatenes + ";" + essaisNonConcatenes;
+        log.warn("essaisAll {}", essaisAll);
         ReportData reportData=ReportData.builder()
                 .utilisateur(directeurDGMG)
                 .dateCertificat(localDate)
                 .essaisConcatenes(essaisConcatenes)
+                .essaisNonConcatenes(essaisNonConcatenes)
+                .essaisAll(essaisAll)
                 .inspection(directeurDGMG.getInspection())
                 .certificatControl(certificatControl)
                 .build();

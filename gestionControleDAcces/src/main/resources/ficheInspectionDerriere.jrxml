@@ -41,6 +41,7 @@
     <field name="certificatControl.vehicule.numeroAssurance" class="java.lang.String"></field>
     <field name="certificatControl.vehicule.numeroCarteGrise" class="java.lang.String"></field>
     <field name="essaisConcatenes" class="java.lang.String"></field>
+    <field name="essaisNonConcatenes" class="java.lang.String"></field>
     <background>
         <band splitType="Stretch"/>
     </background>
@@ -288,7 +289,7 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textFieldExpression><![CDATA[$F{essaisConcatenes}.contains("Clignotants_AV") && $F{essaisConcatenes}.contains("Clignotants_AR") ? "X" : ""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[($F{essaisConcatenes} != null && $F{essaisConcatenes}.contains("Clignotants_AV") && $F{essaisConcatenes}.contains("Clignotants_AR")) ? "X" : ""]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="251" y="40" width="20" height="18" uuid="c7bfc6cf-7d6c-4ed5-8fac-82416e947996">
@@ -300,7 +301,9 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textFieldExpression><![CDATA[!$F{essaisConcatenes}.contains("Clignotants_AV") && !$F{essaisConcatenes}.contains("Clignotants_AR") ? "X" : ""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[($F{essaisNonConcatenes} != null && ($F{essaisNonConcatenes}.contains("Clignotants_AV") || $F{essaisNonConcatenes}.contains("Clignotants_AR")))
+        ? ""
+        : (($F{essaisConcatenes} == null || !$F{essaisConcatenes}.contains("Clignotants_AV") || !$F{essaisConcatenes}.contains("Clignotants_AR")) ? "X" : "")]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="11" y="58" width="180" height="18" uuid="7f6e1d01-ac5d-43ac-8ff5-f773726a1532">
@@ -351,7 +354,7 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textFieldExpression><![CDATA[$F{essaisConcatenes}.contains("FEUX_GABARIT")?"X":""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[ ($F{essaisConcatenes} != null && $F{essaisConcatenes}.contains("FEUX_GABARIT")) ? "X" : ""]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="251" y="58" width="20" height="18" uuid="3b2bdeba-3900-4e95-9a62-2580986ef383">
@@ -363,7 +366,9 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textFieldExpression><![CDATA[!$F{essaisConcatenes}.contains("FEUX_GABARIT") ? "X" : ""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[  ($F{essaisNonConcatenes} != null && $F{essaisNonConcatenes}.contains("FEUX_GABARIT"))
+        ? ""
+        : (($F{essaisConcatenes} == null || !$F{essaisConcatenes}.contains("FEUX_GABARIT")) ? "X" : "")]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="11" y="76" width="180" height="18" uuid="c8bc4100-6597-4a19-b98d-acde64b982dd">
@@ -414,7 +419,7 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textFieldExpression><![CDATA[$F{essaisConcatenes}.contains("FEUX_ARRIERE_STOP") ? "X" : ""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[($F{essaisConcatenes} != null && $F{essaisConcatenes}.contains("FEUX_ARRIERE_STOP")) ? "X" : ""]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="251" y="76" width="20" height="18" uuid="462285fc-5863-4b05-b512-46c0f9814156">
@@ -426,7 +431,9 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textFieldExpression><![CDATA[!$F{essaisConcatenes}.contains("FEUX_ARRIERE_STOP") ? "X" : ""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[($F{essaisNonConcatenes} != null && $F{essaisNonConcatenes}.contains("FEUX_ARRIERE_STOP"))
+        ? ""
+        : (($F{essaisConcatenes} == null || !$F{essaisConcatenes}.contains("FEUX_ARRIERE_STOP")) ? "X" : "")]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="281" y="40" width="180" height="18" uuid="797ad19a-31d9-4757-b309-d1d2cc439809">
@@ -478,7 +485,7 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textFieldExpression><![CDATA[$F{essaisConcatenes}.contains("CEINTURE_DE_SECURITE") ? "X" : ""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[($F{essaisConcatenes} != null && $F{essaisConcatenes}.contains("CEINTURE_DE_SECURITE")) ? "X" : ""]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="521" y="40" width="20" height="18" uuid="c1afbd91-e224-4b4e-a7be-c88ed9ff682c">
@@ -490,7 +497,9 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textFieldExpression><![CDATA[!$F{essaisConcatenes}.contains("CEINTURE_DE_SECURITE") ? "X" : ""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[ ($F{essaisNonConcatenes} != null && $F{essaisNonConcatenes}.contains("CEINTURE_DE_SECURITE"))
+        ? ""
+        : (($F{essaisConcatenes} == null || !$F{essaisConcatenes}.contains("CEINTURE_DE_SECURITE")) ? "X" : "")]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="281" y="58" width="180" height="18" uuid="f9fec361-9cf8-4279-b692-ce7c7b543952">
@@ -541,7 +550,7 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textFieldExpression><![CDATA[$F{essaisConcatenes}.contains("COUPE_BATTERIE") ? "X" : ""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[  ($F{essaisConcatenes} != null && $F{essaisConcatenes}.contains("COUPE_BATTERIE")) ? "X" : ""]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="521" y="58" width="20" height="18" uuid="68cbb3cd-9917-4459-9693-442b282c5422">
@@ -553,7 +562,9 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textFieldExpression><![CDATA[!$F{essaisConcatenes}.contains("COUPE_BATTERIE") ? "X" : ""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[ ($F{essaisNonConcatenes} != null && $F{essaisNonConcatenes}.contains("COUPE_BATTERIE"))
+        ? ""
+        : (($F{essaisConcatenes} == null || !$F{essaisConcatenes}.contains("COUPE_BATTERIE")) ? "X" : "")]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="281" y="76" width="180" height="18" uuid="d96ca1b4-afdd-44c0-9401-0b84cfc750b2">
@@ -604,7 +615,7 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textFieldExpression><![CDATA[$F{essaisConcatenes}.contains("ETAT_DE_LA_CARROSSERIE") ? "X" : ""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[($F{essaisConcatenes} != null && $F{essaisConcatenes}.contains("ETAT_DE_LA_CARROSSERIE")) ? "X" : ""]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="521" y="76" width="20" height="18" uuid="9e7fb64c-fb29-4936-b647-084002e68aeb">
@@ -616,7 +627,9 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textFieldExpression><![CDATA[!$F{essaisConcatenes}.contains("ETAT_DE_LA_CARROSSERIE") ? "X" : ""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[($F{essaisNonConcatenes} != null && $F{essaisNonConcatenes}.contains("ETAT_DE_LA_CARROSSERIE"))
+        ? ""
+        : (($F{essaisConcatenes} == null || !$F{essaisConcatenes}.contains("ETAT_DE_LA_CARROSSERIE")) ? "X" : "")]]></textFieldExpression>
             </textField>
             <rectangle>
                 <reportElement x="11" y="120" width="529" height="80" backcolor="#F0F0F0" uuid="d7828922-ec7d-4f6f-a582-5e63847d0a4d"/>
@@ -654,7 +667,7 @@
                 <text><![CDATA[B.E= Bon état]]></text>
             </staticText>
             <staticText>
-                <reportElement x="300" y="145" width="100" height="20" uuid="5dd29611-b1c1-44ff-a150-d65c9875e5b1">
+                <reportElement x="300" y="145" width="110" height="20" uuid="5dd29611-b1c1-44ff-a150-d65c9875e5b1">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.y" value="px"/>
                 </reportElement>
