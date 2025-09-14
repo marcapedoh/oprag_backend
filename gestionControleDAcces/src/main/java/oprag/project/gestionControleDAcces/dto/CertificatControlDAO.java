@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import oprag.project.gestionControleDAcces.models.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -21,7 +22,7 @@ public class CertificatControlDAO {
     private String site;
     private String societe;
     private String numeroRapport;
-    private Instant creationDate;
+    private LocalDate creationDate;
     private String localisationCertificationFait;
     private String description;
     private boolean noticeInstruction;
@@ -34,9 +35,12 @@ public class CertificatControlDAO {
     private boolean moyenAccessConducteur;
     @Enumerated(EnumType.STRING)
     private List<EssaiFonctionnement> essaiFonctionnementList;
+    @Enumerated(EnumType.STRING)
+    private List<EssaiFonctionnement> essaiNonFonctionnementList;
     private boolean conformeReglement;
     private String motifControle;
     private String observationRecommendation;
+    private String recommendation;
     private Validite validite;
     private String signatureDGM;
     private String normeFabrication;
@@ -63,7 +67,7 @@ public class CertificatControlDAO {
                 .societe(certificatControl.getSociete())
                 .numeroRapport(certificatControl.getNumeroRapport())
                 .deleted(certificatControl.isDeleted())
-                .creationDate(Instant.now())
+                .creationDate(certificatControl.getCreationDate())
                 .validite(certificatControl.getValidite())
                 .description(certificatControl.getDescription())
                 .localisationCertificationFait(certificatControl.getLocalisationCertificationFait())
@@ -76,6 +80,7 @@ public class CertificatControlDAO {
                 .moyenAccessPartiel(certificatControl.isMoyenAccessPartiel())
                 .moyenAccessConducteur(certificatControl.isMoyenAccessConducteur())
                 .essaiFonctionnementList(certificatControl.getEssaiFonctionnementList())
+                .essaiNonFonctionnementList(certificatControl.getEssaiNonFonctionnementList())
                 .conformeReglement(certificatControl.isConformeReglement())
                 .motifControle(certificatControl.getMotifControle())
                 .observationRecommendation(certificatControl.getObservationRecommendation())
@@ -116,6 +121,7 @@ public class CertificatControlDAO {
         certificatControlEntity.setMoyenAccessPartiel(certificatControl.isMoyenAccessPartiel());
         certificatControlEntity.setMoyenAccessConducteur(certificatControl.isMoyenAccessConducteur());
         certificatControlEntity.setEssaiFonctionnementList(certificatControl.getEssaiFonctionnementList());
+        certificatControlEntity.setEssaiNonFonctionnementList(certificatControl.getEssaiNonFonctionnementList());
         certificatControlEntity.setConformeReglement(certificatControl.isConformeReglement());
         certificatControlEntity.setMotifControle(certificatControl.getMotifControle());
         certificatControlEntity.setObservationRecommendation(certificatControl.getObservationRecommendation());

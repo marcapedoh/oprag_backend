@@ -50,54 +50,69 @@ public class JasperReportServiceImpl implements JasperReportService {
                         .collect(Collectors.joining(", "));
     }
 
+    public  String getEssaisNonConcatenes(List<EssaiFonctionnement> essaiNonFonctionnementList) {
+        return essaiNonFonctionnementList==null?"":
+                essaiNonFonctionnementList.stream()
+                        .map(Object::toString)
+                        .collect(Collectors.joining(", "));
+    }
+
     @Override
     public ResponseEntity<byte[]> exportReport(String reportFormat, Integer certificatControlId) throws IOException, JRException {
         String userHome = System.getProperty("user.home");
         Path downloadsPath = Paths.get(userHome, "Downloads");
-        String outputPath="";
+
         var certificatControl= this.certificationControlRepository.findById(certificatControlId).map(CertificatControlDAO::fromEntity).orElseThrow(()-> new EntityNotFoundException("aucun certificatControl pour ce id fourni"));
         var directeurDGMG=this.utilisateurRepository.findUtilisateurByInspectionNomAndRole(certificatControl.getUtilisateur().getInspection().getNom(),UserRole.INSPECTEUR_PRINCIPAL).map(UtilisateurDAO::fromEntity).orElseThrow(()-> new EntityNotFoundException("Le directeur DGMG n'est pas trouvé"));
         ZoneId zoneId = ZoneId.systemDefault(); // ou ZoneId.of("Europe/Paris") selon le besoin
         LocalDate localDate = this.certificationControlRepository.findById(certificatControlId).get().getDateCreation().atZone(zoneId).toLocalDate();
         String essaisConcatenes=getEssaisConcatenes(certificatControl.getEssaiFonctionnementList());
-
-
+        String essaisNonConcatenes=getEssaisNonConcatenes(certificatControl.getEssaiNonFonctionnementList());
+        String essaisAll = essaisConcatenes + ";" + essaisNonConcatenes;
+        log.warn("essaisAll {}", essaisAll);
         ReportData reportData=ReportData.builder()
                 .utilisateur(directeurDGMG)
                 .dateCertificat(localDate)
                 .essaisConcatenes(essaisConcatenes)
+                .essaisNonConcatenes(essaisNonConcatenes)
+                .essaisAll(essaisAll)
                 .inspection(directeurDGMG.getInspection())
                 .certificatControl(certificatControl)
                 .build();
-//        File file= ResourceUtils.getFile("classpath:inspectionFiche.jrxml");
-//        JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
-        InputStream jrxmlStream = getClass().getResourceAsStream("/inspectionFiche.jrxml");
-        JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlStream);
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(
+                Collections.singleton(reportData)
+        );
 
-        JRBeanCollectionDataSource dataSource= new JRBeanCollectionDataSource(Collections.singleton(reportData));
-        Map<String,Object> parameters= new HashMap<>();
-        parameters.put("CreatedBy","MarcAPEDOHKossiKekeli");
-        JasperPrint jasperPrint= JasperFillManager.fillReport(jasperReport,parameters,dataSource);
+        // Compiler les deux rapports
+        JasperReport reportRecto = JasperCompileManager.compileReport(
+                getClass().getResourceAsStream("/ficheInspectionFace.jrxml")
+        );
+        JasperReport reportVerso = JasperCompileManager.compileReport(
+                getClass().getResourceAsStream("/ficheInspectionDerriere.jrxml")
+        );
 
+        JRBeanCollectionDataSource datasourceSecondPage = new JRBeanCollectionDataSource(
+                Collections.singleton(reportData)
+        );
+        // Remplir les rapports
+        JasperPrint printRecto = JasperFillManager.fillReport(reportRecto, new HashMap<>(), dataSource);
+        JasperPrint printVerso = JasperFillManager.fillReport(reportVerso, new HashMap<>(), datasourceSecondPage);
+
+        List<JasperPrint> prints = Arrays.asList(printRecto, printVerso);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        if(reportFormat.equalsIgnoreCase("pdf")){
-             //outputPath = downloadsPath.resolve("inspectionFiche.pdf").toString();
-            //JasperExportManager.exportReportToPdfFile(jasperPrint,outputPath);
-            JasperExportManager.exportReportToPdfStream(jasperPrint, baos);
-            byte[] bytes = baos.toByteArray();
+        JRPdfExporter exporter = new JRPdfExporter();
+        exporter.setExporterInput(SimpleExporterInput.getInstance(prints));
+        exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(baos));
+        exporter.exportReport();
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDispositionFormData("attachment", "inspectionFiche.pdf");
-            headers.setContentLength(bytes.length);
+        // Préparer la réponse HTTP
+        byte[] bytes = baos.toByteArray();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "ficheInspection.pdf");
+        headers.setContentLength(bytes.length);
 
-            return ResponseEntity.ok().headers(headers).body(bytes);
-        }
-//        if(reportFormat.equalsIgnoreCase("html")){
-//             outputPath = downloadsPath.resolve("inspectionFiche.html").toString();
-//            JasperExportManager.exportReportToHtmlFile(jasperPrint,outputPath);
-//        }
-        throw new IllegalArgumentException("Format non supporté : " + reportFormat);
+        return ResponseEntity.ok().headers(headers).body(bytes);
     }
 
 

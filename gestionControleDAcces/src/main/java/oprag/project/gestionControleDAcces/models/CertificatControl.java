@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -21,7 +22,7 @@ public class CertificatControl extends AbstractEntity{
     @Column(name = "numeroRapport",nullable = false)
     private String numeroRapport;
     @Column(name = "creationDate",nullable = false)
-    private Instant creationDate;
+    private LocalDate creationDate;
     @Column(name = "localisationCertificationFait",nullable = false)
     private String localisationCertificationFait;
     @Column(name = "description",nullable = false)
@@ -44,12 +45,16 @@ public class CertificatControl extends AbstractEntity{
     private boolean moyenAccessConducteur;
     @Column(name = "essaiFonctionnementList",nullable = false)
     private List<EssaiFonctionnement> essaiFonctionnementList;
+    @Column(name = "essaiNonFonctionnementList")
+    private List<EssaiFonctionnement> essaiNonFonctionnementList;
     @Column(name = "conformeReglement",nullable = false)
     private boolean conformeReglement;
     @Column(name = "motifControle",nullable = false,length = 2500000)
     private String motifControle;
     @Column(name = "observationRecommendation",nullable = false,length = 2500000)
     private String observationRecommendation;
+    @Column(name = "recommendation",length = 2500000)
+    private String recommendation;
     @Column(name = "validite",nullable = false)
     @Enumerated(EnumType.STRING)
     private Validite validite;
