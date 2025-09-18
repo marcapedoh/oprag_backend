@@ -45,6 +45,12 @@ public interface UtilisateurAPI {
     @GetMapping(value = APP_ROOT + "/Utilisateurs/findAllByInspectionNom", produces = MediaType.APPLICATION_JSON_VALUE)
     List<UtilisateurDAO> findAllByInspectionNom();
 
+
+    @Operation(summary = "Lister tous les utilisateurs par nom d'inspection", description = "Cette méthode permet de retourner la liste de tous les utilisateurs par nomInspection.")
+    @ApiResponse(responseCode = "200", description = "Liste des utilisateurs par nom Inspection")
+    @GetMapping(value = APP_ROOT + "/Utilisateurs/findAllByInspectionNom/{nomInspection}", produces = MediaType.APPLICATION_JSON_VALUE)
+    List<UtilisateurDAO> findAllByInspectionNom(@PathVariable("nomInspection")  String nomInspection);
+
     @GetMapping(value = APP_ROOT + "/Utilisateurs/lastOperationDate/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     Instant lastOperationDate(@PathVariable("id") Integer id);
 

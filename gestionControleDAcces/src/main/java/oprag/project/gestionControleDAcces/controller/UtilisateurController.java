@@ -44,6 +44,11 @@ public class UtilisateurController implements UtilisateurAPI {
     }
 
     @Override
+    public List<UtilisateurDAO> findAllByInspectionNom(String  inspectionNom) {
+        return this.utilisateurService.findAllByInspectionNom(inspectionNom);
+    }
+
+    @Override
     public void delete(Integer id) {
         this.utilisateurService.delete(id);
     }

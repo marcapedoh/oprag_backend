@@ -74,6 +74,14 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     }
 
     @Override
+    public List<UtilisateurDAO> findAllByInspectionNom(String inspectionNom) {
+        return this.utilisateurRepository.findUtilisateurByInspectionNom(inspectionNom)
+                .stream()
+                .map(UtilisateurDAO::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void delete(Integer id) {
         assert id != null;
         if(this.certificatControlRepository.findCertificatControlByUtilisateurId(id).isEmpty()){
