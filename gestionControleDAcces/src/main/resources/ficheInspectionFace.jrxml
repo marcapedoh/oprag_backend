@@ -29,6 +29,7 @@
     <field name="certificatControl.conformeReglement" class="java.lang.Boolean"></field>
     <field name="certificatControl.motifControle" class="java.lang.String"></field>
     <field name="certificatControl.observationRecommendation" class="java.lang.String"></field>
+
     <field name="certificatControl.validite" class="oprag.project.gestionControleDAcces.models.Validite"></field>
     <field name="certificatControl.signatureDGM" class="java.lang.String"></field>
     <field name="certificatControl.normeFabrication" class="java.lang.String"></field>

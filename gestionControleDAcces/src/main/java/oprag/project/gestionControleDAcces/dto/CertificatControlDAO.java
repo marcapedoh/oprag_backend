@@ -84,6 +84,7 @@ public class CertificatControlDAO {
                 .conformeReglement(certificatControl.isConformeReglement())
                 .motifControle(certificatControl.getMotifControle())
                 .observationRecommendation(certificatControl.getObservationRecommendation())
+                .recommendation(certificatControl.getRecommendation())
                 .validite(certificatControl.getValidite())
                 .signatureDGM(certificatControl.getSignatureDGM().isEmpty()?certificatControl.getSignatureDGM():"null")
                 .normeFabrication(certificatControl.getNormeFabrication())
@@ -125,6 +126,7 @@ public class CertificatControlDAO {
         certificatControlEntity.setConformeReglement(certificatControl.isConformeReglement());
         certificatControlEntity.setMotifControle(certificatControl.getMotifControle());
         certificatControlEntity.setObservationRecommendation(certificatControl.getObservationRecommendation());
+        certificatControlEntity.setRecommendation(certificatControl.getRecommendation());
         certificatControlEntity.setValidite(certificatControl.getValidite());
         certificatControlEntity.setSignatureDGM(certificatControl.getSignatureDGM());
         certificatControlEntity.setNormeFabrication(certificatControl.getNormeFabrication());
