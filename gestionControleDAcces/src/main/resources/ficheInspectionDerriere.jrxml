@@ -21,6 +21,7 @@
     <field name="certificatControl.declarationConformite" class="java.lang.Boolean"></field>
     <field name="certificatControl.rapportControlePrecedent" class="java.lang.Boolean"></field>
     <field name="certificatControl.declarationEcrite" class="java.lang.Boolean"></field>
+    <field name="certificatControl.avisFavorable" class="java.lang.Boolean"></field>
     <field name="certificatControl.moyenAccess" class="java.lang.Boolean"></field>
     <field name="certificatControl.moyenAccessPartiel" class="java.lang.Boolean"></field>
     <field name="certificatControl.moyenAccessConducteur" class="java.lang.Boolean"></field>
@@ -878,7 +879,7 @@
                 <textElement textAlignment="Center">
                     <font fontName="Montserrat" isBold="true" />
                 </textElement>
-                <textFieldExpression><![CDATA[""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{certificatControl.avisFavorable}!=null && $F{certificatControl.avisFavorable}?"X":""]]></textFieldExpression>
             </textField>
             <textField>
                 <reportElement x="399" y="270" width="18" height="17" uuid="4a629ed8-05f6-49d8-8b58-6d2b7a0a641b">
@@ -897,7 +898,7 @@
                 <textElement textAlignment="Center">
                     <font fontName="Montserrat" isBold="true"/>
                 </textElement>
-                <textFieldExpression><![CDATA[""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{certificatControl.avisFavorable}!=null && !$F{certificatControl.avisFavorable}?"X":""]]></textFieldExpression>
             </textField>
         </band>
     </detail>

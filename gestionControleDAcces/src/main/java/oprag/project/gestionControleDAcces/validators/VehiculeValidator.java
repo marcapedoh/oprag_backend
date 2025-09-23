@@ -16,12 +16,12 @@ public class VehiculeValidator {
         if(!StringUtils.hasLength(String.valueOf(vehiculeDAO.getNumeroAssurance()))){
             errors.add("on a besoin de savoir le numero de assurance du véhicule");
         }
-        if(!StringUtils.hasLength(String.valueOf(vehiculeDAO.getNumeroCarteGrise()))){
-            errors.add("on a besoin de savoir le numero de la carte grise du véhicule");
-        }
-        if(!StringUtils.hasLength(String.valueOf(vehiculeDAO.getNumeroVisiteTechnique()))){
-            errors.add("on a besoin de savoir le numero de la visite technique du véhicule");
-        }
+//        if(!StringUtils.hasLength(String.valueOf(vehiculeDAO.getNumeroCarteGrise()))){
+//            errors.add("on a besoin de savoir le numero de la carte grise du véhicule");
+//        }
+//        if(!StringUtils.hasLength(String.valueOf(vehiculeDAO.getNumeroVisiteTechnique()))){
+//            errors.add("on a besoin de savoir le numero de la visite technique du véhicule");
+//        }
         return errors;
     }
 }
