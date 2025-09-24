@@ -20,6 +20,7 @@ import oprag.project.gestionControleDAcces.validators.ChauffeurValidator;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Random;
@@ -122,7 +123,9 @@ public class AuthenticationService {
     }
 
     public UtilisateurDAO update(UtilisateurDAO utilisateurDAO){
-
+        if(StringUtils.hasLength(utilisateurDAO.getMotDePasse())){
+            utilisateurDAO.setMotDePasse(passwordEncoder.encode(utilisateurDAO.getMotDePasse()));
+        }
         return UtilisateurDAO.fromEntity(
                 this.utilisateurRepository.save(UtilisateurDAO.toEntity(utilisateurDAO))
         );
