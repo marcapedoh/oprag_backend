@@ -127,4 +127,7 @@ public interface CertificatControlRepository extends JpaRepository<CertificatCon
             @Param("inspectionId") Long inspectionId
     );
 
+
+    List<CertificatControl> findCertificatControlByCreationDateBetweenAndUtilisateurInspectionId(LocalDate dateDebut,LocalDate dateFin,int inspectionId);
+
 }
