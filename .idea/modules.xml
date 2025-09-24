@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ControlAccess.iml" filepath="$PROJECT_DIR$/.idea/ControlAccess.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gestionControleDAcces/gestionControleDAcces.iml" filepath="$PROJECT_DIR$/gestionControleDAcces/gestionControleDAcces.iml" />
     </modules>
   </component>
 </project>
