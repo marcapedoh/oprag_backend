@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -32,12 +34,28 @@ public class StatsController implements StatsAPI {
 
     @Override
     public Object statsWithoutInspection(LocalDate dateDebut, LocalDate dateFin) {
+        List<Object[]> rows = this.certificatControlRepository.countVehiculesBySociete();
+
+        List<String> labels = new ArrayList<>();
+        List<Long> series = new ArrayList<>();
+
+        for (Object[] row : rows) {
+            String societe = (String) row[0];   // nom de la société
+            Long count = (Long) row[1];         // nombre de véhicules
+            labels.add(societe);
+            series.add(count);
+        }
+
+        Map<String, Object> resultCertificatPerCompany = new HashMap<>();
+        resultCertificatPerCompany.put("labels", labels);
+        resultCertificatPerCompany.put("series", series);
+
         Map<String, Object> result = new HashMap<>();
         result.put("status", this.statsService.getStatusStatsInit(dateDebut, dateFin));
         result.put("trend", this.statsService.getTrendStatsInit(dateDebut, dateFin));
         result.put("vehicleTypes", this.statsService.getVehicleTypeStatsInit(dateDebut, dateFin));
         result.put("trendMultiLine",this.statsService.countRapportsByDayAndInspection(dateDebut, dateFin));
-        result.put("InspectionPerSocetite",this.certificatControlRepository.countVehiculesBySociete());
+        result.put("InspectionPerSocetite",resultCertificatPerCompany);
         result.put("ConformeRate",this.certificatControlRepository.countCertificatControlByAvisFavorableInit(dateDebut, dateFin));
         result.put("totalRapport",this.certificatControlRepository.findAllByCreationDateBetween(dateDebut,dateFin).stream().filter(c-> !c.isDeleted()).map(CertificatControlDAO::fromEntity).toList().size());
         result.put("totalCard",this.badgeService.findAllCertificatCreationDate(dateDebut,dateFin).size());
