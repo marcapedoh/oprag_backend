@@ -23,7 +23,7 @@ public class Inspection extends AbstractEntity {
     private boolean status;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "typeControl",nullable = false)
+    @Column(name = "type")
     private TypeControl type;
 
     @Column(name = "logo",length = 2500000)

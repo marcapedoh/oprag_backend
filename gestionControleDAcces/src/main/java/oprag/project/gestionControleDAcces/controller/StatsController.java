@@ -59,7 +59,6 @@ public class StatsController implements StatsAPI {
         result.put("ConformeRate",this.certificatControlRepository.countCertificatControlByAvisFavorableInit(dateDebut, dateFin));
         result.put("totalRapport",this.certificatControlRepository.findAllByCreationDateBetween(dateDebut,dateFin).stream().filter(c-> !c.isDeleted()).map(CertificatControlDAO::fromEntity).toList().size());
         result.put("totalCard",this.badgeService.findAllCertificatCreationDate(dateDebut,dateFin).size());
-        result.put("filteredData",this.certificatControlRepository.findCertificatControlByCreationDateBetween(dateDebut,dateFin).stream().filter(c -> !c.isDeleted()).map(CertificatControlDAO::fromEntity).toList());
         result.put("totalCardActive",this.badgeService.findAllCertificatCreationDate(dateDebut,dateFin).stream().filter(BadgeDAO::isActive).toList().size());
 
         return result;
@@ -77,8 +76,7 @@ public class StatsController implements StatsAPI {
         result.put("ConformeRate",this.certificatControlRepository.countCertificatControlByAvisFavorable(dateDebut, dateFin, inspectionId));
         result.put("totalRapport",this.certificatControlRepository.findAllByCreationDateBetweenAndUtilisateurInspectionId(dateDebut,dateFin,Math.toIntExact(inspectionId)).stream().filter(c->!c.isDeleted()).map(CertificatControlDAO::fromEntity).toList().size());
         result.put("totalCard",this.badgeService.findAllCertificatCreationDateAndInspectionId(dateDebut,dateFin,Math.toIntExact(inspectionId)).size());
-        result.put("filteredData",this.certificatControlRepository.findCertificatControlByCreationDateBetweenAndUtilisateurInspectionId(dateDebut,dateFin, Math.toIntExact(inspectionId)).stream().map(CertificatControlDAO::fromEntity).collect(Collectors.toList()));
-        result.put("totalCardActive",this.badgeService.findAllCertificatCreationDateAndInspectionId(dateDebut,dateFin,Math.toIntExact(inspectionId)).stream().filter(BadgeDAO::isActive).toList().size());
+       result.put("totalCardActive",this.badgeService.findAllCertificatCreationDateAndInspectionId(dateDebut,dateFin,Math.toIntExact(inspectionId)).stream().filter(BadgeDAO::isActive).toList().size());
 
         return result;
     }
