@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import oprag.project.gestionControleDAcces.dto.UtilisateurDAO;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import static oprag.project.gestionControleDAcces.constant.Utils.APP_ROOT;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RequestMapping(APP_ROOT+"/auth")
 @Tag(name = "Authentication", description = "API d'authentification")
@@ -25,7 +25,7 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "403", description = "Utilisateur non trouvé ou non autorisé")
     })
     @PostMapping(value="/authenticate")
-    public ResponseEntity<AuthenticationResponse> authenticate(@RequestBody AuthenticationRequest request){
+    public ResponseEntity<AuthenticationResponse> authenticate(@Valid @RequestBody AuthenticationRequest request){
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
     @PostMapping(value="/register")
