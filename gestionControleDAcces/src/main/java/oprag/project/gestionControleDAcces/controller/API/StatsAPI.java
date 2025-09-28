@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.cglib.core.Local;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,5 +24,13 @@ public interface StatsAPI {
     })
     @GetMapping(value = APP_ROOT + "/Statistiques/{dateDebut}/{dateFin}/{inspectionId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public  Object stats(@PathVariable("dateDebut") LocalDate dateDebut,@PathVariable("dateFin") LocalDate dateFin,@PathVariable("inspectionId") Long inspectionId);
+
+    @Operation(summary = "Recherche des indicateurs analytique", description = "Cette méthode permet de rechercher des indicateurs analytiques")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Indicateurs trouvé"),
+            @ApiResponse(responseCode = "404", description = "Indicateurs non trouvé")
+    })
+    @GetMapping(value = APP_ROOT + "/Statistiques/{dateDebut}/{dateFin}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Object statsWithoutInspection(@PathVariable("dateDebut")LocalDate dateDebut,@PathVariable("dateFin")LocalDate dateFin);
 
 }

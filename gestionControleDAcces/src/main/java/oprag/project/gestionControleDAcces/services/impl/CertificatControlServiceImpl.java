@@ -38,7 +38,16 @@ public class CertificatControlServiceImpl implements CertificatControlService {
             throw new InvalidEntityException("le certificat que vous passez n'est pas valide",ErrorCodes.CERTFICAT_NOT_VALID,errors);
         }
 
+
         var inspectionMontant= InspectionMontantDAO.fromEntity(inspectionMontantRepository.findAll().stream().findFirst().get());
+
+        String last = this.certificatControlRepository.findTopByOrderByIdDesc();
+        long next = 200;
+        if (last != null) {
+            String[] parts = last.split("-RP-");
+            next = Long.parseLong(parts[1]) + 1;
+        }
+        certificatControlDAO.setNumeroRapport(certificatControlDAO.getUtilisateur().getInspection().getCode()+"-RP-"+next);
         certificatControlDAO.setMontant(inspectionMontant.getMontant());
         return CertificatControlDAO.fromEntity(
                 certificatControlRepository.save(

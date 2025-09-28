@@ -122,6 +122,20 @@ public class BadgeServiceImpl implements BadgeService {
     }
 
     @Override
+    public List<BadgeDAO> findAllCertificatCreationDateAndInspectionId(LocalDate dateDebut, LocalDate dateFin, Integer inspectionId) {
+        return this.badgeRepository.findAllByCertificatControlCreationDateBetweenAndCertificatControlUtilisateurInspectionId(dateDebut,dateFin,inspectionId).stream()
+                .map(BadgeDAO::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BadgeDAO> findAllCertificatCreationDate(LocalDate dateDebut, LocalDate dateFin) {
+        return this.badgeRepository.findAllByCertificatControlCreationDateBetween(dateDebut,dateFin).stream()
+                .map(BadgeDAO::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<Object> countAllPerDay() {
         return badgeRepository.findAll().stream()
                 .collect(Collectors.groupingBy(

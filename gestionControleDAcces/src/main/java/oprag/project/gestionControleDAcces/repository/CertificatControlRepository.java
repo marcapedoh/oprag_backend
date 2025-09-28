@@ -34,15 +34,14 @@ public interface CertificatControlRepository extends JpaRepository<CertificatCon
     Double getTotalMontant();
 
 
+    // Filtrage des certificats
     @Query("""
-        SELECT c 
-        FROM CertificatControl c
-        JOIN c.utilisateur u
-        JOIN u.inspection i
-        WHERE (c.creationDate >=:dateDebut )
-        AND ( c.creationDate <= :dateFin)
-        AND (:inspectionId IS NULL OR i.id = :inspectionId)
-        """)
+    SELECT c 
+    FROM CertificatControl c
+    WHERE (c.creationDate >= :dateDebut)
+      AND (c.creationDate <= :dateFin)
+      AND (:inspectionId IS NULL OR c.utilisateur.inspection.id = :inspectionId)
+""")
     List<CertificatControl> findFiltered(
             @Param("dateDebut") LocalDate dateDebut,
             @Param("dateFin") LocalDate dateFin,
@@ -51,83 +50,154 @@ public interface CertificatControlRepository extends JpaRepository<CertificatCon
 
     // Nombre conformes / non conformes par jour
     @Query("""
-        SELECT c.creationDate, 
-               SUM(CASE WHEN c.avisFavorable = true THEN 1 ELSE 0 END),
-               SUM(CASE WHEN c.avisFavorable = false THEN 1 ELSE 0 END)
-        FROM CertificatControl c
-        JOIN c.utilisateur u
-        JOIN u.inspection i
-        WHERE ( c.creationDate >= :dateDebut)
-        AND ( c.creationDate <= :dateFin) 
-        AND (:inspectionId IS NULL OR i.id = :inspectionId)
-        GROUP BY c.creationDate
-        ORDER BY c.creationDate
-        """)
+    SELECT c.creationDate, 
+           SUM(CASE WHEN c.avisFavorable = true THEN 1 ELSE 0 END),
+           SUM(CASE WHEN c.avisFavorable = false THEN 1 ELSE 0 END)
+    FROM CertificatControl c
+    WHERE (c.creationDate >= :dateDebut)
+      AND (c.creationDate <= :dateFin)
+      AND (:inspectionId IS NULL OR c.utilisateur.inspection.id = :inspectionId)
+    GROUP BY c.creationDate
+    ORDER BY c.creationDate
+""")
     List<Object[]> getStatusStats(
             @Param("dateDebut") LocalDate dateDebut,
             @Param("dateFin") LocalDate dateFin,
             @Param("inspectionId") Long inspectionId
     );
 
+    @Query("""
+    SELECT c.creationDate, 
+           SUM(CASE WHEN c.avisFavorable = true THEN 1 ELSE 0 END),
+           SUM(CASE WHEN c.avisFavorable = false THEN 1 ELSE 0 END)
+    FROM CertificatControl c
+    WHERE (c.creationDate >= :dateDebut)
+      AND (c.creationDate <= :dateFin)
+    GROUP BY c.creationDate
+    ORDER BY c.creationDate
+    """)
+    List<Object[]> getStatusStatsInit(
+            @Param("dateDebut") LocalDate dateDebut,
+            @Param("dateFin") LocalDate dateFin
+    );
+
     // Tendances inspections (total par jour)
     @Query("""
-        SELECT c.creationDate, COUNT(c)
-        FROM CertificatControl c
-        JOIN c.utilisateur u
-        JOIN u.inspection i
-        WHERE ( c.creationDate >= :dateDebut)
-        AND ( c.creationDate <= :dateFin)
-        AND (:inspectionId IS NULL OR i.id = :inspectionId)
-        GROUP BY c.creationDate
-        ORDER BY c.creationDate
-        """)
+    SELECT c.creationDate, COUNT(c)
+    FROM CertificatControl c
+    WHERE (c.creationDate >= :dateDebut)
+      AND (c.creationDate <= :dateFin)
+      AND (:inspectionId IS NULL OR c.utilisateur.inspection.id = :inspectionId)
+    GROUP BY c.creationDate
+    ORDER BY c.creationDate
+""")
     List<Object[]> getTrendStats(
             @Param("dateDebut") LocalDate dateDebut,
             @Param("dateFin") LocalDate dateFin,
             @Param("inspectionId") Long inspectionId
     );
 
+    @Query("""
+    SELECT c.creationDate, COUNT(c)
+    FROM CertificatControl c
+    WHERE (c.creationDate >= :dateDebut)
+      AND (c.creationDate <= :dateFin)
+    GROUP BY c.creationDate
+    ORDER BY c.creationDate
+""")
+    List<Object[]> getTrendStatsInit(
+            @Param("dateDebut") LocalDate dateDebut,
+            @Param("dateFin") LocalDate dateFin
+    );
+
     // Répartition par type de véhicule
     @Query("""
-        SELECT c.vehicule.typeVehicules, COUNT(c)
-        FROM CertificatControl c
-        JOIN c.utilisateur u
-        JOIN u.inspection i
-        WHERE (c.creationDate >= :dateDebut)
-        AND ( c.creationDate <= :dateFin)
-        AND (:inspectionId IS NULL OR i.id = :inspectionId)
-        GROUP BY c.vehicule.typeVehicules
-        """)
+    SELECT c.vehicule.typeVehicules, COUNT(c)
+    FROM CertificatControl c
+    WHERE (c.creationDate >= :dateDebut)
+      AND (c.creationDate <= :dateFin)
+      AND (:inspectionId IS NULL OR c.utilisateur.inspection.id = :inspectionId)
+    GROUP BY c.vehicule.typeVehicules
+""")
     List<Object[]> getVehicleTypeStats(
             @Param("dateDebut") LocalDate dateDebut,
             @Param("dateFin") LocalDate dateFin,
             @Param("inspectionId") Long inspectionId
     );
 
-    @Query("SELECT ri.utilisateur.inspection.id, FUNCTION('DATE', ri.creationDate), COUNT(ri) " +
-            "FROM CertificatControl ri " +
-            "WHERE ri.utilisateur.inspection.id = :inspectionId " +
-            "AND ri.creationDate BETWEEN :dateDebut AND :dateFin " +
-            "GROUP BY ri.utilisateur.inspection.id, FUNCTION('DATE', ri.creationDate) " +
-            "ORDER BY FUNCTION('DATE', ri.creationDate), ri.utilisateur.inspection.id")
+    // Rapports par jour et inspection
+    @Query("""
+    SELECT ri.utilisateur.inspection.nom, 
+           FUNCTION('DATE', ri.creationDate), 
+           COUNT(ri)
+    FROM CertificatControl ri
+    WHERE ri.creationDate BETWEEN :dateDebut AND :dateFin
+    GROUP BY ri.utilisateur.inspection.nom, FUNCTION('DATE', ri.creationDate)
+    ORDER BY FUNCTION('DATE', ri.creationDate), ri.utilisateur.inspection.nom
+""")
     List<Object[]> countRapportsByDayAndInspection(
             @Param("dateDebut") LocalDate dateDebut,
-            @Param("dateFin") LocalDate dateFin,
-             @Param("inspectionId") Long inspectionId
+            @Param("dateFin") LocalDate dateFin
     );
 
-    @Query("SELECT COUNT(cc) " +
-            "FROM CertificatControl cc " +
-            "WHERE cc.avisFavorable = true " +
-            "AND cc.utilisateur.inspection.id = :inspectionId " +
-            "AND cc.creationDate BETWEEN :dateDebut AND :dateFin")
+    // Nombre de certificats conformes
+    @Query("""
+    SELECT COUNT(cc)
+    FROM CertificatControl cc
+    WHERE cc.avisFavorable = true
+      AND cc.utilisateur.inspection.id = :inspectionId
+      AND cc.creationDate BETWEEN :dateDebut AND :dateFin
+""")
     Long countCertificatControlByAvisFavorable(
             @Param("dateDebut") LocalDate dateDebut,
             @Param("dateFin") LocalDate dateFin,
             @Param("inspectionId") Long inspectionId
     );
 
+    @Query("""
+    SELECT COUNT(cc)
+    FROM CertificatControl cc
+    WHERE cc.avisFavorable = true
+      AND cc.creationDate BETWEEN :dateDebut AND :dateFin
+""")
+    Long countCertificatControlByAvisFavorableInit(
+            @Param("dateDebut") LocalDate dateDebut,
+            @Param("dateFin") LocalDate dateFin
+    );
 
-    List<CertificatControl> findCertificatControlByCreationDateBetweenAndUtilisateurInspectionId(LocalDate dateDebut,LocalDate dateFin,int inspectionId);
+    // Filtrage par date et inspection (méthode dérivée)
+    List<CertificatControl> findCertificatControlByCreationDateBetweenAndUtilisateurInspectionId(
+            LocalDate dateDebut,
+            LocalDate dateFin,
+            int inspectionId
+    );
+
+    List<CertificatControl> findCertificatControlByCreationDateBetween(
+            LocalDate dateDebut,
+            LocalDate dateFin
+    );
+
+    // Répartition par société
+    @Query("""
+    SELECT c.societe, COUNT(c)
+    FROM CertificatControl c
+    GROUP BY c.societe
+    ORDER BY COUNT(c) DESC
+""")
+    List<Object[]> countVehiculesBySociete();
+
+    // Dernier numéro de rapport
+    @Query("SELECT c.numeroRapport FROM CertificatControl c ORDER BY c.id DESC")
+    String findTopByOrderByIdDesc();
+
+
+
+    List<CertificatControl> findAllByCreationDateBetweenAndUtilisateurInspectionId(LocalDate dateDebut, LocalDate dateFin, int inspectionId);
+
+    List<CertificatControl> findAllByCreationDateBetween(LocalDate dateDebut, LocalDate dateFin);
+
+
+
+
 
 }
