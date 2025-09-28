@@ -99,17 +99,71 @@ public class StatsServiceImpl implements StatsService {
 
     @Override
     public Map<String, Object> getVehicleTypeStatsInit(LocalDate dateDebut, LocalDate dateFin) {
-        return Map.of();
+        List<Object[]> rows = certificatControlRepository.getVehicleTypeStats(dateDebut, dateFin, null);
+
+        Map<String, Long> countsMap = new HashMap<>();
+
+        for (Object[] row : rows) {
+            Object typeObj = row[0];   // Liste<TypeVehicule> ou TypeVehicule
+            Long count = (Long) row[1];
+
+            if (typeObj instanceof List<?> typeList) {
+                // Si c’est une liste, on parcourt
+                for (Object t : typeList) {
+                    String typeName = (t instanceof Enum<?> e) ? e.name() : t.toString();
+                    countsMap.merge(typeName, count, Long::sum);
+                }
+            } else {
+                // Si c’est un seul élément
+                String typeName = (typeObj instanceof Enum<?> e) ? e.name() : typeObj.toString();
+                countsMap.merge(typeName, count, Long::sum);
+            }
+        }
+
+        // Extraire proprement labels et séries
+        List<String> labels = new ArrayList<>(countsMap.keySet());
+        List<Long> series = labels.stream().map(countsMap::get).toList();
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("labels", labels);
+        result.put("series", series);
+
+        return result;
     }
+
 
     @Override
     public Map<String, Object> getVehicleTypeStats(LocalDate dateDebut, LocalDate dateFin, Long inspectionId) {
-        // Récupère les stats depuis la BDD
-//        List<Object[]> certificats = certificatControlRepository.getVehicleTypeStats(dateDebut, dateFin, inspectionId);
+        List<Object[]> rows = certificatControlRepository.getVehicleTypeStats(dateDebut, dateFin, inspectionId);
 
+        Map<String, Long> countsMap = new HashMap<>();
 
+        for (Object[] row : rows) {
+            Object typeObj = row[0];   // Liste<TypeVehicule> ou TypeVehicule
+            Long count = (Long) row[1];
 
-        return null;
+            if (typeObj instanceof List<?> typeList) {
+                // Si c’est une liste, on parcourt
+                for (Object t : typeList) {
+                    String typeName = (t instanceof Enum<?> e) ? e.name() : t.toString();
+                    countsMap.merge(typeName, count, Long::sum);
+                }
+            } else {
+                // Si c’est un seul élément
+                String typeName = (typeObj instanceof Enum<?> e) ? e.name() : typeObj.toString();
+                countsMap.merge(typeName, count, Long::sum);
+            }
+        }
+
+        // Extraire proprement labels et séries
+        List<String> labels = new ArrayList<>(countsMap.keySet());
+        List<Long> series = labels.stream().map(countsMap::get).toList();
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("labels", labels);
+        result.put("series", series);
+
+        return result;
     }
 
     @Override

@@ -118,13 +118,24 @@ public interface CertificatControlRepository extends JpaRepository<CertificatCon
       AND (c.creationDate <= :dateFin)
       AND (:inspectionId IS NULL OR c.utilisateur.inspection.id = :inspectionId)
     GROUP BY c.vehicule.typeVehicules
-""")
+    """)
     List<Object[]> getVehicleTypeStats(
             @Param("dateDebut") LocalDate dateDebut,
             @Param("dateFin") LocalDate dateFin,
             @Param("inspectionId") Long inspectionId
     );
 
+    @Query("""
+    SELECT c.vehicule.typeVehicules, COUNT(c)
+    FROM CertificatControl c
+    WHERE (c.creationDate >= :dateDebut)
+      AND (c.creationDate <= :dateFin)
+    GROUP BY c.vehicule.typeVehicules
+    """)
+    List<Object[]> getVehicleTypeStatsInit(
+            @Param("dateDebut") LocalDate dateDebut,
+            @Param("dateFin") LocalDate dateFin
+    );
     // Rapports par jour et inspection
     @Query("""
     SELECT ri.utilisateur.inspection.nom, 
