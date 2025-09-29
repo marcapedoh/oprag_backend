@@ -87,7 +87,7 @@ public class BadgeServiceImpl implements BadgeService {
         try {
             //String qrContent = "DateCreation:" + badge.getDateCreation() + ";Numero:" + badge.getNumero()+";Validite:"+badge.getValidite();
             // URL Frontend Angular pour l'accès protégé aux fiches
-            String qrContent= "https://badge.routeafrique.com:4200/fiche/"+badge.getCertificatControl().getId();
+            String qrContent= "https://badge.routeafrique.com/fiche/"+badge.getCertificatControl().getId();
             BufferedImage qrImage = QRCodeUtil.generateQRCodeImage(qrContent, 150, 150);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(qrImage, "png", baos);
