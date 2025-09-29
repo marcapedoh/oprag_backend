@@ -44,6 +44,7 @@ public class CertificatControlDAO {
     private Validite validite;
     private String signatureDGM;
     private String normeFabrication;
+    private Boolean avisFavorable;
     private boolean paye;
     private boolean deleted;
     private Double montant;
@@ -77,6 +78,7 @@ public class CertificatControlDAO {
                 .rapportControlePrecedent(certificatControl.isRapportControlePrecedent())
                 .declarationEcrite(certificatControl.isDeclarationEcrite())
                 .moyenAccess(certificatControl.isMoyenAccess())
+                .avisFavorable(certificatControl.getAvisFavorable())
                 .moyenAccessPartiel(certificatControl.isMoyenAccessPartiel())
                 .moyenAccessConducteur(certificatControl.isMoyenAccessConducteur())
                 .essaiFonctionnementList(certificatControl.getEssaiFonctionnementList())
@@ -84,6 +86,7 @@ public class CertificatControlDAO {
                 .conformeReglement(certificatControl.isConformeReglement())
                 .motifControle(certificatControl.getMotifControle())
                 .observationRecommendation(certificatControl.getObservationRecommendation())
+                .recommendation(certificatControl.getRecommendation())
                 .validite(certificatControl.getValidite())
                 .signatureDGM(certificatControl.getSignatureDGM().isEmpty()?certificatControl.getSignatureDGM():"null")
                 .normeFabrication(certificatControl.getNormeFabrication())
@@ -123,8 +126,10 @@ public class CertificatControlDAO {
         certificatControlEntity.setEssaiFonctionnementList(certificatControl.getEssaiFonctionnementList());
         certificatControlEntity.setEssaiNonFonctionnementList(certificatControl.getEssaiNonFonctionnementList());
         certificatControlEntity.setConformeReglement(certificatControl.isConformeReglement());
+        certificatControlEntity.setAvisFavorable(certificatControl.getAvisFavorable());
         certificatControlEntity.setMotifControle(certificatControl.getMotifControle());
         certificatControlEntity.setObservationRecommendation(certificatControl.getObservationRecommendation());
+        certificatControlEntity.setRecommendation(certificatControl.getRecommendation());
         certificatControlEntity.setValidite(certificatControl.getValidite());
         certificatControlEntity.setSignatureDGM(certificatControl.getSignatureDGM());
         certificatControlEntity.setNormeFabrication(certificatControl.getNormeFabrication());

@@ -43,6 +43,7 @@ public class Utilisateur extends AbstractEntity implements UserDetails {
     private Inspection inspection;
 
     @OneToMany(mappedBy = "inspecteur")
+
     private List<Badge> badges;
 
     @Override

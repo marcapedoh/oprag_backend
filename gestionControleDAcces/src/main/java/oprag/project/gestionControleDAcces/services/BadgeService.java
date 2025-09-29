@@ -11,6 +11,9 @@ public interface BadgeService {
     BadgeDAO save(BadgeDAO badgeDAO);
     BadgeDAO findByNumero(String numero);
     List<BadgeDAO> findAll();
+    List<BadgeDAO> findAllCertificatCreationDateAndInspectionId(LocalDate dateDebut,LocalDate dateFin, Integer inspectionId);
+
+    List<BadgeDAO> findAllCertificatCreationDate(LocalDate dateDebut,LocalDate dateFin);
     ResponseEntity<byte[]> getQrCode(String numero);
     List<Object> countAllPerDay();
     long numberOfBadges();

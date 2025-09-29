@@ -11,7 +11,6 @@ import oprag.project.gestionControleDAcces.repository.UtilisateurRepository;
 import oprag.project.gestionControleDAcces.services.BadgeService;
 import oprag.project.gestionControleDAcces.services.QRCodeUtil;
 import oprag.project.gestionControleDAcces.validators.BadgeValidator;
-import oprag.project.gestionControleDAcces.validators.InspectionValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -21,8 +20,6 @@ import org.springframework.stereotype.Service;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -89,7 +86,8 @@ public class BadgeServiceImpl implements BadgeService {
 
         try {
             //String qrContent = "DateCreation:" + badge.getDateCreation() + ";Numero:" + badge.getNumero()+";Validite:"+badge.getValidite();
-            String qrContent= "https://badge.routeafrique.com:1020/OPRAG/v0/endpoint/Reports/exportReportForQrCode/pdf/"+badge.getCertificatControl().getId();
+            // URL Frontend Angular pour l'accès protégé aux fiches
+            String qrContent= "https://badge.routeafrique.com:4200/fiche/"+badge.getCertificatControl().getId();
             BufferedImage qrImage = QRCodeUtil.generateQRCodeImage(qrContent, 150, 150);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(qrImage, "png", baos);
@@ -117,6 +115,20 @@ public class BadgeServiceImpl implements BadgeService {
     @Override
     public List<BadgeDAO> findAll() {
         return this.badgeRepository.findAll().stream()
+                .map(BadgeDAO::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BadgeDAO> findAllCertificatCreationDateAndInspectionId(LocalDate dateDebut, LocalDate dateFin, Integer inspectionId) {
+        return this.badgeRepository.findAllByCertificatControlCreationDateBetweenAndCertificatControlUtilisateurInspectionId(dateDebut,dateFin,inspectionId).stream()
+                .map(BadgeDAO::fromEntity)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BadgeDAO> findAllCertificatCreationDate(LocalDate dateDebut, LocalDate dateFin) {
+        return this.badgeRepository.findAllByCertificatControlCreationDateBetween(dateDebut,dateFin).stream()
                 .map(BadgeDAO::fromEntity)
                 .collect(Collectors.toList());
     }

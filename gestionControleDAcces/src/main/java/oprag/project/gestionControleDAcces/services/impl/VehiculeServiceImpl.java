@@ -29,7 +29,7 @@ public class VehiculeServiceImpl implements VehiculeService {
 
     @Override
     public VehiculeDAO save(VehiculeDAO vehiculeDAO) {
-        if(vehiculeRepository.findVehiculeByNumeroCarteGrise(vehiculeDAO.getNumeroCarteGrise()).isPresent()){
+        if(vehiculeDAO.getId()==null && vehiculeRepository.findVehiculeByNumeroCarteGrise(vehiculeDAO.getNumeroCarteGrise()).isPresent()){
             throw new InvalidOperationException("ce vehicule existe déjà dans la base de donnée", ErrorCodes.VEHICULE_ALREADY_EXIST);
         }
         List<String> errors= VehiculeValidator.validate(vehiculeDAO);

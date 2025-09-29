@@ -1,5 +1,7 @@
 package oprag.project.gestionControleDAcces.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -66,6 +68,9 @@ public class CertificatControl extends AbstractEntity{
     private boolean paye;
     @Column(name = "deleted",nullable = false)
     private boolean deleted;
+
+    @Column(name = "avisFavorable")
+    private Boolean avisFavorable;
     @Column(name = "montant",nullable = false)
     private Double montant;
     @OneToOne(mappedBy = "certificatControl")

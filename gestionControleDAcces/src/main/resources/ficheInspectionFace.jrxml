@@ -13,6 +13,7 @@
     <field name="inspection.nom" class="java.lang.String"></field>
     <field name="utilisateur.role" class="java.lang.String"></field>
     <field name="dateCertificat" class="java.time.LocalDate"></field>
+    <field name="certificatControl.creationDate" class="java.time.LocalDate"></field>
     <field name="certificatControl.societe" class="java.lang.String"></field>
     <field name="certificatControl.numeroRapport" class="java.lang.String"></field>
     <field name="certificatControl.localisationCertificationFait" class="java.lang.String"></field>
@@ -28,6 +29,7 @@
     <field name="certificatControl.conformeReglement" class="java.lang.Boolean"></field>
     <field name="certificatControl.motifControle" class="java.lang.String"></field>
     <field name="certificatControl.observationRecommendation" class="java.lang.String"></field>
+
     <field name="certificatControl.validite" class="oprag.project.gestionControleDAcces.models.Validite"></field>
     <field name="certificatControl.signatureDGM" class="java.lang.String"></field>
     <field name="certificatControl.normeFabrication" class="java.lang.String"></field>
@@ -150,7 +152,7 @@
                     <pen lineWidth="1.0"/>
                     <topPen lineWidth="1.0"/>
                 </box>
-                <textFieldExpression><![CDATA[$F{dateCertificat}]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{certificatControl.creationDate}]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="20" y="130" width="110" height="20" uuid="59782014-5e8d-4f79-b6dc-6f9ae9b136b0"/>
