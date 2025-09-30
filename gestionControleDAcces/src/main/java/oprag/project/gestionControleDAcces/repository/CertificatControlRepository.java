@@ -198,8 +198,8 @@ public interface CertificatControlRepository extends JpaRepository<CertificatCon
     List<Object[]> countVehiculesBySociete();
 
     // Dernier numéro de rapport
-    @Query("SELECT c.numeroRapport FROM CertificatControl c ORDER BY c.id DESC")
-    String findTopByOrderByIdDesc();
+    @Query("SELECT c.numeroRapport FROM CertificatControl c ORDER BY c.id DESC LIMIT 1")
+     String findFirstByOrderByIdDesc();
 
 
 

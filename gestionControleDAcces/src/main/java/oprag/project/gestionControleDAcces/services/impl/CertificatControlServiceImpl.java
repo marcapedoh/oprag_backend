@@ -41,7 +41,7 @@ public class CertificatControlServiceImpl implements CertificatControlService {
 
         var inspectionMontant= InspectionMontantDAO.fromEntity(inspectionMontantRepository.findAll().stream().findFirst().get());
 
-        String last = this.certificatControlRepository.findTopByOrderByIdDesc();
+        String last = this.certificatControlRepository.findFirstByOrderByIdDesc();
         long next = 200;
         if (last != null) {
             String[] parts = last.split("-RP-");
