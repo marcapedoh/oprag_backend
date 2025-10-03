@@ -21,6 +21,7 @@
     <field name="certificatControl.noticeInstruction" class="java.lang.Boolean"></field>
     <field name="certificatControl.livretMaintenance" class="java.lang.Boolean"></field>
     <field name="certificatControl.declarationConformite" class="java.lang.Boolean"></field>
+    <field name="certificatControl.certificationRemorque" class="java.lang.Boolean"></field>
     <field name="certificatControl.rapportControlePrecedent" class="java.lang.Boolean"></field>
     <field name="certificatControl.declarationEcrite" class="java.lang.Boolean"></field>
     <field name="certificatControl.moyenAccess" class="java.lang.Boolean"></field>
@@ -283,16 +284,16 @@
                 </box>
                 <textElement textAlignment="Left"/>
                 <textFieldExpression><![CDATA[(
-                  ($F{certificatControl.noticeInstruction} ? "• Notice d'Instruction\n" : "") +
-                  ($F{certificatControl.livretMaintenance} ? "• Livret maintenance\n" : "") +
-                  ($F{certificatControl.declarationConformite} ? "• Déclaration / Attestation de conformité\n" : "") +
+                  ($F{certificatControl.certificationRemorque} ? "• Certification Remorque: Oui\n" : "• Certification Remorque: Oui\n") +
+                  ($F{certificatControl.livretMaintenance} ? "• Carnet entretien: Oui\n" : "• Carnet entretien: Non\n") +
+                  ($F{certificatControl.rapportControlePrecedent} ? "• Rapport précédent Camionage: Oui\n" : "• Rapport précédent Camionage: Non\n") +
                   ($F{certificatControl.paye} ? "• Payé" : "")
                 ).isEmpty()
                     ? "AUCUN DOCUMENT FOURNI"
                     : (
-                        ($F{certificatControl.noticeInstruction} ? "• Notice d'Instruction\n" : "") +
-                        ($F{certificatControl.livretMaintenance} ? "• Livret maintenance\n" : "") +
-                        ($F{certificatControl.declarationConformite} ? "• Déclaration / Attestation de conformité\n" : "") +
+                        ($F{certificatControl.certificationRemorque} ? "• Certification Remorque: Oui\n" : "• Certification Remorque: Oui\n") +
+                        ($F{certificatControl.livretMaintenance} ? "• Carnet entretien: Oui\n" : "• Carnet entretien: Non\n") +
+                        ($F{certificatControl.rapportControlePrecedent} ? "• Rapport précédent Camionage: Oui\n" : "• Rapport précédent Camionage: Non\n") +
                         ($F{certificatControl.paye} ? "• Payé" : "")
                       )
                 ]]></textFieldExpression>
@@ -324,7 +325,7 @@
                     <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement textAlignment="Left">
-                    <font fontName="Monserrat" isBold="true"/>
+                    <font fontName="Monserrat" isBold="true" size="9"/>
                 </textElement>
                 <text><![CDATA[Moyen d'accès:]]></text>
             </staticText>
@@ -332,23 +333,18 @@
                 <reportElement x="139" y="310" width="140" height="20" uuid="379027cc-bff9-4054-909c-4449503d5c41">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
-                <box topPadding="2" leftPadding="6" bottomPadding="2" rightPadding="2">
+                <box padding="2">
                     <pen lineWidth="1.0"/>
                     <topPen lineWidth="1.0"/>
                 </box>
                 <textFieldExpression><![CDATA[$F{certificatControl.moyenAccess} ? "Accès Autorisé" : "Accès Refusé"]]></textFieldExpression>
             </textField>
             <rectangle>
-                <reportElement x="279" y="310" width="264" height="20" uuid="8a311973-f0d1-440b-aab8-602979c8b847">
-                    <property name="com.jaspersoft.studio.unit.height" value="px"/>
-                </reportElement>
-            </rectangle>
-            <rectangle>
                 <reportElement x="10" y="330" width="129" height="20" backcolor="#D9D9D9" uuid="eec2972b-1c39-4201-ae1f-616d050ce7d2"/>
             </rectangle>
             <staticText>
                 <reportElement x="19" y="330" width="110" height="20" uuid="7118bea2-1299-4e05-8dd4-e4ba2120fc81"/>
-                <box topPadding="2" leftPadding="2">
+                <box topPadding="2" leftPadding="6" bottomPadding="2" rightPadding="2">
                     <pen lineWidth="2.0"/>
                     <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
                     <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -356,7 +352,7 @@
                     <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement textAlignment="Left">
-                    <font fontName="Monserrat" isBold="true"/>
+                    <font fontName="Monserrat" isBold="true" size="9"/>
                 </textElement>
                 <text><![CDATA[Partiel:]]></text>
             </staticText>
@@ -383,7 +379,7 @@
                     <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement textAlignment="Left">
-                    <font fontName="Monserrat" isBold="true"/>
+                    <font fontName="Monserrat" isBold="true" size="9"/>
                 </textElement>
                 <text><![CDATA[Motif de contrôle:]]></text>
             </staticText>
@@ -398,12 +394,12 @@
                 <textFieldExpression><![CDATA[$F{certificatControl.motifControle}]]></textFieldExpression>
             </textField>
             <rectangle>
-                <reportElement x="279" y="330" width="129" height="20" backcolor="#D9D9D9" uuid="b3310b42-8e8e-4543-a18c-a2d4e31ec7c2">
+                <reportElement x="279" y="310" width="129" height="20" backcolor="#D9D9D9" uuid="b3310b42-8e8e-4543-a18c-a2d4e31ec7c2">
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
                 </reportElement>
             </rectangle>
             <staticText>
-                <reportElement x="279" y="330" width="110" height="20" uuid="992401a1-6661-41b6-9021-a12fbe4c30df">
+                <reportElement x="279" y="310" width="110" height="20" uuid="992401a1-6661-41b6-9021-a12fbe4c30df">
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
                 </reportElement>
                 <box topPadding="2" leftPadding="2">
@@ -413,13 +409,13 @@
                     <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textElement textAlignment="Left">
-                    <font fontName="Monserrat" isBold="true"/>
+                <textElement textAlignment="Center">
+                    <font fontName="Monserrat" isBold="true" size="9"/>
                 </textElement>
                 <text><![CDATA[Conducteur:]]></text>
             </staticText>
             <textField>
-                <reportElement x="408" y="330" width="135" height="20" uuid="07ea5d5a-611c-471a-aedc-ee807ef6b424">
+                <reportElement x="408" y="310" width="135" height="20" uuid="07ea5d5a-611c-471a-aedc-ee807ef6b424">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
                 </reportElement>
@@ -430,12 +426,14 @@
                 <textFieldExpression><![CDATA[$F{certificatControl.moyenAccessConducteur} ? "Accès Autorisé" : "Autorisé Refusé"]]></textFieldExpression>
             </textField>
             <rectangle>
-                <reportElement x="279" y="350" width="129" height="20" backcolor="#D9D9D9" uuid="99f9be26-7044-4d4b-a060-db10e9333299">
+                <reportElement x="279" y="330" width="129" height="40" backcolor="#D9D9D9" uuid="99f9be26-7044-4d4b-a060-db10e9333299">
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
                 </reportElement>
             </rectangle>
             <staticText>
-                <reportElement x="279" y="350" width="110" height="20" uuid="00c6015c-08bb-4531-bcdd-49d27c1ce622"/>
+                <reportElement x="279" y="330" width="129" height="40" uuid="00c6015c-08bb-4531-bcdd-49d27c1ce622">
+                    <property name="com.jaspersoft.studio.unit.width" value="px"/>
+                </reportElement>
                 <box topPadding="2" leftPadding="2">
                     <pen lineWidth="2.0"/>
                     <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
@@ -443,13 +441,13 @@
                     <bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textElement textAlignment="Left">
+                <textElement textAlignment="Center">
                     <font fontName="Monserrat" isBold="true" size="9"/>
                 </textElement>
-                <text><![CDATA[Norme de fabrication:]]></text>
+                <text><![CDATA[Norme de fabrication Carte d'inspection:]]></text>
             </staticText>
             <textField>
-                <reportElement x="408" y="350" width="135" height="20" uuid="22a5871b-00dd-498a-b6aa-d19a98f0bcf9">
+                <reportElement x="408" y="330" width="135" height="40" uuid="22a5871b-00dd-498a-b6aa-d19a98f0bcf9">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
                 </reportElement>
@@ -1077,7 +1075,7 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement>
-                    <font size="9"/>
+                    <font fontName="Monserrat" isBold="true" size="9"/>
                 </textElement>
                 <text><![CDATA[Usure Grue camion multi-lève]]></text>
             </staticText>
@@ -1146,7 +1144,7 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement>
-                    <font size="9"/>
+                    <font fontName="Monserrat" isBold="true" size="9"/>
                 </textElement>
                 <text><![CDATA[Dommage visible grue multi-lève]]></text>
             </staticText>
@@ -1215,7 +1213,7 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement>
-                    <font size="9"/>
+                    <font fontName="Monserrat" isBold="true" size="9"/>
                 </textElement>
                 <text><![CDATA[Vérification chassie multi-lève]]></text>
             </staticText>
@@ -1284,7 +1282,7 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement>
-                    <font size="9"/>
+                    <font fontName="Monserrat" isBold="true" size="9"/>
                 </textElement>
                 <text><![CDATA[Vérification vérins multi-lève]]></text>
             </staticText>
@@ -1353,7 +1351,7 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement>
-                    <font size="8"/>
+                    <font fontName="Monserrat" isBold="true" size="8"/>
                 </textElement>
                 <text><![CDATA[Vérification axes,goupilles,galets de guidage]]></text>
             </staticText>
@@ -1422,7 +1420,7 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement>
-                    <font size="9"/>
+                    <font fontName="Monserrat" isBold="true" size="9"/>
                 </textElement>
                 <text><![CDATA[Essai de fonctionnement multi-lève]]></text>
             </staticText>
@@ -2637,7 +2635,10 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <text><![CDATA[Usure maillon crochets]]></text>
+                <textElement>
+                    <font fontName="Monserrat" isBold="true" size="9"/>
+                </textElement>
+                <text><![CDATA[Usure maillon crochets multi-lève]]></text>
             </staticText>
             <textField>
                 <reportElement x="460" y="638" width="20" height="18" uuid="6baf87ce-ec5b-401d-81d2-bac1c353e773">
@@ -2699,6 +2700,9 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
+                <textElement>
+                    <font fontName="Monserrat" isBold="true" size="9"/>
+                </textElement>
                 <text><![CDATA[Marquage charge multi-lève]]></text>
             </staticText>
             <textField>

@@ -27,6 +27,7 @@ public class CertificatControlDAO {
     private String description;
     private boolean noticeInstruction;
     private boolean livretMaintenance;
+    private boolean certificationRemorque;
     private boolean declarationConformite;
     private boolean rapportControlePrecedent;
     private boolean declarationEcrite;
@@ -74,6 +75,7 @@ public class CertificatControlDAO {
                 .localisationCertificationFait(certificatControl.getLocalisationCertificationFait())
                 .noticeInstruction(certificatControl.isNoticeInstruction())
                 .livretMaintenance(certificatControl.isLivretMaintenance())
+                .certificationRemorque(certificatControl.getCertificationRemorque())
                 .declarationConformite(certificatControl.isDeclarationConformite())
                 .rapportControlePrecedent(certificatControl.isRapportControlePrecedent())
                 .declarationEcrite(certificatControl.isDeclarationEcrite())
@@ -117,6 +119,7 @@ public class CertificatControlDAO {
         certificatControlEntity.setLocalisationCertificationFait(certificatControl.getLocalisationCertificationFait());
         certificatControlEntity.setNoticeInstruction(certificatControl.isNoticeInstruction());
         certificatControlEntity.setLivretMaintenance(certificatControl.isLivretMaintenance());
+        certificatControlEntity.setCertificationRemorque(certificatControl.isCertificationRemorque());
         certificatControlEntity.setDeclarationConformite(certificatControl.isDeclarationConformite());
         certificatControlEntity.setRapportControlePrecedent(certificatControl.isRapportControlePrecedent());
         certificatControlEntity.setDeclarationEcrite(certificatControl.isDeclarationEcrite());

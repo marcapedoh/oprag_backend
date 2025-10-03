@@ -71,6 +71,9 @@ public class CertificatControl extends AbstractEntity{
 
     @Column(name = "avisFavorable")
     private Boolean avisFavorable;
+
+    @Column(name = "certification_remorque")
+    private Boolean certificationRemorque;
     @Column(name = "montant",nullable = false)
     private Double montant;
     @OneToOne(mappedBy = "certificatControl")
