@@ -802,7 +802,7 @@
             <textFieldExpression><![CDATA[$F{certificatControl.utilisateur.inspection}.getCode().equals("BJNC")?$F{certificatControl.utilisateur.nom}+" "+$F{certificatControl.utilisateur.prenom}:""]]></textFieldExpression>
         </textField>
         <textField>
-            <reportElement x="372" y="430" width="168" height="28" uuid="a07f94ba-02c4-4acd-b359-76d1b134ac53"/>
+            <reportElement x="371" y="450" width="168" height="28" uuid="a07f94ba-02c4-4acd-b359-76d1b134ac53"/>
             <box leftPadding="2"/>
             <textElement textAlignment="Center"/>
             <textFieldExpression><![CDATA[$F{certificatControl.utilisateur.inspection}.getCode().equals("CFHP")?$F{certificatControl.utilisateur.nom}+" "+$F{certificatControl.utilisateur.prenom}:""]]></textFieldExpression>

@@ -1351,7 +1351,7 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement>
-                    <font fontName="Monserrat" isBold="true" size="8"/>
+                    <font fontName="Monserrat" isBold="true" size="7"/>
                 </textElement>
                 <text><![CDATA[Vérification axes,goupilles,galets de guidage]]></text>
             </staticText>
