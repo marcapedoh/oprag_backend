@@ -643,7 +643,7 @@
             </reportElement>
             <box padding="2"/>
             <textElement>
-                <font size="11" isBold="true" isUnderline="true"/>
+                <font fontName="Monserrat" size="11" isBold="true" isUnderline="true"/>
             </textElement>
             <text><![CDATA[Légende:]]></text>
         </staticText>
@@ -654,7 +654,7 @@
             </reportElement>
             <box padding="2"/>
             <textElement>
-                <font size="10" isBold="true" isUnderline="false"/>
+                <font fontName="Monserrat" size="10" isBold="true" isUnderline="false"/>
             </textElement>
             <text><![CDATA[C= Conforme]]></text>
         </staticText>
@@ -665,7 +665,7 @@
             </reportElement>
             <box padding="2"/>
             <textElement>
-                <font size="10" isBold="true" isUnderline="false"/>
+                <font fontName="Monserrat" size="10" isBold="true" isUnderline="false"/>
             </textElement>
             <text><![CDATA[B.E= Bon état]]></text>
         </staticText>
@@ -676,7 +676,7 @@
             </reportElement>
             <box padding="2"/>
             <textElement>
-                <font size="10" isBold="true" isUnderline="false"/>
+                <font fontName="Monserrat" size="10" isBold="true" isUnderline="false"/>
             </textElement>
             <text><![CDATA[N.C= Non Conforme]]></text>
         </staticText>
@@ -687,7 +687,7 @@
             </reportElement>
             <box padding="2"/>
             <textElement>
-                <font size="10" isBold="true" isUnderline="false"/>
+                <font fontName="Monserrat" size="10" isBold="true" isUnderline="false"/>
             </textElement>
             <text><![CDATA[M.E= Mauvais état]]></text>
         </staticText>
@@ -700,7 +700,7 @@
             </reportElement>
             <box padding="2"/>
             <textElement>
-                <font size="11" isBold="true" isUnderline="true"/>
+                <font fontName="Monserrat" size="11" isBold="true" isUnderline="true"/>
             </textElement>
             <text><![CDATA[OBSERVATIONS:]]></text>
         </staticText>
@@ -711,7 +711,7 @@
             </reportElement>
             <box padding="2"/>
             <textElement>
-                <font size="10" isBold="true" isUnderline="false"/>
+                <font fontName="Monserrat" size="10" isBold="true" isUnderline="false"/>
             </textElement>
             <text><![CDATA[Favorable]]></text>
         </staticText>
@@ -722,7 +722,7 @@
             </reportElement>
             <box padding="2"/>
             <textElement>
-                <font size="10" isBold="true" isUnderline="false"/>
+                <font fontName="Monserrat" size="10" isBold="true" isUnderline="false"/>
             </textElement>
             <text><![CDATA[Défavorable]]></text>
         </staticText>
@@ -732,7 +732,7 @@
             </reportElement>
             <box padding="2"/>
             <textElement textAlignment="Center">
-                <font size="11" isBold="true" isUnderline="true"/>
+                <font fontName="Monserrat" size="11" isBold="true" isUnderline="true"/>
             </textElement>
             <text><![CDATA[Avis:]]></text>
         </staticText>
@@ -749,7 +749,7 @@
             </reportElement>
             <box padding="2"/>
             <textElement>
-                <font size="11" isBold="true" isUnderline="true"/>
+                <font fontName="Monserrat" size="11" isBold="true" isUnderline="true"/>
             </textElement>
             <text><![CDATA[RECOMMANDATIONS:]]></text>
         </staticText>
@@ -773,7 +773,7 @@
                 <property name="com.jaspersoft.studio.unit.height" value="px"/>
             </reportElement>
             <textElement>
-                <font size="10" isBold="true"/>
+                <font fontName="Monserrat" size="10" isBold="true"/>
             </textElement>
             <text><![CDATA[Nom du représentant societé]]></text>
         </staticText>
@@ -782,12 +782,12 @@
                 <property name="com.jaspersoft.studio.unit.height" value="px"/>
             </reportElement>
             <textElement textAlignment="Center">
-                <font size="10" isBold="true"/>
+                <font fontName="Monserrat" size="10" isBold="true"/>
             </textElement>
             <text><![CDATA[Nom du représentant BA'JINN Consulting]]></text>
         </staticText>
         <staticText>
-            <reportElement x="381" y="400" width="148" height="30" uuid="5ef335e8-6008-4066-8aa1-703b78d2a1f8">
+            <reportElement x="381" y="420" width="148" height="30" uuid="5ef335e8-6008-4066-8aa1-703b78d2a1f8">
                 <property name="com.jaspersoft.studio.unit.height" value="px"/>
             </reportElement>
             <textElement textAlignment="Center">
@@ -846,7 +846,7 @@
                 <property name="com.jaspersoft.studio.unit.height" value="px"/>
             </reportElement>
             <textElement>
-                <font size="12" isBold="true"/>
+                <font fontName="Monserrat" size="12" isBold="true"/>
             </textElement>
             <text><![CDATA[PARTENAIRES TECHNIQUES]]></text>
         </staticText>
@@ -856,7 +856,7 @@
                 <property name="com.jaspersoft.studio.unit.x" value="px"/>
             </reportElement>
             <textElement>
-                <font size="14" isBold="true"/>
+                <font fontName="Monserrat" size="14" isBold="true"/>
             </textElement>
             <text><![CDATA[CFHP]]></text>
         </staticText>
@@ -879,7 +879,7 @@
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Center">
-                <font isBold="true"/>
+                <font fontName="Monserrat" isBold="true"/>
             </textElement>
             <textFieldExpression><![CDATA[$F{certificatControl.avisFavorable}!=null && $F{certificatControl.avisFavorable}?"X":""]]></textFieldExpression>
         </textField>
@@ -898,7 +898,7 @@
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
             <textElement textAlignment="Center">
-                <font isBold="true"/>
+                <font fontName="Monserrat" isBold="true"/>
             </textElement>
             <textFieldExpression><![CDATA[$F{certificatControl.avisFavorable}!=null && !$F{certificatControl.avisFavorable}?"X":""]]></textFieldExpression>
         </textField>
@@ -951,6 +951,9 @@
                 <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
+            <textElement textAlignment="Center">
+                <font isBold="true"/>
+            </textElement>
             <textFieldExpression><![CDATA[($F{essaisConcatenes} != null && $F{essaisConcatenes}.contains("BIP_RECUL")) ? "X" : ""]]></textFieldExpression>
         </textField>
         <textField>
@@ -963,6 +966,9 @@
                 <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
+            <textElement textAlignment="Center">
+                <font isBold="true"/>
+            </textElement>
             <textFieldExpression><![CDATA[($F{essaisNonConcatenes} != null && $F{essaisNonConcatenes}.contains("BIP_RECUL"))
         ? ""
         : (($F{essaisConcatenes} == null || !$F{essaisConcatenes}.contains("BIP_RECUL")) ? "X" : "")]]></textFieldExpression>
@@ -1016,6 +1022,9 @@
                 <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
+            <textElement textAlignment="Center">
+                <font isBold="true"/>
+            </textElement>
             <textFieldExpression><![CDATA[($F{essaisConcatenes} != null && $F{essaisConcatenes}.contains("KLAXON")) ? "X" : ""]]></textFieldExpression>
         </textField>
         <textField>
@@ -1028,6 +1037,9 @@
                 <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
+            <textElement textAlignment="Center">
+                <font isBold="true"/>
+            </textElement>
             <textFieldExpression><![CDATA[($F{essaisNonConcatenes} != null && $F{essaisNonConcatenes}.contains("KLAXON"))
         ? ""
         : (($F{essaisConcatenes} == null || !$F{essaisConcatenes}.contains("KLAXON")) ? "X" : "")]]></textFieldExpression>
@@ -1081,6 +1093,9 @@
                 <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
+            <textElement textAlignment="Center">
+                <font isBold="true"/>
+            </textElement>
             <textFieldExpression><![CDATA[($F{essaisConcatenes} != null && $F{essaisConcatenes}.contains("ETAT_CABINE_HABITACLE")) ? "X" : ""]]></textFieldExpression>
         </textField>
         <textField>
@@ -1093,6 +1108,9 @@
                 <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
+            <textElement textAlignment="Center">
+                <font isBold="true"/>
+            </textElement>
             <textFieldExpression><![CDATA[($F{essaisNonConcatenes} != null && $F{essaisNonConcatenes}.contains("ETAT_CABINE_HABITACLE"))
         ? ""
         : (($F{essaisConcatenes} == null || !$F{essaisConcatenes}.contains("ETAT_CABINE_HABITACLE")) ? "X" : "")]]></textFieldExpression>
@@ -1146,6 +1164,9 @@
                 <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
+            <textElement textAlignment="Center">
+                <font isBold="true"/>
+            </textElement>
             <textFieldExpression><![CDATA[($F{essaisConcatenes} != null && $F{essaisConcatenes}.contains("PNEUS_PNEUS_SECOURS")) ? "X" : ""]]></textFieldExpression>
         </textField>
         <textField>
@@ -1158,6 +1179,9 @@
                 <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
             </box>
+            <textElement textAlignment="Center">
+                <font isBold="true"/>
+            </textElement>
             <textFieldExpression><![CDATA[($F{essaisNonConcatenes} != null && $F{essaisNonConcatenes}.contains("PNEUS_PNEUS_SECOURS"))
         ? ""
         : (($F{essaisConcatenes} == null || !$F{essaisConcatenes}.contains("PNEUS_PNEUS_SECOURS")) ? "X" : "")]]></textFieldExpression>
@@ -1165,4 +1189,6 @@
     </band>
 </detail>
 </jasperReport>
+
+
 
