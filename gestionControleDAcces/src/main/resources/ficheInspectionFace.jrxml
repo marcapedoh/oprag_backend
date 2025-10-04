@@ -284,7 +284,7 @@
                 </box>
 
                 <textElement textAlignment="Left">
-                    <font fontName="Monserrat" size="7" />
+                    <font fontName="Monserrat" size="7" isBold="true" />
                 </textElement>
                 <textFieldExpression><![CDATA[(
                   ($F{certificatControl.certificationRemorque} ? "• Certification Remorque\n" : "• Certification Remorque\n") +
@@ -3112,7 +3112,7 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement>
-                    <font fontName="Monserrat" size="7" />
+                    <font fontName="Monserrat" size="7" isBold="true"/>
                 </textElement>
                 <textFieldExpression><![CDATA[(
                   ($F{certificatControl.livretMaintenance} ? "• Carnet entretien\n" : "• Carnet entretien\n") +
