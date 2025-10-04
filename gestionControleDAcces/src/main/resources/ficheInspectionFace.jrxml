@@ -284,7 +284,7 @@
                 </box>
 
                 <textElement textAlignment="Left">
-                    <font fontName="Monserrat" size="9"  />
+                    <font size="8" />
                 </textElement>
                 <textFieldExpression><![CDATA[(
                   ($F{certificatControl.certificationRemorque} ? "• Certification Remorque\n" : "• Certification Remorque\n") +
@@ -3112,7 +3112,7 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement>
-                    <font fontName="Monserrat" size="9" />
+                    <font size="8" />
                 </textElement>
                 <textFieldExpression><![CDATA[(
                   ($F{certificatControl.livretMaintenance} ? "• Carnet entretien\n" : "• Carnet entretien\n") +
@@ -3125,8 +3125,9 @@
 
                       )]]></textFieldExpression>
             </textField>
+
             <textField>
-                <reportElement x="450" y="223" width="10" height="10" uuid="b7ce8896-f692-4ecc-b957-139939f25dac">
+                <reportElement x="471" y="228" width="10" height="10" uuid="b7ce8896-f692-4ecc-b957-139939f25dac">
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -3139,11 +3140,13 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textElement textAlignment="Center"/>
+                <textElement textAlignment="Center">
+                    <font size="4.5"/>
+                </textElement>
                 <textFieldExpression><![CDATA[$F{certificatControl.livretMaintenance}!=null && $F{certificatControl.livretMaintenance} ? "X":""]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement x="470" y="223" width="25" height="20" uuid="1d5f8e7c-e330-4a5c-b36d-9bb6a5f207a3">
+                <reportElement x="482" y="223" width="25" height="20" uuid="1d5f8e7c-e330-4a5c-b36d-9bb6a5f207a3">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                     <property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -3154,7 +3157,7 @@
                 <text><![CDATA[Oui]]></text>
             </staticText>
             <textField>
-                <reportElement x="498" y="223" width="10" height="10" uuid="9215c515-a3ad-4f5a-affa-aacaf6d9c79a">
+                <reportElement x="507" y="228" width="10" height="10" uuid="9215c515-a3ad-4f5a-affa-aacaf6d9c79a">
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -3167,7 +3170,9 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textElement textAlignment="Center"/>
+                <textElement textAlignment="Center">
+                    <font size="4.5"/>
+                </textElement>
                 <textFieldExpression><![CDATA[$F{certificatControl.livretMaintenance}!=null && !$F{certificatControl.livretMaintenance} ? "X":""]]></textFieldExpression>
             </textField>
             <staticText>
@@ -3182,7 +3187,7 @@
                 <text><![CDATA[Non]]></text>
             </staticText>
             <textField>
-                <reportElement x="450" y="246" width="10" height="10" uuid="a119bc9b-ee33-4a8f-bebe-74d9bc51ad83">
+                <reportElement x="471" y="247" width="10" height="10" uuid="a119bc9b-ee33-4a8f-bebe-74d9bc51ad83">
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -3195,24 +3200,28 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textElement textAlignment="Center"/>
-                <textFieldExpression><![CDATA[$F{certificatControl.rapportControlePrecedent} && $F{certificatControl.rapportControlePrecedent} ?"X":""]]></textFieldExpression>
+                <textElement textAlignment="Center">
+                    <font size="4.5"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{certificatControl.rapportControlePrecedent}!=null && $F{certificatControl.rapportControlePrecedent} ?"X":""]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement x="470" y="246" width="25" height="20" uuid="0a24a5b5-d154-44bc-9b2e-91b0e0cc6de3">
+                <reportElement x="482" y="242" width="25" height="20" uuid="0a24a5b5-d154-44bc-9b2e-91b0e0cc6de3">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.y" value="px"/>
                 </reportElement>
                 <box padding="2"/>
                 <textElement textAlignment="Center"/>
                 <text><![CDATA[Oui]]></text>
             </staticText>
             <textField>
-                <reportElement x="497" y="246" width="10" height="10" uuid="9553b930-5a6e-46ce-b6b8-4c2e73dc0168">
+                <reportElement x="508" y="247" width="10" height="10" uuid="9553b930-5a6e-46ce-b6b8-4c2e73dc0168">
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.y" value="px"/>
                 </reportElement>
                 <box padding="2">
                     <pen lineWidth="1.0"/>
@@ -3221,21 +3230,24 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textElement textAlignment="Center"/>
+                <textElement textAlignment="Center">
+                    <font size="4.5"/>
+                </textElement>
                 <textFieldExpression><![CDATA[$F{certificatControl.rapportControlePrecedent}!=null && !$F{certificatControl.rapportControlePrecedent} ?"X":""]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement x="518" y="246" width="25" height="20" uuid="73ce2561-d4cf-451b-8b89-27f4c2fe212a">
+                <reportElement x="518" y="242" width="25" height="20" uuid="73ce2561-d4cf-451b-8b89-27f4c2fe212a">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
+                    <property name="com.jaspersoft.studio.unit.y" value="px"/>
                 </reportElement>
                 <box padding="2"/>
                 <textElement textAlignment="Center"/>
                 <text><![CDATA[Non]]></text>
             </staticText>
             <textField>
-                <reportElement x="237" y="223" width="10" height="10" uuid="2062f65b-2d12-4f25-966e-5b0ad62c4545">
+                <reportElement x="255" y="227" width="10" height="10" uuid="2062f65b-2d12-4f25-966e-5b0ad62c4545">
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -3248,11 +3260,13 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textElement textAlignment="Center"/>
+                <textElement textAlignment="Center">
+                    <font size="4.5" isBold="true"/>
+                </textElement>
                 <textFieldExpression><![CDATA[$F{certificatControl.certificationRemorque}!=null && $F{certificatControl.certificationRemorque} ?"X":""]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement x="255" y="223" width="25" height="20" uuid="b74d032f-56f4-460c-b770-f892833165f0">
+                <reportElement x="265" y="223" width="25" height="20" uuid="b74d032f-56f4-460c-b770-f892833165f0">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -3262,7 +3276,7 @@
                 <text><![CDATA[Oui]]></text>
             </staticText>
             <textField>
-                <reportElement x="281" y="223" width="10" height="10" uuid="cb1b0185-6814-4e80-955b-4a2c6125af32">
+                <reportElement x="291" y="228" width="10" height="10" uuid="cb1b0185-6814-4e80-955b-4a2c6125af32">
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -3274,7 +3288,9 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textElement textAlignment="Center"/>
+                <textElement textAlignment="Center">
+                    <font size="4.5"/>
+                </textElement>
                 <textFieldExpression><![CDATA[$F{certificatControl.certificationRemorque}!=null && !$F{certificatControl.certificationRemorque} ?"X":""]]></textFieldExpression>
             </textField>
             <staticText>
@@ -3288,7 +3304,7 @@
                 <text><![CDATA[Non]]></text>
             </staticText>
             <textField>
-                <reportElement x="237" y="243" width="10" height="10" uuid="0980dbae-c505-4121-9308-3492a219ef4a">
+                <reportElement x="255" y="245" width="10" height="10" uuid="0980dbae-c505-4121-9308-3492a219ef4a">
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -3301,11 +3317,13 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textElement textAlignment="Center"/>
+                <textElement textAlignment="Center">
+                    <font size="4.5"/>
+                </textElement>
                 <textFieldExpression><![CDATA[$F{certificatControl.paye}!=null && $F{certificatControl.paye} ?"X":""]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement x="254" y="243" width="25" height="20" uuid="ef84ca34-6f98-4507-aae2-7422b2df1568">
+                <reportElement x="265" y="240" width="25" height="20" uuid="ef84ca34-6f98-4507-aae2-7422b2df1568">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -3316,7 +3334,7 @@
                 <text><![CDATA[Oui]]></text>
             </staticText>
             <textField>
-                <reportElement x="281" y="243" width="10" height="10" uuid="e70ac7f4-39ce-4f42-be48-058d4a9a8fe4">
+                <reportElement x="291" y="245" width="10" height="10" uuid="e70ac7f4-39ce-4f42-be48-058d4a9a8fe4">
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -3329,11 +3347,13 @@
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
-                <textElement textAlignment="Center"/>
+                <textElement textAlignment="Center">
+                    <font size="4.5"/>
+                </textElement>
                 <textFieldExpression><![CDATA[$F{certificatControl.paye}!=null && !$F{certificatControl.paye} ?"X":""]]></textFieldExpression>
             </textField>
             <staticText>
-                <reportElement x="303" y="243" width="25" height="20" uuid="31236cdd-6ca0-4fd1-ba1c-9c7cfcdd937c">
+                <reportElement x="303" y="240" width="25" height="20" uuid="31236cdd-6ca0-4fd1-ba1c-9c7cfcdd937c">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                     <property name="com.jaspersoft.studio.unit.width" value="px"/>
                     <property name="com.jaspersoft.studio.unit.x" value="px"/>
