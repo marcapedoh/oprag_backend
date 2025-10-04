@@ -332,7 +332,7 @@
                 <reportElement x="139" y="310" width="140" height="20" uuid="379027cc-bff9-4054-909c-4449503d5c41">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
-                <box padding="2">
+                <box topPadding="2" leftPadding="6" bottomPadding="2" rightPadding="2">
                     <pen lineWidth="1.0"/>
                     <topPen lineWidth="1.0"/>
                 </box>
