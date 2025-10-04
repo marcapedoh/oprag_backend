@@ -278,19 +278,22 @@
                 <reportElement x="140" y="220" width="190" height="60" uuid="dc2f70a4-8eda-4214-9155-0d5b978345f8">
                     <property name="com.jaspersoft.studio.unit.height" value="px"/>
                 </reportElement>
-                <box padding="2">
+                <box topPadding="2" leftPadding="6" bottomPadding="2" rightPadding="2">
                     <pen lineWidth="1.0"/>
                     <topPen lineWidth="1.0"/>
                 </box>
-                <textElement textAlignment="Left"/>
+
+                <textElement textAlignment="Left">
+                    <font fontName="Monserrat" size="7" />
+                </textElement>
                 <textFieldExpression><![CDATA[(
-                  ($F{certificatControl.certificationRemorque} ? "• Certification Remorque: \n" : "• Certification Remorque: \n") +
+                  ($F{certificatControl.certificationRemorque} ? "• Certification Remorque\n" : "• Certification Remorque\n") +
                   ($F{certificatControl.paye} ? "• Payé" : "")
                 ).isEmpty()
                     ? "AUCUN DOCUMENT FOURNI"
                     : (
-                        ($F{certificatControl.certificationRemorque} ? "• Certification Remorque: \n" : "• Certification Remorque: \n") +
-                        ($F{certificatControl.paye} ? "• Payé: " : "• Payé: ")
+                        ($F{certificatControl.certificationRemorque} ? "• Certification Remorque\n" : "• Certification Remorque\n") +
+                        ($F{certificatControl.paye} ? "• Payé" : "• Payé")
                       )]]></textFieldExpression>
             </textField>
 
@@ -3102,21 +3105,23 @@
             </staticText>
             <textField>
                 <reportElement x="330" y="220" width="212" height="60" uuid="1b1756b3-3928-4b38-a34d-3380fd32be60"/>
-                <box>
+                <box topPadding="2" leftPadding="6" bottomPadding="2" rightPadding="2">
                     <topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
+                <textElement>
+                    <font fontName="Monserrat" size="7" />
+                </textElement>
                 <textFieldExpression><![CDATA[(
-
-                  ($F{certificatControl.livretMaintenance} ? "• Carnet entretien: \n" : "• Carnet entretien: \n") +
-                  ($F{certificatControl.rapportControlePrecedent} ? "• Rapport précédent Camionage: \n" : "• Rapport précédent Camionage: \n")
+                  ($F{certificatControl.livretMaintenance} ? "• Carnet entretien\n" : "• Carnet entretien\n") +
+                  ($F{certificatControl.rapportControlePrecedent} ? "• Rapport précédent Camionage\n" : "• Rapport précédent Camionage\n")
                 ).isEmpty()
                     ? "AUCUN DOCUMENT FOURNI"
                     : (
-                        ($F{certificatControl.livretMaintenance} ? "• Carnet entretien: \n" : "• Carnet entretien: \n") +
-                        ($F{certificatControl.rapportControlePrecedent} ? "• Rapport précédent Camionage: \n" : "• Rapport précédent Camionage: \n")
+                        ($F{certificatControl.livretMaintenance} ? "• Carnet entretien\n" : "• Carnet entretien\n") +
+                        ($F{certificatControl.rapportControlePrecedent} ? "• Rapport précédent Camionage\n" : "• Rapport précédent Camionage\n")
 
                       )]]></textFieldExpression>
             </textField>
@@ -3217,7 +3222,7 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement textAlignment="Center"/>
-                <textFieldExpression><![CDATA[$F{certificatControl.rapportControlePrecedent} && !$F{certificatControl.rapportControlePrecedent} ?"X":""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{certificatControl.rapportControlePrecedent}!=null && !$F{certificatControl.rapportControlePrecedent} ?"X":""]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="518" y="246" width="25" height="20" uuid="73ce2561-d4cf-451b-8b89-27f4c2fe212a">
@@ -3244,7 +3249,7 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement textAlignment="Center"/>
-                <textFieldExpression><![CDATA[$F{certificatControl.certificationRemorque} && $F{certificatControl.certificationRemorque} ?"X":""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{certificatControl.certificationRemorque}!=null && $F{certificatControl.certificationRemorque} ?"X":""]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="255" y="223" width="25" height="20" uuid="b74d032f-56f4-460c-b770-f892833165f0">
@@ -3270,7 +3275,7 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement textAlignment="Center"/>
-                <textFieldExpression><![CDATA[$F{certificatControl.certificationRemorque} && !$F{certificatControl.certificationRemorque} ?"X":""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{certificatControl.certificationRemorque}!=null && !$F{certificatControl.certificationRemorque} ?"X":""]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="303" y="223" width="25" height="20" uuid="ad359ee3-8565-49c4-97ed-5f417b6c8b63">
@@ -3297,7 +3302,7 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement textAlignment="Center"/>
-                <textFieldExpression><![CDATA[$F{certificatControl.paye} && $F{certificatControl.paye} ?"X":""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{certificatControl.paye}!=null && $F{certificatControl.paye} ?"X":""]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="254" y="243" width="25" height="20" uuid="ef84ca34-6f98-4507-aae2-7422b2df1568">
@@ -3325,7 +3330,7 @@
                     <rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
                 </box>
                 <textElement textAlignment="Center"/>
-                <textFieldExpression><![CDATA[$F{certificatControl.paye} && !$F{certificatControl.paye} ?"X":""]]></textFieldExpression>
+                <textFieldExpression><![CDATA[$F{certificatControl.paye}!=null && !$F{certificatControl.paye} ?"X":""]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="303" y="243" width="25" height="20" uuid="31236cdd-6ca0-4fd1-ba1c-9c7cfcdd937c">
