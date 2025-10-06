@@ -343,7 +343,7 @@
             </rectangle>
             <staticText>
                 <reportElement x="19" y="330" width="110" height="20" uuid="7118bea2-1299-4e05-8dd4-e4ba2120fc81"/>
-                <box topPadding="2" leftPadding="6" bottomPadding="2" rightPadding="2">
+                <box topPadding="2" leftPadding="2">
                     <pen lineWidth="2.0"/>
                     <topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
                     <leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
