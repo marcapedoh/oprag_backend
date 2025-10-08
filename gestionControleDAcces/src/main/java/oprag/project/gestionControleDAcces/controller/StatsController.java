@@ -57,9 +57,11 @@ public class StatsController implements StatsAPI {
         result.put("trendMultiLine",this.statsService.countRapportsByDayAndInspection(dateDebut, dateFin));
         result.put("InspectionPerSocetite",resultCertificatPerCompany);
         result.put("ConformeRate",this.certificatControlRepository.countCertificatControlByAvisFavorableInit(dateDebut, dateFin));
-        result.put("totalRapport",this.certificatControlRepository.findAllByCreationDateBetween(dateDebut,dateFin).stream().filter(c-> !c.isDeleted()).map(CertificatControlDAO::fromEntity).toList().size());
-        result.put("totalCard",this.badgeService.findAllCertificatCreationDate(dateDebut,dateFin).size());
-        result.put("totalCardActive",this.badgeService.findAllCertificatCreationDate(dateDebut,dateFin).stream().filter(BadgeDAO::isActive).toList().size());
+//        result.put("totalRapport",this.certificatControlRepository.findAllByCreationDateBetween(dateDebut,dateFin).stream().filter(c-> !c.isDeleted()).map(CertificatControlDAO::fromEntity).toList().size());
+//        result.put("totalCard",this.badgeService.findAllCertificatCreationDate(dateDebut,dateFin).size());
+        result.put("totalRapport",this.certificatControlRepository.findAll().stream().filter(c-> !c.isDeleted()).map(CertificatControlDAO::fromEntity).toList().size());
+        result.put("totalCard",this.badgeService.findAll().size());
+        result.put("totalCardActive",this.badgeService.findAll().stream().filter(BadgeDAO::isActive).toList().size());
 
         return result;
     }
@@ -74,9 +76,9 @@ public class StatsController implements StatsAPI {
         result.put("trendMultiLine",this.statsService.countRapportsByDayAndInspection(dateDebut, dateFin));
         result.put("InspectionPerSocetite",this.certificatControlRepository.countVehiculesBySociete());
         result.put("ConformeRate",this.certificatControlRepository.countCertificatControlByAvisFavorable(dateDebut, dateFin, inspectionId));
-        result.put("totalRapport",this.certificatControlRepository.findAllByCreationDateBetweenAndUtilisateurInspectionId(dateDebut,dateFin,Math.toIntExact(inspectionId)).stream().filter(c->!c.isDeleted()).map(CertificatControlDAO::fromEntity).toList().size());
-        result.put("totalCard",this.badgeService.findAllCertificatCreationDateAndInspectionId(dateDebut,dateFin,Math.toIntExact(inspectionId)).size());
-       result.put("totalCardActive",this.badgeService.findAllCertificatCreationDateAndInspectionId(dateDebut,dateFin,Math.toIntExact(inspectionId)).stream().filter(BadgeDAO::isActive).toList().size());
+        result.put("totalRapport",this.certificatControlRepository.findAll().stream().filter(c-> !c.isDeleted()).map(CertificatControlDAO::fromEntity).toList().size());
+        result.put("totalCard",this.badgeService.findAll().size());
+        result.put("totalCardActive",this.badgeService.findAll().stream().filter(BadgeDAO::isActive).toList().size());
 
         return result;
     }
