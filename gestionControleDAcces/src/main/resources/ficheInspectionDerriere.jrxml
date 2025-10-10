@@ -796,7 +796,7 @@
             <text><![CDATA[Nom du représentant      CFHP Services]]></text>
         </staticText>
         <textField >
-            <reportElement x="371" y="450" width="168" height="28" uuid="d74d6516-38b7-471f-9b0b-d0a282d2bd26"/>
+            <reportElement x="190" y="452" width="168" height="28" uuid="d74d6516-38b7-471f-9b0b-d0a282d2bd26"/>
             <box leftPadding="2"/>
             <textElement textAlignment="Center"/>
             <textFieldExpression><![CDATA[$F{certificatControl.utilisateur.inspection}.getCode().equals("BJNC")?$F{certificatControl.utilisateur.nom}+" "+$F{certificatControl.utilisateur.prenom}:""]]></textFieldExpression>
