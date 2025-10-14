@@ -56,7 +56,7 @@ public class StatsController implements StatsAPI {
         result.put("vehicleTypes", this.statsService.getVehicleTypeStatsInit(dateDebut, dateFin));
         result.put("trendMultiLine",this.statsService.countRapportsByDayAndInspection(dateDebut, dateFin));
         result.put("InspectionPerSocetite",resultCertificatPerCompany);
-        result.put("ConformeRate",this.certificatControlRepository.countCertificatControlByAvisFavorableInit(dateDebut, dateFin));
+        result.put("ConformeRate",this.certificatControlRepository.countCertificatControlByAvisFavorableInit());
 //        result.put("totalRapport",this.certificatControlRepository.findAllByCreationDateBetween(dateDebut,dateFin).stream().filter(c-> !c.isDeleted()).map(CertificatControlDAO::fromEntity).toList().size());
 //        result.put("totalCard",this.badgeService.findAllCertificatCreationDate(dateDebut,dateFin).size());
         result.put("totalRapport",this.certificatControlRepository.findAll().stream().filter(c-> !c.isDeleted()).map(CertificatControlDAO::fromEntity).toList().size());
@@ -75,7 +75,7 @@ public class StatsController implements StatsAPI {
         result.put("vehicleTypes", this.statsService.getVehicleTypeStats(dateDebut, dateFin, inspectionId));
         result.put("trendMultiLine",this.statsService.countRapportsByDayAndInspection(dateDebut, dateFin));
         result.put("InspectionPerSocetite",this.certificatControlRepository.countVehiculesBySociete());
-        result.put("ConformeRate",this.certificatControlRepository.countCertificatControlByAvisFavorable(dateDebut, dateFin, inspectionId));
+        result.put("ConformeRate",this.certificatControlRepository.countCertificatControlByAvisFavorableInit());
         result.put("totalRapport",this.certificatControlRepository.findAll().stream().filter(c-> !c.isDeleted()).map(CertificatControlDAO::fromEntity).toList().size());
         result.put("totalCard",this.badgeService.findAll().size());
         result.put("totalCardActive",this.badgeService.findAll().stream().filter(BadgeDAO::isActive).toList().size());

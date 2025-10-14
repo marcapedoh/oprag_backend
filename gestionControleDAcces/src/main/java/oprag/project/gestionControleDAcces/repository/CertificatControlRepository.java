@@ -169,12 +169,8 @@ public interface CertificatControlRepository extends JpaRepository<CertificatCon
     SELECT COUNT(cc)
     FROM CertificatControl cc
     WHERE cc.avisFavorable = true
-      AND cc.creationDate BETWEEN :dateDebut AND :dateFin
 """)
-    Long countCertificatControlByAvisFavorableInit(
-            @Param("dateDebut") LocalDate dateDebut,
-            @Param("dateFin") LocalDate dateFin
-    );
+    Long countCertificatControlByAvisFavorableInit();
 
     // Filtrage par date et inspection (méthode dérivée)
     List<CertificatControl> findCertificatControlByCreationDateBetweenAndUtilisateurInspectionId(
