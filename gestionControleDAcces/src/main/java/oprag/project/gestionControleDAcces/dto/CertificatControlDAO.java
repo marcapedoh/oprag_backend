@@ -48,6 +48,7 @@ public class CertificatControlDAO {
     private Boolean avisFavorable;
     private boolean paye;
     private boolean deleted;
+    private boolean status;
     private Double montant;
     @JsonIgnore
     private BadgeDAO badge;
@@ -93,6 +94,7 @@ public class CertificatControlDAO {
                 .signatureDGM(certificatControl.getSignatureDGM().isEmpty()?certificatControl.getSignatureDGM():"null")
                 .normeFabrication(certificatControl.getNormeFabrication())
                 .paye(certificatControl.isPaye())
+                .status(certificatControl.isStatus())
                 .montant(certificatControl.getMontant())
                 //.badge(BadgeDAO.fromEntity(certificatControl.getBadge()))
                 .utilisateur(UtilisateurDAO.fromEntity(certificatControl.getUtilisateur()))
@@ -137,6 +139,7 @@ public class CertificatControlDAO {
         certificatControlEntity.setSignatureDGM(certificatControl.getSignatureDGM());
         certificatControlEntity.setNormeFabrication(certificatControl.getNormeFabrication());
         certificatControlEntity.setPaye(certificatControl.isPaye());
+        certificatControlEntity.setStatus(certificatControl.isStatus());
         certificatControlEntity.setMontant(certificatControl.getMontant());
        //certificatControlEntity.setBadge(BadgeDAO.toEntity(certificatControl.getBadge()));
         certificatControlEntity.setUtilisateur(UtilisateurDAO.toEntity(certificatControl.getUtilisateur()));

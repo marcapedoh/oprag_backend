@@ -31,4 +31,8 @@ public class Inspection extends AbstractEntity {
 
     @OneToMany(mappedBy = "inspection")
     private List<Utilisateur> inspecteurs;
+
+    @OneToMany(mappedBy = "partenaire")
+    private List<Licence> licences;
+
 }

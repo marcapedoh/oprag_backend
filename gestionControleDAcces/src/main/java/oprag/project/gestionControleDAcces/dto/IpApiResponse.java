@@ -1,0 +1,19 @@
+package oprag.project.gestionControleDAcces.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class IpApiResponse {
+    private String status; // success / fail
+    private String country;
+    private String regionName;
+    private String city;
+    private String query;
+}
+

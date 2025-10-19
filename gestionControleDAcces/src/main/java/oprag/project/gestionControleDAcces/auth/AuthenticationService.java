@@ -4,6 +4,7 @@ package oprag.project.gestionControleDAcces.auth;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import oprag.project.gestionControleDAcces.config.JwtService;
+import oprag.project.gestionControleDAcces.dto.AuthenticationLogDAO;
 import oprag.project.gestionControleDAcces.dto.ChauffeurDAO;
 import oprag.project.gestionControleDAcces.dto.UtilisateurDAO;
 import oprag.project.gestionControleDAcces.exception.EntityNotFoundException;
@@ -15,6 +16,7 @@ import oprag.project.gestionControleDAcces.models.Utilisateur;
 import oprag.project.gestionControleDAcces.repository.ChauffeurRepository;
 import oprag.project.gestionControleDAcces.repository.InspectionRepository;
 import oprag.project.gestionControleDAcces.repository.UtilisateurRepository;
+import oprag.project.gestionControleDAcces.services.AuthenticationLogSerice;
 import oprag.project.gestionControleDAcces.services.EmailService;
 import oprag.project.gestionControleDAcces.validators.ChauffeurValidator;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -35,6 +37,7 @@ public class AuthenticationService {
     private final InspectionRepository inspectionRepository;
     private final EmailService emailService;
    private final PasswordEncoder passwordEncoder;
+   private final AuthenticationLogSerice authenticationLogSerice;
 
     public AuthenticationResponse authenticate(AuthenticationRequest request){
         String jwtToken;
@@ -42,6 +45,10 @@ public class AuthenticationService {
         UserDetails utilisateur= this.utilisateurRepository.findUtilisateurByUserName(request.getUsername()).orElseThrow(()-> new EntityNotFoundException("Aucun Utilisateur trouvé pour cet userName"));
         if(passwordEncoder.matches(request.getMotDePasse(),utilisateur.getPassword())){
             jwtToken=jwtService.generateToken(utilisateur);
+            var authenticationLog=AuthenticationLogDAO.builder()
+                    .utilisateur(UtilisateurDAO.fromEntity(user))
+                    .build();
+            this.authenticationLogSerice.save(authenticationLog);
             return AuthenticationResponse.builder()
                     .token(jwtToken)
                     .userId(user.getId())

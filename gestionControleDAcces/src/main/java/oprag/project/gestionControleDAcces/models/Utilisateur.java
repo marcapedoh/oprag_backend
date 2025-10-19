@@ -45,6 +45,8 @@ public class Utilisateur extends AbstractEntity implements UserDetails {
     @OneToMany(mappedBy = "inspecteur")
 
     private List<Badge> badges;
+    @OneToMany(mappedBy = "utilisateur")
+    private List<AuthenticationLog> authenticationLogs;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
