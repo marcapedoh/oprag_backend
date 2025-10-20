@@ -34,26 +34,40 @@ public class LicenceServiceImpl implements LicenceService {
 
     @Override
     public LicenceDAO save(LicenceDAO licenceDAO) {
-        Inspection inspection=this.inspectionRepository.findById(licenceDAO.getPartenaire().getId()).orElse(null);
-        if(inspection!=null){
-            Licence lastLicence = licenceRepository.findFirstByPaysOrderByIdDesc(licenceDAO.getPays());
-
-            long next = 1;
-            if (lastLicence != null && lastLicence.getNumerolicence() != null) {
-                String[] parts = lastLicence.getNumerolicence().split("-");
-                if (parts.length >= 4) {
-                    try {
-                        next = Long.parseLong(parts[3]) + 1;
-                    } catch (NumberFormatException e) {
-                        next = 1; // si erreur de parsing, recommencer à 1
+        Inspection inspection = inspectionRepository.findById(licenceDAO.getPartenaire().getId()).orElse(null);
+        if (inspection != null) {
+            boolean isNew = (licenceDAO.getId() == null); // ⚡ détection création
+            if (isNew) {
+                Licence lastLicence = licenceRepository.findFirstByPaysOrderByIdDesc(licenceDAO.getPays());
+                long next = 1;
+                if (lastLicence != null && lastLicence.getNumerolicence() != null) {
+                    String[] parts = lastLicence.getNumerolicence().split("-");
+                    if (parts.length >= 4) {
+                        try {
+                            next = Long.parseLong(parts[3]) + 1;
+                        } catch (NumberFormatException e) {
+                            next = 1;
+                        }
                     }
                 }
+                String numero = String.format("CERTI-%s-%d-%03d",
+                        licenceDAO.getPays().toUpperCase(),
+                        LocalDate.now().getYear(),
+                        next);
+
+                // ajoute suffixe si besoin
+                if (licenceDAO.getIsPro()) {
+                    numero += "-PRO";
+                } else if (licenceDAO.getIsFree()) {
+                    numero += "-FREE";
+                }
+                licenceDAO.setNumerolicence(numero);
             }
-            String numero = String.format("CERTI-%s-%d-%03d",
-                    licenceDAO.getPays().toUpperCase(),
-                    LocalDate.now().getYear(),
-                    next);
-            licenceDAO.setNumerolicence(numero);
+            if (licenceDAO.getIsPro()) {
+                licenceDAO.setNumerolicence(licenceDAO.getNumerolicence()+"-PRO");
+            } else if (licenceDAO.getIsFree()) {
+                licenceDAO.setNumerolicence(licenceDAO.getNumerolicence()+"-FREE");
+            }
             licenceDAO.setPartenaire(InspectionDAO.fromEntity(inspection));
             return LicenceDAO.fromEntity(licenceRepository.save(LicenceDAO.toEntity(licenceDAO)));
         }

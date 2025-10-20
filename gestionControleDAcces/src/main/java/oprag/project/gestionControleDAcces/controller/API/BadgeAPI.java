@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import oprag.project.gestionControleDAcces.dto.BadgeDAO;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -54,7 +55,8 @@ public interface BadgeAPI {
     List<Object> countAllPerIntervalDays(@PathVariable("startDate") LocalDate startDate,@PathVariable("endDate") LocalDate endDate);
 
     @GetMapping(value = APP_ROOT + "/Badges/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<BadgeDAO> findAll();
+    Page<BadgeDAO> findAll(@RequestParam(defaultValue = "0") int page,
+                           @RequestParam(defaultValue = "20") int size);
 
     @GetMapping(value = APP_ROOT + "/Badges/findAllPerInspecteurId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     List<BadgeDAO> findAllPerInspecteurId(@PathVariable("id") @Positive(message = "L'ID de l'inspecteur doit être positif") Integer id);

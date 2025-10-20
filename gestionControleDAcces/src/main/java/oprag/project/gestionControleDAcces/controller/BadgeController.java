@@ -4,6 +4,7 @@ import oprag.project.gestionControleDAcces.controller.API.BadgeAPI;
 import oprag.project.gestionControleDAcces.dto.BadgeDAO;
 import oprag.project.gestionControleDAcces.services.BadgeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,8 +62,8 @@ public class BadgeController implements BadgeAPI {
     }
 
     @Override
-    public List<BadgeDAO> findAll() {
-        return this.badgeService.findAll();
+    public Page<BadgeDAO> findAll(int page, int size) {
+        return this.badgeService.findAll(page, size);
     }
 
     @Override

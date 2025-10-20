@@ -1,6 +1,7 @@
 package oprag.project.gestionControleDAcces.services;
 
 import oprag.project.gestionControleDAcces.dto.BadgeDAO;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
@@ -10,7 +11,7 @@ import java.util.Map;
 public interface BadgeService {
     BadgeDAO save(BadgeDAO badgeDAO);
     BadgeDAO findByNumero(String numero);
-    List<BadgeDAO> findAll();
+    Page<BadgeDAO> findAll(int page, int size);
     List<BadgeDAO> findAllCertificatCreationDateAndInspectionId(LocalDate dateDebut,LocalDate dateFin, Integer inspectionId);
 
     List<BadgeDAO> findAllCertificatCreationDate(LocalDate dateDebut,LocalDate dateFin);

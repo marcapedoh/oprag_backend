@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import oprag.project.gestionControleDAcces.dto.CertificatControlDAO;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +42,8 @@ public interface CertificatControlAPI {
     List<Map<String,Object>> getCertificatControlsStatsByInspection();
 
     @GetMapping(value = APP_ROOT + "/CertificatControls/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    List<CertificatControlDAO> findAll();
+    Page<CertificatControlDAO> findAll(@RequestParam(defaultValue = "0") int page,
+                                       @RequestParam(defaultValue = "20") int size);
 
     @GetMapping(value = APP_ROOT + "/CertificatControls/findCertificatControlByUtilisateurId/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     List<CertificatControlDAO> findCertificatControlByUtilisateurId(@PathVariable("id") Integer id);

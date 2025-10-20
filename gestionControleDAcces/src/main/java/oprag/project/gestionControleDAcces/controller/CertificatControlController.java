@@ -3,6 +3,7 @@ package oprag.project.gestionControleDAcces.controller;
 import oprag.project.gestionControleDAcces.controller.API.CertificatControlAPI;
 import oprag.project.gestionControleDAcces.dto.CertificatControlDAO;
 import oprag.project.gestionControleDAcces.services.CertificatControlService;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,8 +46,8 @@ public class CertificatControlController implements CertificatControlAPI {
     }
 
     @Override
-    public List<CertificatControlDAO> findAll() {
-        return this.certificatControlService.findAll();
+    public Page<CertificatControlDAO> findAll(int page, int size) {
+        return this.certificatControlService.findAll(page, size);
     }
 
     @Override

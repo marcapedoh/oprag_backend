@@ -3,15 +3,22 @@ package oprag.project.gestionControleDAcces.services.impl;
 import oprag.project.gestionControleDAcces.dto.BadgeDAO;
 import oprag.project.gestionControleDAcces.dto.CertificatControlDAO;
 import oprag.project.gestionControleDAcces.dto.InspectionMontantDAO;
+import oprag.project.gestionControleDAcces.dto.LicenceDAO;
 import oprag.project.gestionControleDAcces.exception.EntityNotFoundException;
 import oprag.project.gestionControleDAcces.exception.ErrorCodes;
 import oprag.project.gestionControleDAcces.exception.InvalidEntityException;
+import oprag.project.gestionControleDAcces.models.CertificatControl;
+import oprag.project.gestionControleDAcces.models.Licence;
 import oprag.project.gestionControleDAcces.repository.BadgeRepository;
 import oprag.project.gestionControleDAcces.repository.CertificatControlRepository;
 import oprag.project.gestionControleDAcces.repository.InspectionMontantRepository;
 import oprag.project.gestionControleDAcces.services.CertificatControlService;
 import oprag.project.gestionControleDAcces.validators.CertificatControlValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -65,15 +72,15 @@ public class CertificatControlServiceImpl implements CertificatControlService {
     }
 
     @Override
-    public List<CertificatControlDAO> findAll() {
-        return this.certificatControlRepository.findAll().stream()
-                .map(CertificatControlDAO::fromEntity)
-                .collect(Collectors.toList());
+    public Page<CertificatControlDAO> findAll(int page,int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("dateCreation").descending());
+        Page<CertificatControl>  certificatControls = certificatControlRepository.findAll(pageable);
+        return certificatControls.map(CertificatControlDAO::fromEntity);
     }
 
     @Override
     public long numberOfCertificatControls() {
-        return this.findAll().size();
+        return this.certificatControlRepository.findAll().size();
     }
 
     @Override

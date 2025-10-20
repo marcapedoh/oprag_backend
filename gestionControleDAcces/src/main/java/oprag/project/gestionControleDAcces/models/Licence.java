@@ -21,6 +21,10 @@ public class Licence extends AbstractEntity{
     private String numerolicence;
     @Column(name = "pays")
     private String pays;
+    @Column(name = "isPro")
+    private Boolean isPro;
+    @Column(name = "isFree")
+    private Boolean isFree;
     @ManyToOne
     @JoinColumn(name = "partenaireId")
     private Inspection partenaire;

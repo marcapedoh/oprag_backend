@@ -5,6 +5,8 @@ import oprag.project.gestionControleDAcces.exception.EntityNotFoundException;
 import oprag.project.gestionControleDAcces.exception.ErrorCodes;
 import oprag.project.gestionControleDAcces.exception.InvalidEntityException;
 import oprag.project.gestionControleDAcces.exception.InvalidOperationException;
+import oprag.project.gestionControleDAcces.models.Badge;
+import oprag.project.gestionControleDAcces.models.CertificatControl;
 import oprag.project.gestionControleDAcces.repository.BadgeRepository;
 import oprag.project.gestionControleDAcces.repository.CertificatControlRepository;
 import oprag.project.gestionControleDAcces.repository.UtilisateurRepository;
@@ -12,6 +14,10 @@ import oprag.project.gestionControleDAcces.services.BadgeService;
 import oprag.project.gestionControleDAcces.services.QRCodeUtil;
 import oprag.project.gestionControleDAcces.validators.BadgeValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -91,12 +97,10 @@ public class BadgeServiceImpl implements BadgeService {
             BufferedImage qrImage = QRCodeUtil.generateQRCodeImage(qrContent, 150, 150);
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(qrImage, "png", baos);
-
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_PNG);
             headers.setContentDispositionFormData("attachment", "badge_qr_" + badge.getNumero() + ".png");
             headers.setContentLength(baos.size());
-
             return ResponseEntity.ok().headers(headers).body(baos.toByteArray());
 
         } catch (Exception e) {
@@ -113,10 +117,10 @@ public class BadgeServiceImpl implements BadgeService {
     }
 
     @Override
-    public List<BadgeDAO> findAll() {
-        return this.badgeRepository.findAll().stream()
-                .map(BadgeDAO::fromEntity)
-                .collect(Collectors.toList());
+    public Page<BadgeDAO> findAll(int page,int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("dateCreation").descending());
+        Page<Badge> badges = badgeRepository.findAll(pageable);
+        return badges.map(BadgeDAO::fromEntity);
     }
 
     @Override
@@ -150,21 +154,18 @@ public class BadgeServiceImpl implements BadgeService {
 
     @Override
     public long numberOfBadges() {
-        return this.findAll().size();
+        return this.badgeRepository.findAll().size();
     }
 
     @Override
     public Map<String, Object> numberOfBadgePerInspection() {
         List<Object[]> results = certificateControlRepository.countCertificatControlByInspection();
-
         List<String> xaxis = new ArrayList<>();
         List<Long> yaxis = new ArrayList<>();
-
         for (Object[] row : results) {
             xaxis.add((String) row[0]);    // Nom inspection
             yaxis.add((Long) row[1]);      // Nombre de cartes
         }
-
         Map<String, Object> result = new HashMap<>();
         result.put("xaxis", xaxis);
         result.put("yaxis", yaxis);

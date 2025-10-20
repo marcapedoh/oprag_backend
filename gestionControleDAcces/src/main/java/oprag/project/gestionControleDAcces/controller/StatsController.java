@@ -4,6 +4,7 @@ import oprag.project.gestionControleDAcces.controller.API.StatsAPI;
 import oprag.project.gestionControleDAcces.dto.BadgeDAO;
 import oprag.project.gestionControleDAcces.dto.CertificatControlDAO;
 import oprag.project.gestionControleDAcces.models.CertificatControl;
+import oprag.project.gestionControleDAcces.repository.BadgeRepository;
 import oprag.project.gestionControleDAcces.repository.CertificatControlRepository;
 import oprag.project.gestionControleDAcces.services.BadgeService;
 import oprag.project.gestionControleDAcces.services.StatsService;
@@ -24,11 +25,14 @@ public class StatsController implements StatsAPI {
     private final CertificatControlRepository certificatControlRepository;
     private final BadgeService badgeService;
 
+    private final BadgeRepository badgeRepository;
 
-    public StatsController(BadgeService badgeService, CertificatControlRepository certificatControlRepository, StatsService statsService) {
+
+    public StatsController(BadgeService badgeService, CertificatControlRepository certificatControlRepository, StatsService statsService,BadgeRepository badgeRepository) {
         this.badgeService = badgeService;
         this.certificatControlRepository = certificatControlRepository;
         this.statsService = statsService;
+        this.badgeRepository = badgeRepository;
     }
 
 
@@ -60,8 +64,8 @@ public class StatsController implements StatsAPI {
 //        result.put("totalRapport",this.certificatControlRepository.findAllByCreationDateBetween(dateDebut,dateFin).stream().filter(c-> !c.isDeleted()).map(CertificatControlDAO::fromEntity).toList().size());
 //        result.put("totalCard",this.badgeService.findAllCertificatCreationDate(dateDebut,dateFin).size());
         result.put("totalRapport",this.certificatControlRepository.findAll().stream().filter(c-> !c.isDeleted()).map(CertificatControlDAO::fromEntity).toList().size());
-        result.put("totalCard",this.badgeService.findAll().size());
-        result.put("totalCardActive",this.badgeService.findAll().stream().filter(BadgeDAO::isActive).toList().size());
+        result.put("totalCard",this.badgeRepository.findAll().size());
+        result.put("totalCardActive",this.badgeRepository.findAll().stream().map(BadgeDAO::fromEntity).filter(BadgeDAO::isActive).toList().size());
 
         return result;
     }
@@ -77,8 +81,8 @@ public class StatsController implements StatsAPI {
         result.put("InspectionPerSocetite",this.certificatControlRepository.countVehiculesBySociete());
         result.put("ConformeRate",this.certificatControlRepository.countCertificatControlByAvisFavorableInit());
         result.put("totalRapport",this.certificatControlRepository.findAll().stream().filter(c-> !c.isDeleted()).map(CertificatControlDAO::fromEntity).toList().size());
-        result.put("totalCard",this.badgeService.findAll().size());
-        result.put("totalCardActive",this.badgeService.findAll().stream().filter(BadgeDAO::isActive).toList().size());
+        result.put("totalCard",this.badgeRepository.findAll().size());
+        result.put("totalCardActive",this.badgeRepository.findAll().stream().map(BadgeDAO::fromEntity).filter(BadgeDAO::isActive).toList().size());
 
         return result;
     }

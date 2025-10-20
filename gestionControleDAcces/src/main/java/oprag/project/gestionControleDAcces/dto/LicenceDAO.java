@@ -25,6 +25,8 @@ public class LicenceDAO {
     private String numerolicence;
     private String pays;
     private InspectionDAO partenaire;
+    private Boolean isPro;
+    private Boolean isFree;
     @JsonIgnore
     private List<DemandeLicence> demandeLicences;
 
@@ -37,6 +39,8 @@ public class LicenceDAO {
                 .graceDays(licence.getGraceDays())
                 .numerolicence(licence.getNumerolicence())
                 .pays(licence.getPays())
+                .isPro(licence.getIsPro())
+                .isFree(licence.getIsFree())
                 .partenaire(InspectionDAO.fromEntity(licence.getPartenaire()))
                 .build();
     }
@@ -50,6 +54,8 @@ public class LicenceDAO {
         licence.setGraceDays(licenceDAO.getGraceDays());
         licence.setNumerolicence(licenceDAO.getNumerolicence());
         licence.setPays(licenceDAO.getPays());
+        licence.setIsFree(licenceDAO.getIsFree());
+        licence.setIsPro(licenceDAO.getIsPro());
         licence.setPartenaire(InspectionDAO.toEntity(licenceDAO.getPartenaire()));
         return licence;
     }
