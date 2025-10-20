@@ -54,8 +54,8 @@ public class CertificatControl extends AbstractEntity{
     @Column(name = "motifControle",nullable = false,length = 2500000)
     private String motifControle;
 
-    @Column(name = "status",nullable = false)
-    private boolean status;
+    @Column(name = "status")
+    private Boolean status;
     @Column(name = "observationRecommendation",nullable = false,length = 2500000)
     private String observationRecommendation;
     @Column(name = "recommendation",length = 2500000)
